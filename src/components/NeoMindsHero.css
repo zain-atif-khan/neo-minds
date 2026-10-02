@@ -1,0 +1,558 @@
+/* ==========================================================================
+   ORIGINAL SUPPLIED HERO COMPONENT STYLES
+   Exact 1:1 Implementation from code1/code/styles.css
+   ========================================================================== */
+
+.hero-component-root {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  min-height: 720px;
+  overflow: hidden;
+  background-color: #ffffff;
+  color: #000;
+  font-family: "PP Neue Montreal", "Plus Jakarta Sans", sans-serif;
+}
+
+.hero-component-root img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.hero-component-root p {
+  text-transform: uppercase;
+  font-family: "Akkurat Mono", "IBM Plex Mono", monospace;
+  font-size: 0.7rem;
+  margin: 0;
+}
+
+.hero-component-root a {
+  text-decoration: none;
+  text-transform: uppercase;
+  font-family: "Akkurat Mono", "IBM Plex Mono", monospace;
+  font-size: 0.7rem;
+  color: #000;
+}
+
+/* ==========================================================================
+   OVERLAY LOADER (Original Black #000 with White Text and Gradient Wipe)
+   ========================================================================== */
+.hero-component-root .overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100svh;
+  padding: 2em;
+  background-color: #000;
+  color: #fff;
+  display: flex;
+  gap: 2em;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.hero-component-root .projects,
+.hero-component-root .loader,
+.hero-component-root .locations {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1em;
+}
+
+.hero-component-root .loader {
+  align-items: center;
+  gap: 0;
+}
+
+.hero-component-root .loader h1 {
+  text-align: center;
+  text-transform: uppercase;
+  font-family: "Druk", "Space Grotesk", Impact, "Arial Black", sans-serif;
+  font-size: 2.5rem;
+  font-style: italic;
+  line-height: 1;
+  padding: 0.1em 0.25em 0.1em 0.1em;
+  overflow: visible;
+  white-space: nowrap;
+  letter-spacing: 0.02em;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
+  background-image: linear-gradient(0deg, #3a3a3a, #3a3a3a 50%, #fff 0);
+  background-size: 100% 200%;
+  background-position: 0% 100%;
+  color: #3a3a3a;
+  margin: 0;
+}
+
+.hero-component-root .projects-header,
+.hero-component-root .project-item,
+.hero-component-root .locations-header,
+.hero-component-root .location-item {
+  display: flex;
+  gap: 2em;
+  opacity: 0;
+}
+
+.hero-component-root .projects-header > *,
+.hero-component-root .project-item > * {
+  flex: 1;
+}
+
+.hero-component-root .locations {
+  align-items: center;
+}
+
+.hero-component-root .locations-header,
+.hero-component-root .location-item {
+  width: 50%;
+}
+
+.hero-component-root .project-item,
+.hero-component-root .location-item {
+  color: #4f4f4f;
+}
+
+/* ==========================================================================
+   IMAGE GRID (Exact 30% Width, Aspect Ratio 1, Gap 1em)
+   ========================================================================== */
+.hero-component-root .image-grid {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 30%;
+  aspect-ratio: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  z-index: 5;
+}
+
+.hero-component-root .grid-row {
+  width: 100%;
+  display: flex;
+  gap: 1em;
+}
+
+.hero-component-root .img {
+  position: relative;
+  flex: 1;
+  aspect-ratio: 1;
+  clip-path: polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%);
+}
+
+.hero-component-root .img.hero-img {
+  z-index: 10;
+}
+
+/* ==========================================================================
+   BANNER IMAGES (20% Width, 4/5 Aspect Ratio, Angled Rotation)
+   ========================================================================== */
+.hero-component-root .banner-img {
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  width: 20%;
+  aspect-ratio: 4/5;
+  z-index: 2;
+}
+
+.hero-component-root .banner-img-1 {
+  z-index: 2;
+}
+
+.hero-component-root .banner-img-2 {
+  z-index: 2;
+}
+
+/* ==========================================================================
+   INTRO COPY & TITLE (Exact Original Druk Italic Styling)
+   ========================================================================== */
+.hero-component-root .intro-copy {
+  position: absolute;
+  top: 45%;
+  transform: translateY(-50%);
+  width: 100%;
+  padding: 0 4em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 4;
+  pointer-events: none;
+}
+
+.hero-component-root .title {
+  position: absolute;
+  bottom: 10%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 5;
+  text-align: center;
+}
+
+.hero-component-root .intro-copy h3,
+.hero-component-root .title h1 {
+  position: relative;
+  text-transform: uppercase;
+  color: #000;
+  font-family: "Druk", "Space Grotesk", Impact, "Arial Black", sans-serif;
+  font-weight: 500;
+  font-style: italic;
+  line-height: 0.9;
+  margin: 0;
+}
+
+.hero-component-root .title h1 {
+  font-size: 3.5rem;
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+}
+
+.hero-component-root .intro-copy h3 {
+  font-size: 1.5rem;
+}
+
+.hero-component-root .intro-copy h3,
+.hero-component-root .title h1 {
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+}
+
+.hero-component-root .intro-copy h3 .word,
+.hero-component-root .title h1 .word {
+  display: inline-block;
+  position: relative;
+  will-change: transform;
+  margin-right: 0.1rem;
+}
+
+/* ==========================================================================
+   RESPONSIVE BEHAVIOR (Matches original @media (max-width: 900px))
+   ========================================================================== */
+@media (max-width: 900px) {
+  .hero-component-root .loader {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .hero-component-root .projects,
+  .hero-component-root .locations,
+  .hero-component-root .intro-copy,
+  .hero-component-root .banner-img {
+    display: none;
+  }
+
+  .hero-component-root .title {
+    width: 100%;
+    bottom: 20%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .hero-component-root .title h1 {
+    font-size: 2.5rem;
+    white-space: normal;
+    padding: 0 1rem;
+  }
+
+  .hero-component-root .image-grid {
+    width: 75%;
+    gap: 0.5em;
+  }
+
+  .hero-component-root .grid-row {
+    width: 95%;
+    justify-content: space-around;
+    gap: 0.5em;
+  }
+}
+
+/* ==========================================================================
+   FINAL HERO ENDING — OPAQUE SHEET & EXACT REFERENCE NEO MINDS REVEAL
+   Continuous canvas: pure white background flowing into page
+   ========================================================================== */
+.hero-component-root .hero-opaque-sheet {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #FFFFFF;
+  z-index: 10;
+  transform: scaleY(0);
+  transform-origin: 50% 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* Subtle curved orbital lines container matching reference */
+.hero-component-root .hero-orbital-container {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0;
+  overflow: hidden;
+}
+
+.hero-component-root .hero-orbital-svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* Glowing Blue Nodes / Dots on Orbital Lines */
+.hero-component-root .orbital-node {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.hero-component-root .orbital-node-core {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: #1677FF;
+  position: relative;
+  z-index: 2;
+  box-shadow: 0 0 8px rgba(22, 119, 255, 0.7);
+}
+
+.hero-component-root .orbital-node-glow {
+  position: absolute;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(22, 119, 255, 0.28) 0%, rgba(22, 119, 255, 0) 70%);
+  z-index: 1;
+}
+
+.hero-component-root .orbital-node-lower-left {
+  left: 15%;
+  bottom: 39%;
+}
+
+.hero-component-root .orbital-node-upper-right {
+  right: 13%;
+  top: 28%;
+}
+
+/* Centered Content Composition */
+.hero-component-root .hero-reveal-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  width: 94%;
+  max-width: 980px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  pointer-events: auto;
+  margin: 0 auto;
+  z-index: 2;
+}
+
+/* Main Title: Exact elegant, flowing serif wordmark matching reference "NeoMinds" */
+.hero-component-root .neo-minds-reveal-title {
+  font-family: "Newsreader", "Playfair Display", Georgia, serif;
+  font-size: clamp(4.2rem, 9.6vw, 7.8rem);
+  font-weight: 500;
+  letter-spacing: -0.015em;
+  line-height: 1;
+  margin: 0;
+  text-align: center;
+  text-transform: none;
+  font-style: normal;
+  display: inline-flex;
+  align-items: baseline;
+  justify-content: center;
+  opacity: 0;
+  transform: translateY(18px);
+}
+
+.hero-component-root .brand-word-neo {
+  color: #0B1736;
+  font-weight: 500;
+}
+
+.hero-component-root .brand-word-minds {
+  color: #1677FF;
+  font-weight: 500;
+}
+
+/* Tech Hub with symmetrical flanking horizontal lines matching reference */
+.hero-component-root .neo-minds-sub-wrapper {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem;
+  margin: 1.15rem 0 0 0;
+  opacity: 0;
+  transform: translateY(14px);
+}
+
+.hero-component-root .tech-hub-line {
+  display: inline-block;
+  width: 52px;
+  height: 1px;
+  background-color: #61718D;
+  opacity: 0.55;
+}
+
+.hero-component-root .neo-minds-reveal-sub {
+  font-family: "Newsreader", "Playfair Display", Georgia, serif;
+  font-size: clamp(0.95rem, 1.6vw, 1.2rem);
+  font-weight: 500;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: #0B1736;
+  margin: 0;
+  padding: 0;
+  line-height: 1;
+}
+
+/* One-Line Description */
+.hero-component-root .neo-minds-reveal-desc {
+  font-family: "Newsreader", "Playfair Display", Georgia, serif;
+  font-size: clamp(1.05rem, 1.75vw, 1.35rem);
+  font-weight: 400;
+  font-style: normal;
+  color: #61718D;
+  line-height: 1.5;
+  margin: 1.65rem 0 0 0;
+  max-width: 720px;
+  text-align: center;
+  text-transform: none;
+  opacity: 0;
+  transform: translateY(14px);
+}
+
+/* Refined Rectangular CTA Buttons */
+.hero-component-root .final-cta-group {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.35rem;
+  margin-top: 2.25rem;
+}
+
+.hero-component-root .final-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  padding: 12px 28px;
+  min-width: 146px;
+  height: 46px;
+  border-radius: 8px;
+  cursor: pointer;
+  opacity: 0;
+  transform: translateY(14px);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  text-decoration: none;
+  line-height: 1;
+}
+
+.hero-component-root .final-cta-btn .btn-arrow {
+  display: inline-block;
+  font-size: 1rem;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hero-component-root .final-cta-btn:hover .btn-arrow {
+  transform: translateX(4px);
+}
+
+.hero-component-root .final-cta-primary {
+  background-color: #1677FF;
+  color: #FFFFFF;
+  border: 1.5px solid #1677FF;
+  box-shadow: 0 4px 18px rgba(22, 119, 255, 0.28);
+}
+
+.hero-component-root .final-cta-primary:hover {
+  background-color: #0958D9;
+  border-color: #0958D9;
+  box-shadow: 0 6px 22px rgba(22, 119, 255, 0.4);
+  transform: translateY(-2px);
+}
+
+.hero-component-root .final-cta-secondary {
+  background-color: #FFFFFF;
+  color: #0B1736;
+  border: 1.5px solid rgba(22, 119, 255, 0.32);
+}
+
+.hero-component-root .final-cta-secondary:hover {
+  border-color: #1677FF;
+  color: #1677FF;
+  background-color: #F8FAFD;
+  transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+  .hero-component-root .neo-minds-reveal-title {
+    font-size: clamp(2.8rem, 12vw, 4.4rem);
+  }
+
+  .hero-component-root .tech-hub-line {
+    width: 28px;
+  }
+
+  .hero-component-root .neo-minds-reveal-sub {
+    font-size: 0.85rem;
+    letter-spacing: 0.24em;
+  }
+
+  .hero-component-root .neo-minds-reveal-desc {
+    font-size: 1rem;
+    margin-top: 1.35rem;
+    padding: 0 0.5rem;
+  }
+
+  .hero-component-root .orbital-node-lower-left {
+    left: 8%;
+    bottom: 30%;
+  }
+
+  .hero-component-root .orbital-node-upper-right {
+    right: 6%;
+    top: 20%;
+  }
+
+  .hero-component-root .final-cta-group {
+    flex-direction: column;
+    gap: 0.75rem;
+    width: 100%;
+    max-width: 290px;
+    margin-top: 1.75rem;
+  }
+
+  .hero-component-root .final-cta-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+

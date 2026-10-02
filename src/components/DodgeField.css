@@ -1,0 +1,38 @@
+.dodge-field {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+  overflow: visible;
+}
+
+.join-dodge-field {
+  min-width: 146px;
+  height: 46px;
+  overflow: visible;
+}
+
+.dodge-field__mover {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  will-change: transform;
+  cursor: pointer;
+}
+
+.final-cta-btn.is-dodging {
+  box-shadow: 0 8px 24px rgba(22, 119, 255, 0.45);
+  transform: scale(1.02);
+}
+
+.dodge-field__notice {
+  position: absolute;
+  bottom: -1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.75rem;
+  color: #61718D;
+  white-space: nowrap;
+  pointer-events: none;
+}

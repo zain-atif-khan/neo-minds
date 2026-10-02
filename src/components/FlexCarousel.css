@@ -1,0 +1,133 @@
+.flex-carousel {
+  position: relative;
+  width: 100%;
+  height: 520px;
+  overflow: hidden;
+  user-select: none;
+  touch-action: pan-y;
+  outline: none;
+  background: transparent;
+  cursor: grab;
+}
+
+.flex-carousel:active {
+  cursor: grabbing;
+}
+
+.flex-carousel canvas {
+  position: absolute;
+  inset: 0;
+  width: 100% !important;
+  height: 100% !important;
+  pointer-events: none;
+}
+
+.flex-carousel[data-dragging] {
+  cursor: grabbing !important;
+}
+
+.flex-carousel[data-hover='open'] {
+  cursor: pointer;
+}
+
+.flex-carousel[data-hover='close'] {
+  cursor: pointer;
+}
+
+/* Caption bar below the WebGL canvas */
+.flex-carousel__caption {
+  position: absolute;
+  bottom: 1.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  padding: 0.75rem 1.6rem;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(11, 23, 54, 0.08);
+  box-shadow: 0 10px 30px rgba(11, 23, 54, 0.08);
+  z-index: 10;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.flex-carousel__title {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  white-space: nowrap;
+}
+
+.flex-carousel__subtitle {
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--text-muted);
+}
+
+.flex-carousel__count {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--accent-blue);
+  border-left: 1px solid var(--border-light);
+  padding-left: 1rem;
+}
+
+.flex-carousel__slash {
+  opacity: 0.45;
+  color: var(--text-muted);
+}
+
+.flex-carousel__digits {
+  display: inline-flex;
+}
+
+.flex-carousel__digit {
+  display: inline-block;
+  height: 1.1em;
+  overflow: hidden;
+  line-height: 1.1;
+}
+
+.flex-carousel__reel {
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.flex-carousel__live {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+@media (max-width: 768px) {
+  .flex-carousel {
+    height: 420px;
+  }
+  .flex-carousel__caption {
+    bottom: 1rem;
+    padding: 0.5rem 1.2rem;
+    max-width: 90%;
+  }
+  .flex-carousel__title {
+    font-size: 0.85rem;
+  }
+}

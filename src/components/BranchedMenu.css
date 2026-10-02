@@ -1,0 +1,190 @@
+.branched-menu {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: var(--bm-w, 100%);
+  max-width: 100%;
+  font-family: var(--font-sans);
+  color: var(--bm-ink, #0B1736);
+  user-select: none;
+  background: transparent;
+  padding: 1.5rem 0;
+}
+
+/* Detached left marker hidden in favor of continuous trunk line */
+.branched-menu__marker {
+  display: none;
+}
+
+.branched-menu__section {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Parent Header (e.g. "INTERNSHIP JOURNEY") */
+.branched-menu__head {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: transparent;
+  border: none;
+  padding: 0.5rem 1rem 1.25rem calc(var(--bm-indent, 56px));
+  font-family: var(--font-sans);
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--bm-accent, #1677FF);
+  text-align: left;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+  width: fit-content;
+}
+
+.branched-menu__head-stem {
+  position: absolute;
+  top: 8px;
+  bottom: 0;
+  width: var(--bm-line-w, 2px);
+  background: var(--bm-accent, #1677FF);
+  transform: translateX(-50%);
+  border-radius: 9999px 9999px 0 0;
+}
+
+.branched-menu__head-title {
+  display: inline-block;
+}
+
+.branched-menu__head:hover {
+  opacity: 0.85;
+}
+
+/* Body Fold Area */
+.branched-menu__body {
+  position: relative;
+  overflow: visible;
+  transition: height var(--bm-fold, 300ms) cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.branched-menu__fold {
+  position: relative;
+}
+
+.branched-menu__tree {
+  position: relative;
+}
+
+/* SVG Branch Lines */
+.branched-menu__lines {
+  position: absolute;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  overflow: visible;
+  z-index: 1;
+}
+
+.branched-menu__base {
+  fill: none;
+  stroke: var(--bm-line, #E2E8F0);
+  stroke-width: var(--bm-line-w, 2px);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.branched-menu__trunk-active {
+  fill: none;
+  stroke: var(--bm-accent, #1677FF);
+  stroke-width: var(--bm-line-w, 2px);
+  stroke-linecap: round;
+  transition: d var(--bm-draw, 400ms) cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.branched-menu__reach {
+  fill: none;
+  stroke: var(--bm-accent, #1677FF);
+  stroke-width: calc(var(--bm-line-w, 2px) + 0.5px);
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: stroke-dashoffset var(--bm-draw, 400ms) cubic-bezier(0.16, 1, 0.3, 1);
+  filter: drop-shadow(0 0 6px rgba(22, 119, 255, 0.35));
+}
+
+/* Item Row (Button container) */
+.branched-menu__item {
+  position: absolute;
+  left: var(--bm-indent, 56px);
+  right: 0;
+  display: flex;
+  align-items: flex-start;
+  gap: 1.25rem;
+  height: calc(var(--bm-row, 88px) - 16px);
+  background: transparent;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 12px;
+  cursor: pointer;
+  text-align: left;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 2;
+  box-sizing: border-box;
+}
+
+.branched-menu__item:hover {
+  transform: translateX(6px);
+}
+
+/* Step Number (e.g. 01, 02) */
+.branched-menu__step-num {
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: var(--bm-accent, #1677FF);
+  min-width: 28px;
+  padding-top: 1px;
+  line-height: 1.2;
+  transition: transform 0.2s ease;
+}
+
+.branched-menu__item:hover .branched-menu__step-num,
+.branched-menu__item[data-active] .branched-menu__step-num {
+  transform: scale(1.08);
+}
+
+/* Content Column (Title + Description) */
+.branched-menu__content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  flex: 1;
+}
+
+.branched-menu__label {
+  font-family: var(--font-sans);
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  color: var(--bm-ink, #0B1736);
+  line-height: 1.2;
+  transition: color 0.2s ease;
+}
+
+.branched-menu__item:hover .branched-menu__label,
+.branched-menu__item[data-active] .branched-menu__label {
+  color: var(--bm-accent, #1677FF);
+}
+
+.branched-menu__desc {
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: #61718D;
+  transition: color 0.2s ease;
+}
+
+.branched-menu__item[data-active] .branched-menu__desc {
+  color: #334155;
+  font-weight: 500;
+}
