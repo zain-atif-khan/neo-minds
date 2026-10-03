@@ -5,7 +5,6 @@ import ProgramsSection from '../components/ProgramsSection';
 import CampusNetworkSection from '../components/CampusNetworkSection';
 import ProjectsSection from '../components/ProjectsSection';
 import InternshipsSection from '../components/InternshipsSection';
-import SuccessStoriesSection from '../components/SuccessStoriesSection';
 import ApplicationSection from '../components/ApplicationSection';
 import EventsSection from '../components/EventsSection';
 import AboutSection from '../components/AboutSection';
@@ -67,10 +66,7 @@ export default function HomePage({
         onOpenAssessmentModal={onOpenAssessmentModal}
       />
 
-      {/* 07 — SUCCESS STORIES */}
-      <SuccessStoriesSection navigateTo={navigateTo} />
-
-      {/* 08 — AMBASSADOR + STUDENT APPLICATION */}
+      {/* 07 — AMBASSADOR + STUDENT APPLICATION */}
       <ApplicationSection />
 
       {/* 09 — EVENTS & WORKSHOPS (What's happening at Neo Minds) */}
