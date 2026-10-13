@@ -59,6 +59,7 @@ export default function AboutSection({ onOpenJoinModal }) {
           scrub: 0.8,
           anticipatePin: 1,
           invalidateOnRefresh: true,
+          refreshPriority: -1,
           onUpdate: (self) => {
             const p = self.progress;
             if (p < 0.38) {

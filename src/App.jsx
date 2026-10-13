@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Navbar from './components/Navbar';
 import FooterSection from './components/FooterSection';
 import HomePage from './pages/HomePage';
 
@@ -76,7 +77,22 @@ export default function App() {
     }
   }, [isReloadBelowHero]);
 
-  // Synchronize ScrollTrigger instances when intro completes normally
+  // Synchronize ScrollTrigger instances when intro completes normally or assets finish loading
+  React.useEffect(() => {
+    const handleLoad = () => {
+      ScrollTrigger.refresh();
+    };
+    window.addEventListener('load', handleLoad);
+    const timer = setTimeout(() => ScrollTrigger.refresh(), 500);
+    const timer2 = setTimeout(() => ScrollTrigger.refresh(), 1200);
+
+    return () => {
+      window.removeEventListener('load', handleLoad);
+      clearTimeout(timer);
+      clearTimeout(timer2);
+    };
+  }, []);
+
   React.useEffect(() => {
     if (isHeroAnimationComplete && !isReloadBelowHero) {
       const timer = setTimeout(() => {
@@ -128,7 +144,8 @@ export default function App() {
     }
     const el = document.getElementById(targetId);
     if (el) {
-      const targetPos = el.getBoundingClientRect().top + window.pageYOffset;
+      const navOffset = 75;
+      const targetPos = el.getBoundingClientRect().top + window.pageYOffset - navOffset;
       window.scrollTo({ top: targetPos, behavior: 'smooth' });
     }
   };
@@ -145,8 +162,17 @@ export default function App() {
     }
   };
 
+  // Navbar is visible once hero animation completes
+  const isNavbarVisible = isHeroAnimationComplete;
+
   return (
     <div className="neominds-app">
+      {/* Primary Sticky Header */}
+      <Navbar 
+        navigateTo={scrollToSection}
+        openJoinModal={() => setAuthModalState({ isOpen: true, mode: 'join' })}
+        isVisible={isNavbarVisible}
+      />
 
       {/* Main Single-Page Website Content (z-index: 10, background: #FFFFFF) */}
       <main className="curtain-content">
