@@ -5749,7 +5749,7 @@ img {
     font-size: 0.85rem;
     font-weight: 800;
     letter-spacing: -0.01em;
-    color: #64748B;
+    color: #1677FF;
     line-height: 1;
     min-width: 1.5rem;
     transition: color 0.2s ease;
@@ -5758,7 +5758,7 @@ img {
   .ig-mobile-gate-dash {
     font-family: var(--font-mono, monospace);
     font-size: 0.82rem;
-    color: rgba(100, 116, 139, 0.35);
+    color: rgba(22, 119, 255, 0.45);
     line-height: 1;
     transition: color 0.2s ease;
   }
@@ -5769,7 +5769,7 @@ img {
     font-weight: 800;
     letter-spacing: 0.12em;
     text-transform: uppercase;
-    color: #0B1736;
+    color: #1677FF;
     line-height: 1;
     transition: color 0.2s ease;
   }
@@ -5791,7 +5791,7 @@ img {
     font-weight: 700;
     letter-spacing: 0.1em;
     text-transform: uppercase;
-    color: #94A3B8;
+    color: #1677FF;
     line-height: 1;
     transition: color 0.2s ease;
   }
@@ -5802,7 +5802,7 @@ img {
 
   /* Inactive locked status subtle dimming */
   .ig-mobile-gate-row.ig-lane--locked {
-    opacity: 0.85;
+    opacity: 1;
   }
 
   /* 2. Expanded Stage Item in Sequence — replaces its collapsed row inline */
