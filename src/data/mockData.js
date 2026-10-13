@@ -1,12 +1,5 @@
 // Neo Minds Tech Hub Data Architecture
 
-export const METRICS = [
-  { value: '50+', label: 'Colleges' },
-  { value: '5000+', label: 'Students' },
-  { value: '100+', label: 'Projects' },
-  { value: '20+', label: 'Industry Partners' },
-];
-
 export const HOW_IT_WORKS_STEPS = [
   {
     number: '01',
@@ -67,9 +60,24 @@ export const COLLEGES = [
     upcomingEvent: 'Campus Ambassador Summit & Tech Expo'
   },
   {
+    id: 'anwar-ul-uloom',
+    name: 'Anwarul Uloom College',
+    shortName: 'Anwarul Uloom\nCollege',
+    city: 'Hyderabad',
+    state: 'Telangana',
+    status: 'Active Club',
+    image: '/images/campus_anwar.jpg',
+    ambassador: 'Mohammed Farhan (B.Tech IT)',
+    members: 380,
+    establishedYear: 1953,
+    activeProjects: 22,
+    description: 'Premier higher education institute in New Mallepally. Home to a vibrant Neo Minds Tech Hub with student-led initiatives in AI and cloud computing.',
+    upcomingEvent: 'Full-Stack Product Sprint'
+  },
+  {
     id: 'loyola',
-    name: 'Loyola Academy College',
-    shortName: 'Loyola\nAcademy College',
+    name: 'Loyola Academy',
+    shortName: 'Loyola\nAcademy',
     city: 'Hyderabad',
     state: 'Telangana',
     status: 'Active Club',
@@ -83,12 +91,12 @@ export const COLLEGES = [
   },
   {
     id: 'cbit',
-    name: 'CBIT',
-    shortName: 'CBIT',
+    name: 'CBIT — Chaitanya Bharathi Institute of Technology',
+    shortName: 'CBIT\nHyderabad',
     city: 'Hyderabad',
     state: 'Telangana',
     status: 'Active Club',
-    image: '/img21.jpeg',
+    image: '/images/campus_cbit.jpg',
     ambassador: 'Divya Sree (CSE)',
     members: 420,
     establishedYear: 1979,
@@ -97,28 +105,13 @@ export const COLLEGES = [
     upcomingEvent: 'Generative AI & Agentic Workflows'
   },
   {
-    id: 'anwar-ul-uloom',
-    name: 'Anwar Ul Uloom College',
-    shortName: 'Anwar Ul Uloom\nCollege',
-    city: 'Hyderabad',
-    state: 'Telangana',
-    status: 'Active Club',
-    image: '/images/campus_anwar.jpg',
-    ambassador: 'Mohammed Farhan (B.Tech IT)',
-    members: 380,
-    establishedYear: 1953,
-    activeProjects: 22,
-    description: 'Premier higher education institute in New Mallepally. Home to a vibrant Neo Minds Tech Hub with student-led initiatives in AI and cloud computing.',
-    upcomingEvent: 'Full-Stack Product Sprint'
-  },
-  {
     id: 'jntu-hyderabad',
-    name: 'JNTU Hyderabad',
-    shortName: 'JNTU\nHyderabad',
+    name: 'JNTUH — Jawaharlal Nehru Technological University Hyderabad',
+    shortName: 'JNTUH\nHyderabad',
     city: 'Hyderabad',
     state: 'Telangana',
     status: 'Active Club',
-    image: '/img23.jpeg',
+    image: '/images/campus_jntuh.jpg',
     ambassador: 'Karthik Rao (ECE)',
     members: 460,
     establishedYear: 1972,
@@ -128,12 +121,12 @@ export const COLLEGES = [
   },
   {
     id: 'st-francis',
-    name: 'St. Francis College',
-    shortName: 'St. Francis\nCollege',
+    name: 'St. Francis College for Women',
+    shortName: 'St. Francis\nCollege for Women',
     city: 'Hyderabad',
     state: 'Telangana',
     status: 'Active Club',
-    image: '/img26.jpeg',
+    image: '/images/campus_st_francis.jpg',
     ambassador: 'Ananya Sharma (Computer Science)',
     members: 320,
     establishedYear: 1959,
@@ -148,7 +141,7 @@ export const COLLEGES = [
     city: 'Hyderabad',
     state: 'Telangana',
     status: 'Active Club',
-    image: '/img30.jpeg',
+    image: '/images/campus_vnr.webp',
     ambassador: 'Akhil Tej (Information Science)',
     members: 395,
     establishedYear: 1995,

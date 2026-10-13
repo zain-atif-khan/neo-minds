@@ -1,0 +1,211 @@
+.circular-carousel {
+  position: relative;
+  width: 100%;
+  height: 480px;
+  overflow: hidden;
+  user-select: none;
+  touch-action: pan-y;
+  outline: none;
+  background: transparent;
+  cursor: grab;
+  perspective: 1200px;
+}
+
+.circular-carousel[data-dragging] {
+  cursor: grabbing !important;
+}
+
+.circular-carousel__view {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.circular-carousel__stage {
+  position: absolute;
+  width: 0;
+  height: 0;
+  transform-style: preserve-3d;
+  pointer-events: auto;
+}
+
+.circular-carousel__camera {
+  position: absolute;
+  width: 0;
+  height: 0;
+  transform-style: preserve-3d;
+}
+
+.circular-carousel__ring {
+  position: absolute;
+  width: 0;
+  height: 0;
+  transform-style: preserve-3d;
+}
+
+.circular-carousel__card {
+  position: absolute;
+  width: 0;
+  height: 0;
+  transform-style: preserve-3d;
+  cursor: pointer;
+}
+
+.circular-carousel__tile {
+  position: absolute;
+  overflow: hidden;
+  backface-visibility: hidden;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.circular-carousel__frame {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  background: #0B1736;
+  box-shadow: 0 10px 28px rgba(11, 23, 54, 0.16);
+}
+
+.circular-carousel__photo {
+  position: absolute;
+  object-fit: cover;
+  pointer-events: none;
+  will-change: transform;
+  display: block;
+}
+
+.circular-carousel__photo--leaving {
+  opacity: 0;
+  animation: ccLeaving 0.7s forwards ease;
+}
+
+@keyframes ccLeaving {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: scale(0.92);
+  }
+}
+
+.circular-carousel__inner {
+  position: absolute;
+  inset: 0;
+  background: var(--cc-fade, #000000);
+  opacity: var(--cc-inner, 0.4);
+  pointer-events: none;
+}
+
+.circular-carousel__shade {
+  position: absolute;
+  inset: 0;
+  background: var(--cc-fade, #000000);
+  opacity: var(--cc-depth, 0);
+  pointer-events: none;
+  transition: opacity 0.12s linear;
+}
+
+/* Caption bar below the 3D ring */
+.circular-carousel__caption {
+  position: absolute;
+  bottom: 1rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.25rem;
+  padding: 0.65rem 1.4rem;
+  border-radius: 9999px;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(22, 119, 255, 0.14);
+  box-shadow: 0 8px 24px rgba(11, 23, 54, 0.08);
+  z-index: 10;
+  pointer-events: none;
+  font-family: var(--font-sans, sans-serif);
+  color: #0B1736;
+  max-width: calc(100% - 2rem);
+  box-sizing: border-box;
+}
+
+.circular-carousel__title {
+  font-weight: 700;
+  font-size: 0.88rem;
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
+}
+
+.circular-carousel__subtitle {
+  font-weight: 500;
+  font-size: 0.76rem;
+  color: #64748B;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.circular-carousel__count {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  font-family: var(--font-mono, monospace);
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: #1677FF;
+  flex-shrink: 0;
+}
+
+.circular-carousel__digits {
+  display: inline-flex;
+  overflow: hidden;
+  height: 1.15em;
+}
+
+.circular-carousel__digit {
+  display: inline-block;
+  width: 0.64em;
+  height: 1.15em;
+  overflow: hidden;
+}
+
+.circular-carousel__reel {
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.circular-carousel__reel span {
+  height: 1.15em;
+  line-height: 1.15em;
+  text-align: center;
+}
+
+.circular-carousel__slash {
+  color: #94A3B8;
+  margin: 0 2px;
+}
+
+.circular-carousel__live {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}

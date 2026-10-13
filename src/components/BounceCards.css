@@ -54,12 +54,42 @@
   overflow: visible;
 }
 
-@media (max-width: 992px) {
+@media (max-width: 992px) and (min-width: 769px) {
   .programs-bounce-stage {
     padding: 1.5rem 0;
     overflow-x: auto;
   }
   .bounceCardsContainer {
     max-width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .programs-bounce-stage {
+    padding: 1rem 0;
+    overflow: visible;
+  }
+  .programs-bounce-stage .bounceCardsContainer {
+    width: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 1.25rem !important;
+    align-items: stretch !important;
+    position: static !important;
+  }
+  .programs-bounce-stage .bounceCardsContainer .card {
+    position: static !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    transform: none !important;
+    margin: 0 !important;
+    min-height: auto !important;
+    box-shadow: 0 4px 18px rgba(11, 23, 54, 0.08) !important;
+  }
+  .bounceCardsContainer .program-shelf-card {
+    min-height: auto !important;
+    padding: 1.5rem 1.25rem !important;
   }
 }

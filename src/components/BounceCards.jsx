@@ -65,7 +65,7 @@ export default function BounceCards({
   };
 
   const pushSiblings = hoveredIdx => {
-    if (!enableHover || !containerRef.current) return;
+    if (!enableHover || !containerRef.current || (typeof window !== 'undefined' && window.innerWidth <= 768)) return;
 
     const q = gsap.utils.selector(containerRef);
 

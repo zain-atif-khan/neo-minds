@@ -190,7 +190,7 @@
 
 .hero-component-root .title {
   position: absolute;
-  bottom: 10%;
+  bottom: 14%;
   left: 50%;
   transform: translateX(-50%);
   z-index: 5;
@@ -236,41 +236,76 @@
    RESPONSIVE BEHAVIOR (Matches original @media (max-width: 900px))
    ========================================================================== */
 @media (max-width: 900px) {
+  .hero-component-root .overlay {
+    padding: 0;
+    justify-content: center;
+    align-items: center;
+  }
+
   .hero-component-root .loader {
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    width: 100%;
+    text-align: center;
   }
 
   .hero-component-root .projects,
-  .hero-component-root .locations,
-  .hero-component-root .intro-copy,
-  .hero-component-root .banner-img {
+  .hero-component-root .locations {
     display: none;
   }
 
+  .hero-component-root .intro-copy {
+    display: none !important;
+  }
+
   .hero-component-root .title {
+    position: absolute;
+    top: calc(45% + clamp(95px, 24vw, 135px));
+    bottom: auto !important;
+    left: 50%;
+    transform: translateX(-50%);
     width: 100%;
-    bottom: 20%;
-    display: flex;
+    display: flex !important;
     justify-content: center;
+    align-items: center;
+    text-align: center;
+    z-index: 15;
+    padding: 0 8px;
+    box-sizing: border-box;
   }
 
   .hero-component-root .title h1 {
-    font-size: 2.5rem;
-    white-space: normal;
-    padding: 0 1rem;
+    font-family: "Druk", "Space Grotesk", Impact, "Arial Black", sans-serif;
+    font-size: clamp(1.05rem, 5.2vw, 1.85rem);
+    font-weight: 700;
+    font-style: italic;
+    color: #000;
+    text-transform: uppercase;
+    white-space: nowrap;
+    letter-spacing: -0.02em;
+    line-height: 1;
+    margin: 0;
+    text-align: center;
+    padding: 0;
   }
 
   .hero-component-root .image-grid {
-    width: 75%;
-    gap: 0.5em;
+    width: 68%;
+    max-width: 280px;
+    gap: 0.35em;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    align-items: center;
+    justify-content: center;
   }
 
   .hero-component-root .grid-row {
-    width: 95%;
-    justify-content: space-around;
+    width: 100%;
+    justify-content: center;
+    align-items: center;
     gap: 0.5em;
   }
 }
@@ -286,7 +321,7 @@
   width: 100%;
   height: 100%;
   background-color: #FFFFFF;
-  z-index: 10;
+  z-index: 30;
   transform: scaleY(0);
   transform-origin: 50% 50%;
   display: flex;
@@ -302,8 +337,8 @@
   width: 100%;
   height: 100%;
   pointer-events: none;
-  z-index: 1;
-  opacity: 0;
+  z-index: 2;
+  opacity: 0.9;
   overflow: hidden;
 }
 
@@ -313,6 +348,14 @@
   left: 0;
   width: 100%;
   height: 100%;
+}
+
+.hero-component-root .mobile-only-orbital {
+  display: none;
+}
+
+.hero-component-root .desktop-only-orbital {
+  display: block;
 }
 
 /* Glowing Blue Nodes / Dots on Orbital Lines */
@@ -368,7 +411,7 @@
   justify-content: center;
   pointer-events: auto;
   margin: 0 auto;
-  z-index: 2;
+  z-index: 5;
 }
 
 /* Main Title: Exact elegant, flowing serif wordmark matching reference "NeoMinds" */
@@ -385,8 +428,8 @@
   display: inline-flex;
   align-items: baseline;
   justify-content: center;
-  opacity: 0;
-  transform: translateY(18px);
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .hero-component-root .brand-word-neo {
@@ -406,8 +449,8 @@
   justify-content: center;
   gap: 1.25rem;
   margin: 1.15rem 0 0 0;
-  opacity: 0;
-  transform: translateY(14px);
+  opacity: 1;
+  transform: translateY(0);
 }
 
 .hero-component-root .tech-hub-line {
@@ -442,8 +485,8 @@
   max-width: 720px;
   text-align: center;
   text-transform: none;
-  opacity: 0;
-  transform: translateY(14px);
+  opacity: 1;
+  transform: translateY(0);
 }
 
 /* Refined Rectangular CTA Buttons */
@@ -468,8 +511,8 @@
   height: 46px;
   border-radius: 8px;
   cursor: pointer;
-  opacity: 0;
-  transform: translateY(14px);
+  opacity: 1;
+  transform: translateY(0);
   transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   text-decoration: none;
   line-height: 1;
@@ -513,46 +556,196 @@
 }
 
 @media (max-width: 768px) {
+  .hero-component-root {
+    min-height: 100svh;
+    height: 100svh;
+  }
+
+  /* Center the entire hero unit as one cohesive composition */
+  .hero-component-root .hero-reveal-center {
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    max-width: 360px;
+    margin: 0 auto;
+  }
+
   .hero-component-root .neo-minds-reveal-title {
-    font-size: clamp(2.8rem, 12vw, 4.4rem);
+    font-size: clamp(2.7rem, 11vw, 3.8rem);
   }
 
   .hero-component-root .tech-hub-line {
-    width: 28px;
+    width: 24px;
   }
 
   .hero-component-root .neo-minds-reveal-sub {
-    font-size: 0.85rem;
-    letter-spacing: 0.24em;
+    font-size: 0.8rem;
+    letter-spacing: 0.22em;
   }
 
   .hero-component-root .neo-minds-reveal-desc {
-    font-size: 1rem;
-    margin-top: 1.35rem;
-    padding: 0 0.5rem;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin-top: 1.15rem;
+    padding: 0 0.25rem;
+    max-width: 310px;
+  }
+
+  /* Desktop / Mobile Orbital SVG Display Toggle */
+  .desktop-only-orbital {
+    display: none !important;
+  }
+
+  .mobile-only-orbital {
+    display: block !important;
+  }
+
+  /* Reposition blue orbital framing nodes along the curved orbital lines strictly in empty spaces */
+  .hero-component-root .orbital-node-upper-right {
+    left: auto !important;
+    right: 15% !important;
+    top: 13.5% !important;
+    bottom: auto !important;
+    transform: none !important;
   }
 
   .hero-component-root .orbital-node-lower-left {
-    left: 8%;
-    bottom: 30%;
+    left: 17% !important;
+    right: auto !important;
+    top: 86% !important;
+    bottom: auto !important;
+    transform: none !important;
   }
 
-  .hero-component-root .orbital-node-upper-right {
-    right: 6%;
-    top: 20%;
-  }
-
+  /* Side-by-side buttons with identical dimensions */
   .hero-component-root .final-cta-group {
-    flex-direction: column;
-    gap: 0.75rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
     width: 100%;
-    max-width: 290px;
-    margin-top: 1.75rem;
+    max-width: 310px;
+    margin-top: 1.4rem;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  .hero-component-root .join-dodge-field {
+    flex: 1 1 0;
+    width: 50%;
+    min-width: 0 !important;
+    max-width: none !important;
+    height: 44px !important;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    box-sizing: border-box;
+  }
+
+  .hero-component-root .dodge-field__mover {
+    width: 100%;
+    height: 44px;
+    display: flex;
+    box-sizing: border-box;
   }
 
   .hero-component-root .final-cta-btn {
+    flex: 1 1 0;
     width: 100%;
+    min-width: 0 !important;
+    max-width: none !important;
+    height: 44px !important;
+    padding: 0 10px;
+    font-size: 0.88rem;
+    font-weight: 600;
+    border-radius: 8px;
+    display: inline-flex;
+    align-items: center;
     justify-content: center;
+    gap: 6px;
+    box-sizing: border-box;
+    text-align: center;
+    white-space: nowrap;
+    line-height: 1;
+  }
+
+  .hero-component-root .final-cta-secondary {
+    flex: 1 1 0;
+    width: 50%;
+    min-width: 0 !important;
+    max-width: none !important;
+    height: 44px !important;
+  }
+
+  /* Center the 3x3 image grid animation on mobile phone screens */
+  /* Center the 3x3 image grid animation on mobile phone screens */
+  .hero-component-root .image-grid {
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 68%;
+    max-width: 270px;
+    aspect-ratio: 1 / 1;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 0.35em !important;
+    z-index: 10 !important;
+    margin: 0;
+    padding: 0;
+  }
+
+  .hero-component-root .image-grid .grid-row {
+    width: 100% !important;
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: center !important;
+    align-items: center !important;
+    gap: 0.35em !important;
+    flex: 1;
+  }
+
+  .hero-component-root .image-grid .img {
+    position: relative !important;
+    flex: 1 !important;
+    aspect-ratio: 1 / 1 !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    overflow: visible !important;
+  }
+
+  /* Center middle hero image is in front (z-index 10) */
+  .hero-component-root .image-grid .img.hero-img {
+    z-index: 10 !important;
+  }
+
+  /* Banner images on mobile phone: sit BEHIND central man (z-index 2) */
+  .hero-component-root .banner-img {
+    display: block !important;
+    width: 33% !important;
+    max-width: 135px !important;
+    min-width: 95px !important;
+    aspect-ratio: 4 / 5 !important;
+    z-index: 2 !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    overflow: visible !important;
+  }
+
+  .hero-component-root .banner-img-1 {
+    z-index: 2 !important;
+  }
+
+  .hero-component-root .banner-img-2 {
+    z-index: 2 !important;
+  }
+
+  /* White sheet reveal sits on top of all images (z-index 30) */
+  .hero-component-root .hero-opaque-sheet {
+    z-index: 30 !important;
   }
 }
+
 

@@ -120,7 +120,7 @@
 
 @media (max-width: 768px) {
   .flex-carousel {
-    height: 420px;
+    height: 480px;
   }
   .flex-carousel__caption {
     bottom: 1rem;

@@ -143,6 +143,8 @@ uniform float uCurl;
 uniform float uDispersion;
 uniform float uStrength;
 uniform float uSceneAlpha;
+uniform float uSwirl;
+uniform float uLift;
 out vec4 fragColor;
 
 void main() {
@@ -166,8 +168,8 @@ void main() {
   float slope = 16.0 * t * t * (1.0 - t) * (1.0 - t);
   float reachX = rel.x / (uResolution.x * 0.5);
   float side = smoothstep(0.02, 0.3, abs(reachX)) * (uCurl == 0.0 ? sign(reachX) : uCurl);
-  float lift = ramp * side * uFlow * uStrength;
-  vec2 swirl = along * along.y * side * slope * uFlow * uStrength * 0.35;
+  float lift = ramp * side * uFlow * uStrength * uLift;
+  vec2 swirl = along * along.y * side * slope * uFlow * uStrength * uSwirl;
   vec2 drift = vec2(0.0, -lift) - swirl;
   vec2 shifted = uv + drift / uResolution;
 
@@ -233,6 +235,8 @@ const FlexCarousel = ({
   curl,
   dispersion,
   liquid,
+  swirl,
+  lift,
   followCursor,
   squeeze = 0.2,
   focusOnClick = true,
@@ -280,6 +284,8 @@ const FlexCarousel = ({
       curl: pick(curl, 'curl'),
       dispersion: pick(dispersion, 'dispersion'),
       liquid: pick(liquid, 'liquid'),
+      swirl: swirl !== undefined ? swirl : 0.35,
+      lift: lift !== undefined ? lift : 1.0,
       followCursor: pick(followCursor, 'followCursor'),
       squeeze,
       focusOnClick,
@@ -365,7 +371,9 @@ const FlexCarousel = ({
       uCurl: { value: 0 },
       uDispersion: { value: 0 },
       uStrength: { value: 0 },
-      uSceneAlpha: { value: 0 }
+      uSceneAlpha: { value: 0 },
+      uSwirl: { value: 0.35 },
+      uLift: { value: 1.0 }
     };
     const lensMesh = new Mesh(gl, {
       geometry: new Triangle(gl),
@@ -937,6 +945,8 @@ const FlexCarousel = ({
         lensUniforms.uDispersion.value = s.dispersion * 0.12 * (1 + Math.abs(deform) * liquidAmount * 1.2);
         lensUniforms.uStrength.value = effects.strength * (1 - focusEase);
         lensUniforms.uSceneAlpha.value = effects.sceneAlpha;
+        lensUniforms.uSwirl.value = s.swirl !== undefined ? s.swirl : 0.35;
+        lensUniforms.uLift.value = s.lift !== undefined ? s.lift : 1.0;
         renderer.render({ scene: lensMesh });
       }
 

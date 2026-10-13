@@ -180,24 +180,25 @@ export default function Navbar({ currentRoute, navigateTo, openJoinModal, isVisi
 
   // Side padding: 0 6vw -> 0 28px
   const paddingVal = isMobile 
-    ? (p === 0 ? '0 18px' : '0 16px') 
+    ? (p === 0 ? '0 12px' : '0 12px') 
     : (p === 0 ? '0 6vw' : `0 ${lerp(48, 28, p)}px`);
 
   // ============================================================
   // 7. STABLE LOGO SCALING (GPU transform-based)
   // ============================================================
   // Initial: ~160px width, Scrolled: ~133px width (scale = 0.835)
-  const logoScale = isMobile ? lerp(1, 0.88, p) : lerp(1, 0.835, p);
+  // On mobile: scale down appropriately to avoid cramping
+  const logoScale = isMobile ? lerp(0.82, 0.74, p) : lerp(1, 0.835, p);
 
   // ============================================================
   // 8. JOIN NOW CTA BUTTON DIMENSIONS
   // ============================================================
-  // Initial: height 46px, width 138px
+  // Desktop Initial: height 46px, width 138px
   // Scrolled: height 42px, width 128px, radius 21px
-  const btnHeight = lerp(46, 42, p);
-  const btnWidth = lerp(138, 128, p);
-  const btnRadius = lerp(23, 21, p);
-  const btnFontSize = `${lerp(0.92, 0.88, p)}rem`;
+  const btnHeight = isMobile ? lerp(38, 34, p) : lerp(46, 42, p);
+  const btnWidth = isMobile ? 'auto' : `${lerp(138, 128, p)}px`;
+  const btnRadius = isMobile ? lerp(19, 17, p) : lerp(23, 21, p);
+  const btnFontSize = isMobile ? '0.82rem' : `${lerp(0.92, 0.88, p)}rem`;
 
   const containerStyle = {
     position: 'fixed',
@@ -336,7 +337,7 @@ export default function Navbar({ currentRoute, navigateTo, openJoinModal, isVisi
             justifySelf: 'end', 
             display: 'flex', 
             alignItems: 'center', 
-            gap: isMobile ? '0.6rem' : '0.85rem', 
+            gap: isMobile ? '0.45rem' : '0.85rem', 
             flexShrink: 0 
           }}
         >
@@ -349,14 +350,14 @@ export default function Navbar({ currentRoute, navigateTo, openJoinModal, isVisi
               border: 'none',
               borderRadius: `${btnRadius}px`,
               height: `${btnHeight}px`,
-              width: `${btnWidth}px`,
-              padding: '0',
+              width: isMobile ? 'auto' : `${btnWidth}px`,
+              padding: isMobile ? '0 12px' : '0',
               fontSize: btnFontSize,
               fontWeight: 600,
               display: 'inline-flex',
               alignItems: 'center',
               justifyContent: 'center',
-              gap: '6px',
+              gap: '5px',
               cursor: 'pointer',
               whiteSpace: 'nowrap',
               boxShadow: '0 4px 14px rgba(22, 119, 255, 0.24)',
@@ -364,7 +365,7 @@ export default function Navbar({ currentRoute, navigateTo, openJoinModal, isVisi
               flexShrink: 0,
             }}
           >
-            Join Now <ArrowRight size={14} />
+            Join Now <ArrowRight size={13} />
           </button>
 
           {/* Responsive Mobile Menu Button */}

@@ -1,79 +1,181 @@
-import React, { useState } from 'react';
-import { ArrowRight, Compass, Shield, Users, ArrowUpRight, X, Sparkles, Building2 } from 'lucide-react';
+import React, { useState, useEffect, useRef } from 'react';
+import { ArrowRight, X, Building2, Shield } from 'lucide-react';
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+if (typeof window !== 'undefined') {
+  gsap.registerPlugin(ScrollTrigger);
+}
+
+const PRINCIPLES = [
+  {
+    index: '01',
+    title: 'Practical Over Theory',
+    text: 'Colleges teach computer science foundations, but industry runs on modern stacks: autonomous workflows, vector systems, and production serverless architectures.',
+    pillars: ['TOOL MASTERY', 'PRODUCTION STACKS'],
+  },
+  {
+    index: '02',
+    title: 'Proof Over Resumes',
+    text: "Resumes with textbook bullet points don't convince modern engineering teams. Real code repositories, live hosted web applications, and verified diagnostic skill benchmarks speak louder.",
+    pillars: ['LIVE DEPLOYMENTS', 'VERIFIED PROOF'],
+  },
+  {
+    index: '03',
+    title: 'Campus to Career',
+    text: 'By partnering directly with collegiate chapters and vetted tech employers, we establish direct pipeline relationships where students move smoothly from learning to paid internships.',
+    pillars: ['50+ CAMPUS HUBS', 'DIRECT MATCHING'],
+  },
+];
 
 export default function AboutSection({ onOpenJoinModal }) {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [activeHoverIndex, setActiveHoverIndex] = useState(0); // Exactly one principle active at a time
+
+  const sectionRef = useRef(null);
+  const trackWrapperRef = useRef(null);
+  const trackRef = useRef(null);
+
+  useEffect(() => {
+    const mm = gsap.matchMedia();
+
+    mm.add('(max-width: 768px)', () => {
+      const section = sectionRef.current;
+      const track = trackRef.current;
+      if (!section || !track) return;
+
+      const cols = track.querySelectorAll('.about-principle-col');
+      if (cols.length < 3) return;
+
+      const getPanelWidth = () => window.innerWidth;
+
+      const tl = gsap.timeline({
+        scrollTrigger: {
+          trigger: section,
+          start: 'top 75px',
+          end: '+=1200',
+          pin: true,
+          pinSpacing: true,
+          scrub: 0.8,
+          anticipatePin: 1,
+          invalidateOnRefresh: true,
+          onUpdate: (self) => {
+            const p = self.progress;
+            if (p < 0.38) {
+              setActiveHoverIndex(0);
+            } else if (p < 0.76) {
+              setActiveHoverIndex(1);
+            } else {
+              setActiveHoverIndex(2);
+            }
+          },
+        },
+      });
+
+      // Card 01 -> Card 02 -> Card 03 with comfortable reading holds
+      tl.to({}, { duration: 0.1 })
+        .to(track, {
+          x: () => -getPanelWidth(),
+          ease: 'power1.inOut',
+          duration: 0.8,
+        })
+        .to({}, { duration: 0.1 })
+        .to(track, {
+          x: () => -(2 * getPanelWidth()),
+          ease: 'power1.inOut',
+          duration: 0.8,
+        })
+        .to({}, { duration: 0.3 });
+    });
+
+    return () => mm.revert();
+  }, []);
 
   return (
-    <section className="section-spacing about-section" id="about">
-      <div className="container">
+    <section className="about-bridge-section" id="about" ref={sectionRef}>
+      <div className="container about-bridge-container">
         {/* Header Row */}
-        <div className="section-header-row">
+        <div className="section-header-row about-bridge-header">
           <div className="section-header-left">
             <div className="kicker">
-              OUR PURPOSE & THESIS
+              OUR PURPOSE &amp; THESIS
             </div>
-            <h2 className="section-title editorial-serif">
+            <h2 className="section-title editorial-serif about-bridge-title">
               Bridging college to<br />
-              <span style={{ color: '#1677FF' }}>industry.</span>
+              <span className="text-blue">industry.</span>
             </h2>
           </div>
 
           <div className="section-header-right">
-            <p className="section-subtext">
+            <p className="section-subtext about-bridge-subtext">
               We help students build practical skills, work on real projects, and secure a verified pathway toward industry experience.
             </p>
             <button 
-              className="btn btn-secondary" 
+              className="about-explore-cta" 
               onClick={() => setIsModalOpen(true)}
-              style={{ marginTop: '0.5rem' }}
+              type="button"
             >
-              Read Our Thesis <ArrowRight size={15} />
+              <span>EXPLORE THE BRIDGE</span>
+              <ArrowRight size={14} className="about-explore-arrow" />
             </button>
           </div>
         </div>
 
-        {/* Editorial Structured 3-Pillar Row with Subtle Dividers (No Generic 3-Card Grid) */}
-        <div className="about-editorial-manifesto">
-          <div className="about-column-item">
-            <div className="about-column-index">01</div>
-            <h3 className="about-column-title">Practical Over Theory</h3>
-            <p className="about-column-text">
-              Colleges teach computer science foundations, but industry runs on modern stacks: autonomous workflows, vector systems, and production serverless architectures. We bridge this exact curriculum gap.
-            </p>
-            <div className="about-column-meta">
-              <span className="about-tag">Tool Mastery</span>
-              <span className="about-tag">Production Stacks</span>
-            </div>
-          </div>
+        {/* ── 3 EDITORIAL PRINCIPLES (HORIZONTAL SCROLL ON MOBILE, 3-COL ON DESKTOP) ── */}
+        <div className="about-principles-track-wrapper" ref={trackWrapperRef}>
+          <div className="about-bridge-principles" ref={trackRef}>
+            {PRINCIPLES.map((principle, idx) => {
+              const isActive = activeHoverIndex === idx;
+              const isSubdued = activeHoverIndex !== null && !isActive;
 
-          <div className="about-column-item">
-            <div className="about-column-index">02</div>
-            <h3 className="about-column-title">Proof Over Resumes</h3>
-            <p className="about-column-text">
-              Resumes with textbook bullet points don't convince modern engineering teams. Real code repositories, live hosted web applications, and verified diagnostic skill benchmarks speak louder.
-            </p>
-            <div className="about-column-meta">
-              <span className="about-tag">Live Deployments</span>
-              <span className="about-tag">Verified Proof</span>
-            </div>
-          </div>
+              return (
+                <div
+                  key={principle.index}
+                  className={`about-principle-col ${isActive ? 'is-active' : ''} ${isSubdued ? 'is-subdued' : ''}`}
+                  onMouseEnter={() => setActiveHoverIndex(idx)}
+                  tabIndex={0}
+                  role="region"
+                  aria-label={`Principle ${principle.index}: ${principle.title}`}
+                >
+                {/* Faint Oversized Watermark Number */}
+                <div className="about-principle-watermark" aria-hidden="true">
+                  {principle.index}
+                </div>
 
-          <div className="about-column-item">
-            <div className="about-column-index">03</div>
-            <h3 className="about-column-title">Campus to Career</h3>
-            <p className="about-column-text">
-              By partnering directly with collegiate chapters and vetted tech employers, we establish direct pipeline relationships where students move smoothly from learning to paid internships.
-            </p>
-            <div className="about-column-meta">
-              <span className="about-tag">50+ Campus Hubs</span>
-              <span className="about-tag">Direct Matching</span>
-            </div>
-          </div>
+                {/* Top Number */}
+                <div className="about-principle-num">
+                  {principle.index}
+                </div>
+
+                {/* Heading */}
+                <h3 className="about-principle-heading">
+                  {principle.title}
+                </h3>
+
+                {/* Paragraph */}
+                <p className="about-principle-text">
+                  {principle.text}
+                </p>
+
+                {/* Vertical Blue Accent Pillars (No Pills!) */}
+                <div className="about-principle-pillars">
+                  <div className="about-pillars-accent" aria-hidden="true" />
+                  <div className="about-pillars-list">
+                    {principle.pillars.map((pillar, pIdx) => (
+                      <span key={pIdx} className="about-pillar-word">
+                        {pillar}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            );
+          })}
         </div>
       </div>
+    </div>
 
-      {/* Detailed About Modal / Manifesto */}
+      {/* Detailed Thesis Modal */}
       {isModalOpen && (
         <div className="modal-backdrop" onClick={() => setIsModalOpen(false)}>
           <div 

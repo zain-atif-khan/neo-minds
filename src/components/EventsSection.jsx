@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Calendar, Clock, MapPin, Users, ArrowUpRight, X, Sparkles, CheckCircle2 } from 'lucide-react';
 import { EVENTS } from '../data/mockData';
+import AnimatedList from './AnimatedList';
 
 export default function EventsSection() {
   const [selectedEvent, setSelectedEvent] = useState(null);
@@ -39,16 +40,19 @@ export default function EventsSection() {
           </div>
         </div>
 
-        {/* Compact Editorial Event Rows (Lines and Typography, Not Generic Cards) */}
-        <div className="events-editorial-list">
-          {EVENTS.map((event, idx) => (
+        {/* Animated Editorial Event List with In-View Scale & Opacity Motion */}
+        <AnimatedList
+          items={EVENTS}
+          className="events-editorial-animated-list"
+          onItemSelect={(event) => handleOpenModal(event)}
+          showGradients={true}
+          enableArrowNavigation={true}
+          renderItem={(event, idx, isSelected) => (
             <article 
-              key={event.id || idx} 
-              className="event-row-item"
-              onClick={() => handleOpenModal(event)}
+              className={`event-row-item ${isSelected ? 'selected' : ''}`}
               tabIndex={0}
               role="button"
-              onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') handleOpenModal(event); }}
+              aria-label={`View details for ${event.title}`}
             >
               {/* Left: Monospaced Date & Category Tag */}
               <div className="event-date-col">
@@ -80,8 +84,8 @@ export default function EventsSection() {
                 </div>
               </div>
             </article>
-          ))}
-        </div>
+          )}
+        />
       </div>
 
       {/* Event Details Modal */}

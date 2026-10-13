@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import Navbar from './components/Navbar';
 import FooterSection from './components/FooterSection';
 import HomePage from './pages/HomePage';
 
@@ -12,7 +11,19 @@ import AuthModal from './components/AuthModal';
 
 import { SKILL_ASSESSMENT_DATA } from './data/mockData';
 
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+
+if (typeof window !== 'undefined') {
+  gsap.registerPlugin(ScrollTrigger);
+}
+
+import { saveCurrentScrollY, getSavedScrollY, checkIsReloadBelowHero } from './utils/scrollState';
+
 export default function App() {
+  // Detect if visitor reloaded while scrolled down past the hero
+  const isReloadBelowHero = checkIsReloadBelowHero();
+
   // Dynamic Assessment State
   const [hasCompletedAssessment, setHasCompletedAssessment] = useState(() => {
     return localStorage.getItem('neominds_assessment_done') === 'true';
@@ -23,8 +34,81 @@ export default function App() {
   });
   const [skillBreakdown, setSkillBreakdown] = useState(SKILL_ASSESSMENT_DATA.breakdown);
 
-  // Track Hero animation on Home page (Navbar hidden during Hero animation, visible after)
-  const [isHeroAnimationComplete, setIsHeroAnimationComplete] = useState(false);
+  // Track Hero animation on Home page (Defaults to true if visitor reloads below the hero)
+  const [isHeroAnimationComplete, setIsHeroAnimationComplete] = useState(() => isReloadBelowHero);
+
+  // Continuously record the exact scroll position in sessionStorage
+  React.useEffect(() => {
+    const handleScroll = () => {
+      saveCurrentScrollY();
+    };
+
+    const handleBeforeUnload = () => {
+      saveCurrentScrollY();
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    window.addEventListener('beforeunload', handleBeforeUnload);
+    window.addEventListener('pagehide', handleBeforeUnload);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+      window.removeEventListener('pagehide', handleBeforeUnload);
+    };
+  }, []);
+
+  // When reloading below the hero, restore the visitor to their exact saved scroll position
+  React.useEffect(() => {
+    if (isReloadBelowHero) {
+      const targetY = getSavedScrollY();
+      if (targetY > 80) {
+        ScrollTrigger.refresh();
+        window.scrollTo(0, targetY);
+
+        const timer = setTimeout(() => {
+          ScrollTrigger.refresh();
+          window.scrollTo(0, targetY);
+        }, 80);
+
+        return () => clearTimeout(timer);
+      }
+    }
+  }, [isReloadBelowHero]);
+
+  // Synchronize ScrollTrigger instances when intro completes normally
+  React.useEffect(() => {
+    if (isHeroAnimationComplete && !isReloadBelowHero) {
+      const timer = setTimeout(() => {
+        ScrollTrigger.refresh();
+      }, 60);
+      return () => clearTimeout(timer);
+    }
+  }, [isHeroAnimationComplete, isReloadBelowHero]);
+
+  // Pin/lock page scrolling ONLY during genuine intro animation (never when restored below hero)
+  React.useEffect(() => {
+    if (!isHeroAnimationComplete && !isReloadBelowHero) {
+      const originalOverflow = document.body.style.overflow;
+      const originalHtmlOverflow = document.documentElement.style.overflow;
+      document.body.style.overflow = 'hidden';
+      document.documentElement.style.overflow = 'hidden';
+
+      const preventScroll = (e) => {
+        e.preventDefault();
+      };
+
+      window.addEventListener('wheel', preventScroll, { passive: false });
+      window.addEventListener('touchmove', preventScroll, { passive: false });
+
+      return () => {
+        document.body.style.overflow = originalOverflow;
+        document.documentElement.style.overflow = originalHtmlOverflow;
+        window.removeEventListener('wheel', preventScroll);
+        window.removeEventListener('touchmove', preventScroll);
+      };
+    }
+  }, [isHeroAnimationComplete, isReloadBelowHero]);
 
   // Modals state
   const [isAssessmentOpen, setIsAssessmentOpen] = useState(false);
@@ -44,8 +128,7 @@ export default function App() {
     }
     const el = document.getElementById(targetId);
     if (el) {
-      const navOffset = 75;
-      const targetPos = el.getBoundingClientRect().top + window.pageYOffset - navOffset;
+      const targetPos = el.getBoundingClientRect().top + window.pageYOffset;
       window.scrollTo({ top: targetPos, behavior: 'smooth' });
     }
   };
@@ -62,17 +145,8 @@ export default function App() {
     }
   };
 
-  // Navbar is visible once hero animation completes
-  const isNavbarVisible = isHeroAnimationComplete;
-
   return (
     <div className="neominds-app">
-      {/* Primary Sticky Header */}
-      <Navbar 
-        navigateTo={scrollToSection}
-        openJoinModal={() => setAuthModalState({ isOpen: true, mode: 'join' })}
-        isVisible={isNavbarVisible}
-      />
 
       {/* Main Single-Page Website Content (z-index: 10, background: #FFFFFF) */}
       <main className="curtain-content">

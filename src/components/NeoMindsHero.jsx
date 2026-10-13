@@ -93,6 +93,8 @@ export const projectsData = [
   },
 ];
 
+import { checkIsReloadBelowHero } from "../utils/scrollState";
+
 export default function NeoMindsHero({ navigateTo, onOpenHowItWorks, openJoinModal, onHeroAnimationComplete }) {
   const containerRef = useRef(null);
   const overlayRef = useRef(null);
@@ -115,16 +117,25 @@ export default function NeoMindsHero({ navigateTo, onOpenHowItWorks, openJoinMod
     }
   };
 
+  // Detect whether the visitor is reloading while restored below the hero
+  const isRestoringBelowHero = checkIsReloadBelowHero();
+
   useEffect(() => {
     const container = containerRef.current;
     if (!container) return;
 
     let isMounted = true;
 
-    // Check prefers-reduced-motion
+    // Check prefers-reduced-motion or if user is restoring below hero
     const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (prefersReducedMotion) {
-      if (overlayRef.current) overlayRef.current.style.display = "none";
+    const isBelowHero = checkIsReloadBelowHero();
+
+    if (prefersReducedMotion || isBelowHero) {
+      if (overlayRef.current) {
+        overlayRef.current.style.display = "none";
+        overlayRef.current.style.pointerEvents = "none";
+      }
+      gsap.set(container.querySelectorAll(".banner-img-1, .banner-img-2, .hero-img, .title, .intro-copy, .image-grid"), { opacity: 0 });
       gsap.set(container.querySelector(".hero-opaque-sheet"), { scaleY: 1 });
       gsap.set(
         container.querySelectorAll(
@@ -138,6 +149,8 @@ export default function NeoMindsHero({ navigateTo, onOpenHowItWorks, openJoinMod
       if (onHeroAnimationComplete) onHeroAnimationComplete();
       return;
     }
+
+    sessionStorage.setItem("has_seen_hero", "true");
 
     const gridImages = gsap.utils.toArray(container.querySelectorAll(".img"));
     const heroImage = container.querySelector(".img.hero-img");
@@ -160,14 +173,24 @@ export default function NeoMindsHero({ navigateTo, onOpenHowItWorks, openJoinMod
       console.warn("SplitType initialization error:", err);
     }
 
-    const allImageSources = Array.from(
-      { length: 35 },
-      (_, i) => `/img${i + 1}.jpeg`
-    );
+    // Safe image pool: Defaults to available images img1-img9.
+    // If fewer images are provided, it automatically cycles and wraps around without 404 errors.
+    const availableImages = [
+      '/img1.jpeg',
+      '/img2.jpeg',
+      '/img3.jpeg',
+      '/img4.jpeg',
+      '/img5.jpeg',
+      '/img6.jpeg',
+      '/img7.jpeg',
+      '/img8.jpeg',
+      '/img9.jpeg',
+    ];
 
     const getRandomImageSet = () => {
-      const shuffled = [...allImageSources].sort(() => 0.5 - Math.random());
-      return shuffled.slice(0, 9);
+      const shuffled = [...availableImages].sort(() => 0.5 - Math.random());
+      // Return 9 images by repeating/cycling if fewer than 9 exist
+      return Array.from({ length: 9 }, (_, idx) => shuffled[idx % shuffled.length]);
     };
 
     function startImageRotation() {
@@ -200,6 +223,11 @@ export default function NeoMindsHero({ navigateTo, onOpenHowItWorks, openJoinMod
     }
 
     function setupInitialStates() {
+      gsap.set(container.querySelector(".hero-opaque-sheet"), {
+        scaleY: 0,
+        transformOrigin: "50% 50%",
+      });
+
       if (introCopy && introCopy.words) {
         gsap.set(introCopy.words, {
           y: "110%",
@@ -322,14 +350,15 @@ export default function NeoMindsHero({ navigateTo, onOpenHowItWorks, openJoinMod
         ease: "hop",
       });
 
+      const isMobile = window.innerWidth <= 768;
       imagesTimeline.to(".hero-img", {
-        y: -50,
+        y: isMobile ? -25 : -50,
         duration: 1,
         ease: "hop",
       });
 
       imagesTimeline.to(".hero-img", {
-        scale: 3.5,
+        scale: isMobile ? 2.2 : 3.5,
         clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
         duration: 1.5,
         ease: "hop",
@@ -343,6 +372,8 @@ export default function NeoMindsHero({ navigateTo, onOpenHowItWorks, openJoinMod
       });
 
       // Banner images emerge from directly behind the center hero image to form the fanned trio
+      // Banner images emerge from directly behind the center hero image to form the fanned trio
+      // On mobile, left image moved farther outward to 22% and right image to 78% so portraits are clearly visible
       imagesTimeline.fromTo(
         ".banner-img-1",
         {
@@ -353,10 +384,10 @@ export default function NeoMindsHero({ navigateTo, onOpenHowItWorks, openJoinMod
           opacity: 0,
         },
         {
-          left: "34%",
+          left: isMobile ? "22%" : "34%",
           top: "45%",
-          scale: 0.95,
-          rotate: -13,
+          scale: isMobile ? 0.95 : 0.95,
+          rotate: isMobile ? -9 : -12,
           opacity: 1,
           duration: 1.5,
           ease: "hop",
@@ -374,10 +405,10 @@ export default function NeoMindsHero({ navigateTo, onOpenHowItWorks, openJoinMod
           opacity: 0,
         },
         {
-          left: "66%",
+          left: isMobile ? "78%" : "66%",
           top: "45%",
-          scale: 0.95,
-          rotate: 13,
+          scale: isMobile ? 0.95 : 0.95,
+          rotate: isMobile ? 9 : 12,
           opacity: 1,
           duration: 1.5,
           ease: "hop",
@@ -415,6 +446,17 @@ export default function NeoMindsHero({ navigateTo, onOpenHowItWorks, openJoinMod
       // Appended AFTER existing animation completes (200-400ms pause)
       // ============================================================
       textTimeline.addLabel("existingComplete", "+=0.3");
+
+      // Fade out all three images (center and side banners) as the opaque white sheet expands
+      textTimeline.to(
+        [".banner-img-1", ".banner-img-2", ".hero-img"],
+        {
+          opacity: 0,
+          duration: 0.45,
+          ease: "power2.inOut",
+        },
+        "existingComplete"
+      );
 
       // 1. Thin opaque white sheet begins and expands across Hero (scaleY: 0 -> 1)
       textTimeline.fromTo(
@@ -506,7 +548,11 @@ export default function NeoMindsHero({ navigateTo, onOpenHowItWorks, openJoinMod
   return (
     <section ref={containerRef} className="hero-component-root">
       {/* 1. OVERLAY WITH ORIGINAL NOVA / VICE AND PROJECTS */}
-      <div ref={overlayRef} className="overlay">
+      <div 
+        ref={overlayRef} 
+        className="overlay"
+        style={isRestoringBelowHero ? { display: 'none', pointerEvents: 'none' } : undefined}
+      >
         <div className="projects">
           <div className="projects-header">
             <p>Project</p>
@@ -538,7 +584,10 @@ export default function NeoMindsHero({ navigateTo, onOpenHowItWorks, openJoinMod
       </div>
 
       {/* 2. IMAGE GRID (ORIGINAL 3 ROWS × 3 COLS = 9 CELLS WITH CENTER HERO-IMG) */}
-      <div className="image-grid">
+      <div 
+        className="image-grid"
+        style={isRestoringBelowHero ? { opacity: 0, pointerEvents: 'none' } : undefined}
+      >
         <div className="grid-row">
           <div className="img"><img src="/img1.jpeg" alt="" /></div>
           <div className="img"><img src="/img2.jpeg" alt="" /></div>
@@ -557,25 +606,41 @@ export default function NeoMindsHero({ navigateTo, onOpenHowItWorks, openJoinMod
       </div>
 
       {/* 3. BANNER IMAGES */}
-      <div className="banner-img banner-img-1"><img src="/images/hero_left.png" alt="" /></div>
-      <div className="banner-img banner-img-2"><img src="/images/hero_right.png" alt="" /></div>
+      <div 
+        className="banner-img banner-img-1"
+        style={isRestoringBelowHero ? { opacity: 0, pointerEvents: 'none' } : undefined}
+      ><img src="/images/hero_left.png" alt="" /></div>
+      <div 
+        className="banner-img banner-img-2"
+        style={isRestoringBelowHero ? { opacity: 0, pointerEvents: 'none' } : undefined}
+      ><img src="/images/hero_right.png" alt="" /></div>
 
       {/* 4. INTRO COPY */}
-      <div className="intro-copy">
+      <div 
+        className="intro-copy"
+        style={isRestoringBelowHero ? { opacity: 0, pointerEvents: 'none' } : undefined}
+      >
         <h3>Creative Solutions</h3>
         <h3>Impactful Results</h3>
       </div>
 
       {/* 5. TITLE */}
-      <div className="title">
+      <div 
+        className="title"
+        style={isRestoringBelowHero ? { opacity: 0, pointerEvents: 'none' } : undefined}
+      >
         <h1>Crafting bold experiences</h1>
       </div>
 
       {/* 6. FINAL REVEAL: OPAQUE SHEET & PERFECTLY CENTERED TYPOGRAPHIC HERO CONTENT */}
-      <div className="hero-opaque-sheet">
+      <div 
+        className="hero-opaque-sheet"
+        style={isRestoringBelowHero ? { transform: 'scaleY(1)' } : undefined}
+      >
         {/* Subtle curved orbital lines with glowing blue nodes matching reference */}
         <div className="hero-orbital-container" aria-hidden="true">
-          <svg className="hero-orbital-svg" viewBox="0 0 1440 900" fill="none" preserveAspectRatio="xMidYMid slice">
+          {/* Desktop orbital curves */}
+          <svg className="hero-orbital-svg desktop-only-orbital" viewBox="0 0 1440 900" fill="none" preserveAspectRatio="xMidYMid slice">
             {/* Lower-left upward sweep curve */}
             <path 
               d="M -150 480 C 120 440 260 620 420 950" 
@@ -596,6 +661,42 @@ export default function NeoMindsHero({ navigateTo, onOpenHowItWorks, openJoinMod
               stroke="#E8F0FE" 
               strokeWidth="1" 
               strokeOpacity="0.5"
+            />
+          </svg>
+
+          {/* Mobile orbital curves flowing strictly through empty white spaces (never crossing text/buttons) */}
+          <svg className="hero-orbital-svg mobile-only-orbital" viewBox="0 0 390 844" fill="none" preserveAspectRatio="none">
+            {/* Upper-right primary curve flowing through upper-right empty quadrant */}
+            <path 
+              d="M 210 -15 C 260 45 320 85 365 130 C 395 160 415 190 430 220" 
+              stroke="#D2E3FC" 
+              strokeWidth="1.25" 
+              strokeOpacity="0.85"
+              strokeLinecap="round"
+            />
+            {/* Upper-right secondary ambient curve */}
+            <path 
+              d="M 290 -25 C 335 30 380 65 425 105" 
+              stroke="#E8F0FE" 
+              strokeWidth="1.0" 
+              strokeOpacity="0.6"
+              strokeLinecap="round"
+            />
+            {/* Lower-left primary curve flowing through bottom-left empty quadrant */}
+            <path 
+              d="M -30 650 C 35 680 75 725 90 765 C 105 805 135 840 185 865" 
+              stroke="#D2E3FC" 
+              strokeWidth="1.25" 
+              strokeOpacity="0.85"
+              strokeLinecap="round"
+            />
+            {/* Lower-left secondary ambient curve */}
+            <path 
+              d="M -25 735 C 20 755 55 795 95 860" 
+              stroke="#E8F0FE" 
+              strokeWidth="1.0" 
+              strokeOpacity="0.6"
+              strokeLinecap="round"
             />
           </svg>
 

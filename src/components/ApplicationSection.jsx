@@ -3,18 +3,18 @@ import { X, ArrowRight, CheckCircle2 } from 'lucide-react';
 
 // ─── DATA ─────────────────────────────────────────────────────────
 const STUDENT_PATH = [
-  { n: '01', title: 'ASSESS',  desc: 'Understand what you already know and where you need to improve.' },
-  { n: '02', title: 'LEARN',   desc: 'Learn the skills you are missing through practical training.' },
-  { n: '03', title: 'BUILD',   desc: 'Work on real projects and create proof of what you can do.' },
-  { n: '04', title: 'PREPARE', desc: 'Improve your portfolio, communication and interview readiness.' },
-  { n: '05', title: 'INTERN',  desc: 'Use your skills and project work to work toward real industry opportunities.' },
+  { title: 'ASSESS' },
+  { title: 'LEARN' },
+  { title: 'BUILD' },
+  { title: 'PREPARE' },
+  { title: 'INTERN' },
 ];
 
 const AMBASSADOR_PATH = [
-  { n: '01', title: 'REPRESENT', desc: 'Bring Neo Minds to your college and introduce it to your peers.' },
-  { n: '02', title: 'CONNECT',   desc: 'Build a community of students on your campus who want to grow.' },
-  { n: '03', title: 'ORGANISE',  desc: 'Run workshops, events and activities that create real learning opportunities.' },
-  { n: '04', title: 'LEAD',      desc: 'Take ownership of your campus chapter and create measurable impact.' },
+  { title: 'REPRESENT' },
+  { title: 'CONNECT' },
+  { title: 'ORGANISE' },
+  { title: 'LEAD' },
 ];
 
 // ─── APPLICATION MODAL ────────────────────────────────────────────
@@ -52,7 +52,7 @@ function ApplicationModal({ type, onClose }) {
             </p>
 
             <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+              <div className="app-modal-grid-row">
                 <div>
                   <label className="form-label">Full Name *</label>
                   <input required type="text" placeholder="e.g. Ayaan Khan" className="form-input"
@@ -65,7 +65,7 @@ function ApplicationModal({ type, onClose }) {
                 </div>
               </div>
 
-              <div style={{ display: 'grid', gridTemplateColumns: '0.8fr 1.2fr', gap: '1rem' }}>
+              <div className="app-modal-grid-row app-modal-grid-row--phone">
                 <div>
                   <label className="form-label">Phone *</label>
                   <input required type="tel" placeholder="+91 9876543210" className="form-input"
@@ -78,7 +78,7 @@ function ApplicationModal({ type, onClose }) {
                 </div>
               </div>
 
-              <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem' }}>
+              <div className="app-modal-grid-row">
                 <div>
                   <label className="form-label">Course / Year *</label>
                   <input required type="text" placeholder="e.g. B.Tech CSE, 2nd Year" className="form-input"
@@ -152,12 +152,8 @@ function PathwayItems({ items }) {
   return (
     <div className="prz-items">
       {items.map((item) => (
-        <div key={item.n} className="prz-item">
-          <span className="prz-item-num">{item.n}</span>
-          <div className="prz-item-body">
-            <span className="prz-item-title">{item.title}</span>
-            <span className="prz-item-desc">{item.desc}</span>
-          </div>
+        <div key={item.title} className="prz-item">
+          <span className="prz-item-title">{item.title}</span>
         </div>
       ))}
     </div>
@@ -171,22 +167,20 @@ function PathwayStage({ activePathway }) {
   const showStudent = activePathway !== 'ambassador';
 
   return (
-    <div className="prz-stage">
+    <div className="prz-stage desktop-only-prz-stage">
       {/* ── STUDENT PATHWAY ── */}
-      <div className={`prz-panel ${showStudent ? 'prz-panel--visible' : 'prz-panel--hidden'}`}
+      <div className={`prz-panel prz-panel--student ${showStudent ? 'prz-panel--visible' : 'prz-panel--hidden'}`}
         aria-hidden={!showStudent}>
         <div className="prz-eyebrow">
-          <span className="prz-eyebrow-num">01</span>
           STUDENT PATHWAY
         </div>
         <PathwayItems items={STUDENT_PATH} />
       </div>
 
       {/* ── AMBASSADOR PATHWAY ── */}
-      <div className={`prz-panel ${!showStudent ? 'prz-panel--visible' : 'prz-panel--hidden'}`}
+      <div className={`prz-panel prz-panel--ambassador ${!showStudent ? 'prz-panel--visible' : 'prz-panel--hidden'}`}
         aria-hidden={showStudent}>
         <div className="prz-eyebrow">
-          <span className="prz-eyebrow-num">02</span>
           AMBASSADOR PATHWAY
         </div>
         <PathwayItems items={AMBASSADOR_PATH} />
@@ -250,8 +244,7 @@ export default function ApplicationSection() {
                 <span style={{ color: '#1677FF' }}>Join the movement.</span>
               </h2>
               <p className="app-section-desc">
-                Neo Minds helps students develop practical, industry-ready skills through
-                learning, projects, assessments and real opportunities.
+                Develop practical, industry-ready skills through projects, assessments, and real opportunities.
               </p>
             </div>
 
@@ -324,6 +317,7 @@ export default function ApplicationSection() {
               role="button" tabIndex={0}
               onKeyDown={e => e.key === 'Enter' && setActiveModal('student')}
             >
+              <div className="app-col-segment app-col-segment--top" />
               <div className="app-pathway-index">01</div>
               <div className="app-pathway-divider" />
               <div className="app-pathway-body">
@@ -332,9 +326,7 @@ export default function ApplicationSection() {
                   Start building<br />your skills.
                 </h3>
                 <p className="app-pathway-text">
-                  Join Neo Minds, assess your current skills, learn practical tools,
-                  build real projects and work toward industry opportunities — all while
-                  still in college.
+                  Assess your skills, build real projects, and access industry opportunities while in college.
                 </p>
                 <div className="app-pathway-tags">
                   <span className="app-tag">Skill Assessment</span>
@@ -350,6 +342,8 @@ export default function ApplicationSection() {
                   <span className="app-cta-arrow">→</span>
                 </button>
               </div>
+
+              <div className="app-col-segment app-col-segment--bottom" />
             </div>
 
             {/* CENTER DOT */}
@@ -368,11 +362,16 @@ export default function ApplicationSection() {
             {/* RIGHT: AMBASSADOR */}
             <div
               className="app-pathway app-pathway--ambassador"
-              onMouseEnter={() => setHoverPathway('ambassador')}
+              onMouseEnter={() => {
+                if (typeof window !== 'undefined' && window.innerWidth > 900) {
+                  setHoverPathway('ambassador');
+                }
+              }}
               onClick={() => setActiveModal('ambassador')}
               role="button" tabIndex={0}
               onKeyDown={e => e.key === 'Enter' && setActiveModal('ambassador')}
             >
+              <div className="app-col-segment app-col-segment--top" />
               <div className="app-pathway-index">02</div>
               <div className="app-pathway-divider" />
               <div className="app-pathway-body">
@@ -381,9 +380,7 @@ export default function ApplicationSection() {
                   Lead Neo Minds<br />on your campus.
                 </h3>
                 <p className="app-pathway-text">
-                  Represent Neo Minds at your college, build a student community,
-                  organise activities and help more students discover practical
-                  learning opportunities.
+                  Represent Neo Minds, build a campus tech community, and lead hands-on student activities.
                 </p>
                 <div className="app-pathway-tags">
                   <span className="app-tag">Campus Chapter</span>
@@ -399,6 +396,7 @@ export default function ApplicationSection() {
                   <span className="app-cta-arrow">→</span>
                 </button>
               </div>
+              <div className="app-col-segment app-col-segment--bottom" />
             </div>
           </div>
 
