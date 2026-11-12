@@ -9,13 +9,8 @@
   height: 100vh;
   min-height: 720px;
   overflow: hidden;
-<<<<<<< HEAD
   background-color: #080808;
   color: #F5F5F5;
-=======
-  background-color: #ffffff;
-  color: #000;
->>>>>>> origin/main
   font-family: "PP Neue Montreal", "Plus Jakarta Sans", sans-serif;
 }
 
@@ -38,11 +33,7 @@
   text-transform: uppercase;
   font-family: "Akkurat Mono", "IBM Plex Mono", monospace;
   font-size: 0.7rem;
-<<<<<<< HEAD
   color: #F5F5F5;
-=======
-  color: #000;
->>>>>>> origin/main
 }
 
 /* ==========================================================================
@@ -210,11 +201,7 @@
 .hero-component-root .title h1 {
   position: relative;
   text-transform: uppercase;
-<<<<<<< HEAD
   color: #F5F5F5;
-=======
-  color: #000;
->>>>>>> origin/main
   font-family: "Druk", "Space Grotesk", Impact, "Arial Black", sans-serif;
   font-weight: 500;
   font-style: italic;
@@ -294,11 +281,7 @@
     font-size: clamp(1.05rem, 5.2vw, 1.85rem);
     font-weight: 700;
     font-style: italic;
-<<<<<<< HEAD
     color: #F5F5F5;
-=======
-    color: #000;
->>>>>>> origin/main
     text-transform: uppercase;
     white-space: nowrap;
     letter-spacing: -0.02em;
@@ -337,11 +320,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-<<<<<<< HEAD
   background-color: #080808;
-=======
-  background-color: #FFFFFF;
->>>>>>> origin/main
   z-index: 30;
   transform: scaleY(0);
   transform-origin: 50% 50%;
@@ -379,11 +358,7 @@
   display: block;
 }
 
-<<<<<<< HEAD
 /* Glowing Orange Nodes / Dots on Orbital Lines */
-=======
-/* Glowing Blue Nodes / Dots on Orbital Lines */
->>>>>>> origin/main
 .hero-component-root .orbital-node {
   position: absolute;
   display: flex;
@@ -396,17 +371,10 @@
   width: 7px;
   height: 7px;
   border-radius: 50%;
-<<<<<<< HEAD
   background-color: #FF6A00;
   position: relative;
   z-index: 2;
   box-shadow: 0 0 10px rgba(255, 106, 0, 0.85);
-=======
-  background-color: #1677FF;
-  position: relative;
-  z-index: 2;
-  box-shadow: 0 0 8px rgba(22, 119, 255, 0.7);
->>>>>>> origin/main
 }
 
 .hero-component-root .orbital-node-glow {
@@ -414,11 +382,7 @@
   width: 28px;
   height: 28px;
   border-radius: 50%;
-<<<<<<< HEAD
   background: radial-gradient(circle, rgba(255, 106, 0, 0.30) 0%, rgba(255, 106, 0, 0) 70%);
-=======
-  background: radial-gradient(circle, rgba(22, 119, 255, 0.28) 0%, rgba(22, 119, 255, 0) 70%);
->>>>>>> origin/main
   z-index: 1;
 }
 
@@ -469,20 +433,12 @@
 }
 
 .hero-component-root .brand-word-neo {
-<<<<<<< HEAD
   color: #F5F5F5;
-=======
-  color: #0B1736;
->>>>>>> origin/main
   font-weight: 500;
 }
 
 .hero-component-root .brand-word-minds {
-<<<<<<< HEAD
   color: #FF6A00;
-=======
-  color: #1677FF;
->>>>>>> origin/main
   font-weight: 500;
 }
 
@@ -501,11 +457,7 @@
   display: inline-block;
   width: 52px;
   height: 1px;
-<<<<<<< HEAD
   background-color: rgba(255, 255, 255, 0.25);
-=======
-  background-color: #61718D;
->>>>>>> origin/main
   opacity: 0.55;
 }
 
@@ -515,11 +467,7 @@
   font-weight: 500;
   letter-spacing: 0.32em;
   text-transform: uppercase;
-<<<<<<< HEAD
   color: #F5F5F5;
-=======
-  color: #0B1736;
->>>>>>> origin/main
   margin: 0;
   padding: 0;
   line-height: 1;
@@ -531,11 +479,7 @@
   font-size: clamp(1.05rem, 1.75vw, 1.35rem);
   font-weight: 400;
   font-style: normal;
-<<<<<<< HEAD
   color: #CCCCCC;
-=======
-  color: #61718D;
->>>>>>> origin/main
   line-height: 1.5;
   margin: 1.65rem 0 0 0;
   max-width: 720px;
@@ -585,7 +529,6 @@
 }
 
 .hero-component-root .final-cta-primary {
-<<<<<<< HEAD
   background-color: #FF6A00;
   color: #FFFFFF;
   border: 1.5px solid #FF6A00;
@@ -596,23 +539,10 @@
   background-color: #E55A00;
   border-color: #E55A00;
   box-shadow: 0 6px 22px rgba(255, 106, 0, 0.4);
-=======
-  background-color: #1677FF;
-  color: #FFFFFF;
-  border: 1.5px solid #1677FF;
-  box-shadow: 0 4px 18px rgba(22, 119, 255, 0.28);
-}
-
-.hero-component-root .final-cta-primary:hover {
-  background-color: #0958D9;
-  border-color: #0958D9;
-  box-shadow: 0 6px 22px rgba(22, 119, 255, 0.4);
->>>>>>> origin/main
   transform: translateY(-2px);
 }
 
 .hero-component-root .final-cta-secondary {
-<<<<<<< HEAD
   background-color: #151515;
   color: #FFFFFF;
   border: 1.5px solid rgba(255, 106, 0, 0.4);
@@ -622,17 +552,6 @@
   border-color: #FF6A00;
   color: #FFFFFF;
   background-color: #261408;
-=======
-  background-color: #FFFFFF;
-  color: #0B1736;
-  border: 1.5px solid rgba(22, 119, 255, 0.32);
-}
-
-.hero-component-root .final-cta-secondary:hover {
-  border-color: #1677FF;
-  color: #1677FF;
-  background-color: #F8FAFD;
->>>>>>> origin/main
   transform: translateY(-2px);
 }
 

@@ -122,13 +122,8 @@ export default function CampusNetworkSection({ navigateTo, onSelectCollege }) {
               autoplay={2.5}
               grayscale={false}
               dim={0.25}
-<<<<<<< HEAD
               theme="dark"
               accentColor="#FF6A00"
-=======
-              theme="light"
-              accentColor="#1677FF"
->>>>>>> origin/main
               onItemClick={(item) => handleSelect(item)}
             />
           </div>

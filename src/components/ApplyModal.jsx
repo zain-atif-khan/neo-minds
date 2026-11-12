@@ -38,13 +38,6 @@ export default function ApplyModal({ item, type = 'internship', onClose }) {
 
         {!submitted ? (
           <div>
-<<<<<<< HEAD
-=======
-            <div className="kicker">
-              APPLICATION FORM • {type.toUpperCase()}
-            </div>
-
->>>>>>> origin/main
             <h3 style={{ fontSize: '1.45rem', fontWeight: 700, color: 'var(--text-primary)', marginBottom: '0.4rem' }}>
               {getTitle()}
             </h3>
@@ -160,13 +153,8 @@ export default function ApplyModal({ item, type = 'internship', onClose }) {
               width: '64px',
               height: '64px',
               borderRadius: '50%',
-<<<<<<< HEAD
               background: 'rgba(16, 185, 129, 0.14)',
               color: '#34D399',
-=======
-              background: '#ECFDF5',
-              color: '#059669',
->>>>>>> origin/main
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',

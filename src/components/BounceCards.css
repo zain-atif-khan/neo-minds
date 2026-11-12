@@ -11,15 +11,9 @@
   width: 280px;
   border-radius: 20px;
   overflow: hidden;
-<<<<<<< HEAD
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), 0 2px 8px rgba(255, 106, 0, 0.15);
   border: 1px solid var(--border-light, rgba(255, 255, 255, 0.08));
   background: #111111;
-=======
-  box-shadow: 0 10px 30px rgba(11, 23, 54, 0.12), 0 2px 8px rgba(22, 119, 255, 0.08);
-  border: 1px solid var(--border-light, #E2EDFD);
-  background: #ffffff;
->>>>>>> origin/main
   cursor: pointer;
   transform-origin: center center;
   will-change: transform;
@@ -30,11 +24,7 @@
 
 .bounceCardsContainer .card:hover {
   z-index: 10;
-<<<<<<< HEAD
   box-shadow: 0 20px 48px rgba(255, 106, 0, 0.35), 0 4px 16px rgba(0, 0, 0, 0.6);
-=======
-  box-shadow: 0 20px 48px rgba(22, 119, 255, 0.28), 0 4px 16px rgba(11, 23, 54, 0.12);
->>>>>>> origin/main
 }
 
 .bounceCardsContainer .card .image {
@@ -96,11 +86,7 @@
     transform: none !important;
     margin: 0 !important;
     min-height: auto !important;
-<<<<<<< HEAD
     box-shadow: 0 4px 18px rgba(0, 0, 0, 0.6) !important;
-=======
-    box-shadow: 0 4px 18px rgba(11, 23, 54, 0.08) !important;
->>>>>>> origin/main
   }
   .bounceCardsContainer .program-shelf-card {
     min-height: auto !important;

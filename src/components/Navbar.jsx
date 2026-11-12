@@ -18,7 +18,6 @@ export default function Navbar({ currentRoute, navigateTo, openJoinModal, isVisi
   const [isMobile, setIsMobile] = useState(false);
   const [prefersReducedMotion, setPrefersReducedMotion] = useState(false);
   const [activeNavId, setActiveNavId] = useState('home');
-<<<<<<< HEAD
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   // Hide navbar whenever any popup/modal overlay is open in the DOM
@@ -35,8 +34,6 @@ export default function Navbar({ currentRoute, navigateTo, openJoinModal, isVisi
     observer.observe(document.body, { childList: true, subtree: true });
     return () => observer.disconnect();
   }, []);
-=======
->>>>>>> origin/main
 
   const navRef = useRef(null);
   const itemRefs = useRef({});
@@ -170,7 +167,6 @@ export default function Navbar({ currentRoute, navigateTo, openJoinModal, isVisi
   const navRadius = isMobile ? lerp(0, 24, p) : lerp(0, 31, p);
 
   // ============================================================
-<<<<<<< HEAD
   // 2. TRUE GLASSMORPHIC BACKGROUND (BLACK & CHARCOAL GLASS)
   // ============================================================
   // Top: #080808 (solid deep black)
@@ -180,16 +176,6 @@ export default function Navbar({ currentRoute, navigateTo, openJoinModal, isVisi
   const b = Math.round(lerp(8, 17, p));
   const bgAlpha = lerp(1, 0.82, p).toFixed(3);
   const backgroundColor = p === 0 ? '#080808' : `rgba(${r}, ${g}, ${b}, ${bgAlpha})`;
-=======
-  // 2. TRUE GLASSMORPHIC BACKGROUND
-  // ============================================================
-  // Top: #FFFFFF (solid white)
-  // Scrolled: rgba(248, 251, 255, 0.65)
-  const r = Math.round(lerp(255, 248, p));
-  const g = Math.round(lerp(255, 251, p));
-  const bgAlpha = lerp(1, 0.65, p).toFixed(3);
-  const backgroundColor = p === 0 ? '#FFFFFF' : `rgba(${r}, ${g}, 255, ${bgAlpha})`;
->>>>>>> origin/main
 
   // Backdrop filter: blur(22px) saturate(145%)
   const blurVal = lerp(0, 22, p).toFixed(1);
@@ -197,7 +183,6 @@ export default function Navbar({ currentRoute, navigateTo, openJoinModal, isVisi
   const backdropFilter = blurVal > 0.2 ? `blur(${blurVal}px) saturate(${satVal}%)` : 'none';
 
   // ============================================================
-<<<<<<< HEAD
   // 3 & 4. SUBTLE ORANGE BORDER (FADES IN ON SCROLL)
   // ============================================================
   const orangeAlpha = (0.28 * smoothStep(p)).toFixed(3);
@@ -206,19 +191,6 @@ export default function Navbar({ currentRoute, navigateTo, openJoinModal, isVisi
   // Box shadow: 0 12px 35px rgba(0, 0, 0, 0.6)
   const shadowAlpha = (lerp(0, 0.6, p)).toFixed(3);
   const boxShadow = p > 0.01 ? `0 12px 35px rgba(0, 0, 0, ${shadowAlpha})` : 'none';
-=======
-  // 3 & 4. SUBTLE REFINED GOLD BORDER (FADES IN CONTINUOUSLY)
-  // ============================================================
-  // Gold: rgba(197, 160, 89, 0.70)
-  // At top: border opacity = 0
-  // During morph: opacity smoothly increases via smoothStep
-  const goldAlpha = (0.70 * smoothStep(p)).toFixed(3);
-  const border = `1px solid rgba(197, 160, 89, ${goldAlpha})`;
-
-  // Box shadow: 0 12px 35px rgba(11, 23, 54, 0.08)
-  const shadowAlpha = (lerp(0, 0.08, p)).toFixed(3);
-  const boxShadow = p > 0.01 ? `0 12px 35px rgba(11, 23, 54, ${shadowAlpha})` : 'none';
->>>>>>> origin/main
 
   // Side padding: 0 6vw -> 0 28px
   const paddingVal = isMobile 
@@ -233,7 +205,6 @@ export default function Navbar({ currentRoute, navigateTo, openJoinModal, isVisi
   const logoScale = isMobile ? lerp(0.82, 0.74, p) : lerp(1, 0.835, p);
 
   // ============================================================
-<<<<<<< HEAD
   // 8. JOIN NOW CTA BUTTON DIMENSIONS (VIBRANT ORANGE)
   // ============================================================
   // Proportional scaling integrated with shrinking navbar:
@@ -248,30 +219,14 @@ export default function Navbar({ currentRoute, navigateTo, openJoinModal, isVisi
   const arrowSize = isMobile ? 12 : Math.round(lerp(13, 12, p));
 
   const shouldShowNavbar = isVisible && !isModalOpen;
-=======
-  // 8. JOIN NOW CTA BUTTON DIMENSIONS
-  // ============================================================
-  // Desktop Initial: height 46px, width 138px
-  // Scrolled: height 42px, width 128px, radius 21px
-  const btnHeight = isMobile ? lerp(38, 34, p) : lerp(46, 42, p);
-  const btnWidth = isMobile ? 'auto' : `${lerp(138, 128, p)}px`;
-  const btnRadius = isMobile ? lerp(19, 17, p) : lerp(23, 21, p);
-  const btnFontSize = isMobile ? '0.82rem' : `${lerp(0.92, 0.88, p)}rem`;
->>>>>>> origin/main
 
   const containerStyle = {
     position: 'fixed',
     top: `${navTop}px`,
     left: '50%',
-<<<<<<< HEAD
     transform: shouldShowNavbar ? 'translateX(-50%) translateY(0)' : 'translateX(-50%) translateY(-20px)',
     opacity: shouldShowNavbar ? 1 : 0,
     pointerEvents: shouldShowNavbar ? 'auto' : 'none',
-=======
-    transform: isVisible ? 'translateX(-50%) translateY(0)' : 'translateX(-50%) translateY(-20px)',
-    opacity: isVisible ? 1 : 0,
-    pointerEvents: isVisible ? 'auto' : 'none',
->>>>>>> origin/main
     width: navWidth,
     maxWidth: navMaxWidth,
     height: `${navHeight}px`,
@@ -317,11 +272,7 @@ export default function Navbar({ currentRoute, navigateTo, openJoinModal, isVisi
           }}
         >
           <BrandLogo 
-<<<<<<< HEAD
             width={188} 
-=======
-            width={160} 
->>>>>>> origin/main
             onClick={() => scrollToSection('home')} 
           />
         </div>
@@ -343,11 +294,7 @@ export default function Navbar({ currentRoute, navigateTo, openJoinModal, isVisi
               padding: '2px 0',
             }}
           >
-<<<<<<< HEAD
             {/* 9. ACTIVE PAGE PILL: Soft orange glass highlight moves between items */}
-=======
-            {/* 9. ACTIVE PAGE PILL: Soft blue glass highlight moves between items */}
->>>>>>> origin/main
             <span 
               className="nav-active-glass-pill"
               style={{
@@ -357,13 +304,8 @@ export default function Navbar({ currentRoute, navigateTo, openJoinModal, isVisi
                 width: `${pillStyle.width}px`,
                 height: `${pillStyle.height}px`,
                 opacity: pillStyle.opacity,
-<<<<<<< HEAD
                 background: 'rgba(255, 106, 0, 0.12)',
                 border: '1px solid rgba(255, 106, 0, 0.22)',
-=======
-                background: 'rgba(22, 119, 255, 0.09)',
-                border: '1px solid rgba(22, 119, 255, 0.10)',
->>>>>>> origin/main
                 borderRadius: '11px',
                 pointerEvents: 'none',
                 transition: prefersReducedMotion 
@@ -393,11 +335,7 @@ export default function Navbar({ currentRoute, navigateTo, openJoinModal, isVisi
                     fontWeight: isActive ? 600 : 500,
                     letterSpacing: '0.04em',
                     textTransform: 'uppercase',
-<<<<<<< HEAD
                     color: isActive ? '#FF6A00' : '#F5F5F5',
-=======
-                    color: isActive ? '#1677FF' : '#0B1736',
->>>>>>> origin/main
                     cursor: 'pointer',
                     transition: 'color 180ms ease, background-color 180ms ease',
                     whiteSpace: 'nowrap',
@@ -427,16 +365,11 @@ export default function Navbar({ currentRoute, navigateTo, openJoinModal, isVisi
             className="navbar-join-btn"
             onClick={openJoinModal}
             style={{
-<<<<<<< HEAD
               background: '#FF6A00',
-=======
-              background: '#1677FF',
->>>>>>> origin/main
               color: '#FFFFFF',
               border: 'none',
               borderRadius: `${btnRadius}px`,
               height: `${btnHeight}px`,
-<<<<<<< HEAD
               width: btnWidth,
               minWidth: btnWidth,
               padding: btnPadding,
@@ -459,24 +392,6 @@ export default function Navbar({ currentRoute, navigateTo, openJoinModal, isVisi
           >
             <span style={{ display: 'inline-block', lineHeight: 1 }}>Join Now</span>
             <ArrowRight size={arrowSize} className="navbar-join-arrow" strokeWidth={2.2} />
-=======
-              width: isMobile ? 'auto' : `${btnWidth}px`,
-              padding: isMobile ? '0 12px' : '0',
-              fontSize: btnFontSize,
-              fontWeight: 600,
-              display: 'inline-flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              gap: '5px',
-              cursor: 'pointer',
-              whiteSpace: 'nowrap',
-              boxShadow: '0 4px 14px rgba(22, 119, 255, 0.24)',
-              transition: 'transform 0.18s ease, background 0.18s ease, box-shadow 0.18s ease',
-              flexShrink: 0,
-            }}
-          >
-            Join Now <ArrowRight size={13} />
->>>>>>> origin/main
           </button>
 
           {/* Responsive Mobile Menu Button */}
@@ -485,11 +400,7 @@ export default function Navbar({ currentRoute, navigateTo, openJoinModal, isVisi
               className="btn-circle"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
               aria-label="Toggle Navigation Menu"
-<<<<<<< HEAD
               style={{ width: '38px', height: '38px', background: 'transparent', border: '1px solid rgba(255, 255, 255, 0.15)', color: '#F5F5F5' }}
-=======
-              style={{ width: '38px', height: '38px', background: 'transparent', border: '1px solid var(--border-light)' }}
->>>>>>> origin/main
             >
               {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
             </button>
@@ -506,21 +417,12 @@ export default function Navbar({ currentRoute, navigateTo, openJoinModal, isVisi
             top: `${navTop + navHeight + 8}px`,
             left: '14px',
             right: '14px',
-<<<<<<< HEAD
             background: 'rgba(14, 14, 14, 0.96)',
             backdropFilter: 'blur(24px) saturate(150%)',
             WebkitBackdropFilter: 'blur(24px) saturate(150%)',
             border: '1px solid rgba(255, 106, 0, 0.25)',
             borderRadius: '24px',
             boxShadow: '0 20px 50px rgba(0, 0, 0, 0.8)',
-=======
-            background: 'rgba(248, 251, 255, 0.94)',
-            backdropFilter: 'blur(24px) saturate(150%)',
-            WebkitBackdropFilter: 'blur(24px) saturate(150%)',
-            border: '1px solid rgba(197, 160, 89, 0.40)',
-            borderRadius: '24px',
-            boxShadow: '0 20px 50px rgba(11, 23, 54, 0.15)',
->>>>>>> origin/main
             padding: '1.25rem',
             zIndex: 999,
             display: 'flex',
@@ -542,15 +444,9 @@ export default function Navbar({ currentRoute, navigateTo, openJoinModal, isVisi
                   justifyContent: 'space-between',
                   padding: '0.75rem 1rem',
                   borderRadius: '11px',
-<<<<<<< HEAD
                   background: isActive ? 'rgba(255, 106, 0, 0.12)' : 'transparent',
                   border: isActive ? '1px solid rgba(255, 106, 0, 0.25)' : '1px solid transparent',
                   color: isActive ? '#FF6A00' : '#F5F5F5',
-=======
-                  background: isActive ? 'rgba(22, 119, 255, 0.09)' : 'transparent',
-                  border: isActive ? '1px solid rgba(22, 119, 255, 0.10)' : '1px solid transparent',
-                  color: isActive ? '#1677FF' : '#0B1736',
->>>>>>> origin/main
                   fontWeight: isActive ? 600 : 500,
                   fontSize: '0.95rem',
                   cursor: 'pointer',
@@ -561,16 +457,11 @@ export default function Navbar({ currentRoute, navigateTo, openJoinModal, isVisi
                 }}
               >
                 <span>{item.label}</span>
-<<<<<<< HEAD
                 {isActive && <div style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#FF6A00' }} />}
-=======
-                {isActive && <div style={{ width: '6px', height: '6px', borderRadius: '50%', background: '#1677FF' }} />}
->>>>>>> origin/main
               </button>
             );
           })}
 
-<<<<<<< HEAD
           <div style={{ marginTop: '0.5rem', paddingTop: '0.5rem', borderTop: '1px solid rgba(255, 106, 0, 0.15)' }}>
             <button 
               className="btn" 
@@ -578,15 +469,6 @@ export default function Navbar({ currentRoute, navigateTo, openJoinModal, isVisi
               onClick={() => { setMobileMenuOpen(false); openJoinModal(); }}
             >
               Join Now <ArrowRight size={14} />
-=======
-          <div style={{ marginTop: '0.5rem', paddingTop: '0.5rem', borderTop: '1px solid rgba(22, 119, 255, 0.12)' }}>
-            <button 
-              className="btn btn-primary" 
-              style={{ width: '100%', height: '44px', borderRadius: '22px', fontSize: '0.92rem' }} 
-              onClick={() => { setMobileMenuOpen(false); openJoinModal(); }}
-            >
-              Join Now <ArrowRight size={14} style={{ marginLeft: '4px' }} />
->>>>>>> origin/main
             </button>
           </div>
         </div>

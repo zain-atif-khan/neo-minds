@@ -175,10 +175,6 @@ export default function InternshipsSection({
         {/* SECTION HEADER — Preserved Editorial Intro */}
         <div className="fg-header">
           <div className="fg-header-left">
-<<<<<<< HEAD
-=======
-            <div className="fg-eyebrow">THE QUALIFICATION PROCESS</div>
->>>>>>> origin/main
             <h2 className="fg-heading">
               Internships that move you <span className="fg-heading-blue">forward.</span>
             </h2>
@@ -487,11 +483,7 @@ export default function InternshipsSection({
                         <path
                           d="M 0,7 C 60,13 120,1 180,7 C 240,13 300,1 360,7"
                           fill="none"
-<<<<<<< HEAD
                           stroke="#FF6A00"
-=======
-                          stroke="#1677FF"
->>>>>>> origin/main
                           strokeWidth="2"
                           strokeLinecap="round"
                         />

@@ -309,10 +309,6 @@ export default function ProjectsSection() {
         {/* ── SECTION HEADER (Shared, perfectly responsive) ── */}
         <div className="ps-header">
           <div className="ps-header-left">
-<<<<<<< HEAD
-=======
-            <div className="ps-eyebrow">FEATURED PROJECTS</div>
->>>>>>> origin/main
             <h2 className="ps-heading">
               Real Projects.<br />
               Real <span className="ps-heading-blue">Impact.</span>
