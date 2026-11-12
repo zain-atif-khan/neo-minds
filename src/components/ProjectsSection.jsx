@@ -182,6 +182,7 @@ export default function ProjectsSection() {
           pinSpacing: true,
           anticipatePin: 1,
           scrub: 0.6,
+          refreshPriority: 5,
           invalidateOnRefresh: true,
           onUpdate(self) {
             const p = self.progress;
@@ -238,6 +239,9 @@ export default function ProjectsSection() {
 
       // Final settle on Project 04
       tl.to({}, { duration: 0.25 });
+
+      ScrollTrigger.sort();
+      ScrollTrigger.refresh();
     });
 
     return () => mm.revert();

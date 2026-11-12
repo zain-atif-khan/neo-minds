@@ -75,7 +75,7 @@ export default function AscendingTimelineSection() {
   const [activePhaseIndex, setActivePhaseIndex] = useState(0);
   const [completedPhases, setCompletedPhases] = useState([]);
 
-  // Calculate the staircase connecting path
+  // Calculate the continuous connecting staircase path
   const recalculatePath = () => {
     if (!svgRef.current || !canvasRef.current) return;
     const svgRect = svgRef.current.getBoundingClientRect();
@@ -124,11 +124,17 @@ export default function AscendingTimelineSection() {
         d += ` C ${cp1x.toFixed(1)} ${cp1y.toFixed(1)}, ${cp2x.toFixed(1)} ${cp2y.toFixed(1)}, ${pIn.x.toFixed(1)} ${pIn.y.toFixed(1)}`;
       } else {
         // Architectural staircase curve: Leaves pOut horizontally, curves upward, enters pIn horizontally
-        const cp1x = pOut.x + dx * 0.52;
+        const horizontalSpan = Math.max(dx * 0.5, 12);
+        const cp1x = pOut.x + horizontalSpan;
         const cp1y = pOut.y;
-        const cp2x = pOut.x + dx * 0.52;
+        const cp2x = pIn.x - horizontalSpan;
         const cp2y = pIn.y;
         d += ` C ${cp1x.toFixed(1)} ${cp1y.toFixed(1)}, ${cp2x.toFixed(1)} ${cp2y.toFixed(1)}, ${pIn.x.toFixed(1)} ${pIn.y.toFixed(1)}`;
+
+        // Traverse through the opaque bar to its exit anchor
+        if (i < points.length - 2) {
+          d += ` L ${points[i + 1].out.x.toFixed(1)} ${points[i + 1].out.y.toFixed(1)}`;
+        }
       }
     }
 
@@ -142,8 +148,8 @@ export default function AscendingTimelineSection() {
     };
 
     window.addEventListener('resize', handleResize);
-    const t1 = setTimeout(recalculatePath, 80);
-    const t2 = setTimeout(recalculatePath, 350);
+    const t1 = setTimeout(recalculatePath, 60);
+    const t2 = setTimeout(recalculatePath, 250);
 
     return () => {
       window.removeEventListener('resize', handleResize);
@@ -207,20 +213,21 @@ export default function AscendingTimelineSection() {
   }, [pathD]);
 
   // GSAP ScrollTrigger Pinned Animation:
-  // Pins ONLY the timeline animation stage once it reaches below the sticky navbar.
-  // The header & intro paragraph scroll normally above it!
+  // Pins ONLY the timeline animation stage once the headline & intro have scrolled completely off-screen.
+  // Uses refreshPriority: 10 so it calculates BEFORE lower sections (e.g. ProjectsSection priority 5).
   useEffect(() => {
     if (!pinnedStageRef.current || totalLength === 0 || segmentStopLengths.length < 6) return;
 
     const ctx = gsap.context(() => {
       ScrollTrigger.create({
         trigger: pinnedStageRef.current,
-        start: 'top 85px',
-        end: '+=2400',
+        start: 'top top',
+        end: '+=2200',
         pin: true,
         pinSpacing: true,
         anticipatePin: 1,
         scrub: 0.5,
+        refreshPriority: 10,
         invalidateOnRefresh: true,
         onUpdate: (self) => {
           const p = Math.max(0, Math.min(1, self.progress));
@@ -242,7 +249,7 @@ export default function AscendingTimelineSection() {
             currentDist = endLen;
           }
 
-          if (p >= 0.99) {
+          if (p >= 0.98) {
             currentDist = totalLength;
           }
 
@@ -288,6 +295,10 @@ export default function AscendingTimelineSection() {
           setCompletedPhases(completed);
         },
       });
+
+      // Synchronize trigger hierarchy across the entire document
+      ScrollTrigger.sort();
+      ScrollTrigger.refresh();
     }, pinnedStageRef);
 
     return () => ctx.revert();
@@ -295,7 +306,7 @@ export default function AscendingTimelineSection() {
 
   return (
     <section className="ascending-timeline-section" id="how-it-works" ref={sectionRef}>
-      {/* 1. SCROLLABLE INTRO BLOCK (Scrolls naturally, NOT part of pin) */}
+      {/* 1. SCROLLABLE INTRO BLOCK (Scrolls normally, precedes the pin) */}
       <div className="staircase-intro-block">
         <div className="staircase-header-row">
           <div className="staircase-title-block">
@@ -315,135 +326,137 @@ export default function AscendingTimelineSection() {
         </div>
       </div>
 
-      {/* 2. PINNED TIMELINE STAGE (Pins only when reaching viewport below navbar) */}
+      {/* 2. PINNED TIMELINE STAGE (Pins precisely at 'top top' once intro has scrolled out of view) */}
       <div className="staircase-pin-trigger-wrapper">
         <div className="staircase-pinned-stage" ref={pinnedStageRef}>
-          {/* Horizontal Timeline Scale Across the Top (Matching Image 2) */}
-          <div className="staircase-scale-track">
-            <div className="staircase-scale-labels">
-              {PHASES.map((phase, idx) => {
-                const isActive = activePhaseIndex === idx;
+          <div className="staircase-stage-inner">
+            {/* Horizontal Timeline Scale Across the Top (Matching Image 2) */}
+            <div className="staircase-scale-track">
+              <div className="staircase-scale-labels">
+                {PHASES.map((phase, idx) => {
+                  const isActive = activePhaseIndex === idx;
+                  return (
+                    <div
+                      key={phase.phase}
+                      className={`scale-label-item ${isActive ? 'scale-active' : ''}`}
+                    >
+                      {phase.scaleLabel}
+                    </div>
+                  );
+                })}
+              </div>
+              <div className="staircase-scale-line" />
+            </div>
+
+            {/* Ascending Staircase Canvas (Bottom-Left to Top-Right) */}
+            <div className="staircase-canvas" ref={canvasRef}>
+              {/* Continuous SVG Connecting Path */}
+              <svg className="staircase-svg-overlay" ref={svgRef} xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <mask id="staircase-mask">
+                    <path
+                      ref={maskPathRef}
+                      d={pathD}
+                      fill="none"
+                      stroke="#FFFFFF"
+                      strokeWidth="12"
+                      strokeDasharray={totalLength || 1}
+                      strokeDashoffset={totalLength || 1}
+                    />
+                  </mask>
+                </defs>
+
+                {/* Hidden Path for distance queries */}
+                <path
+                  ref={hiddenPathRef}
+                  d={pathD}
+                  fill="none"
+                  stroke="transparent"
+                  strokeWidth="1"
+                />
+
+                {/* Faint Background Guide Line */}
+                {pathD && (
+                  <path
+                    d={pathD}
+                    fill="none"
+                    stroke="rgba(255, 255, 255, 0.08)"
+                    strokeWidth="1.8"
+                    strokeDasharray="4 6"
+                  />
+                )}
+
+                {/* Active Orange Dotted Connecting Line */}
+                {pathD && totalLength > 0 && (
+                  <path
+                    d={pathD}
+                    fill="none"
+                    stroke="#FF6A00"
+                    strokeWidth="2.8"
+                    strokeDasharray="4 6"
+                    strokeLinecap="round"
+                    mask="url(#staircase-mask)"
+                  />
+                )}
+
+                {/* Small Precise Arrowhead traveling at leading tip */}
+                {pathD && (
+                  <g ref={arrowRef} className="timeline-arrowhead">
+                    <path
+                      d="M -5 -3.5 L 4 0 L -5 3.5 L -2.5 0 Z"
+                      fill="#FF6A00"
+                      stroke="#080808"
+                      strokeWidth="0.8"
+                    />
+                  </g>
+                )}
+              </svg>
+
+              {/* Exactly Six Opaque Horizontal Phase Bars with explicit indexing */}
+              {PHASES.map((phase) => {
+                const isActive = activePhaseIndex === phase.index;
+                const isCompleted = completedPhases.includes(phase.index);
+
+                let barStateClass = 'bar-inactive';
+                if (isActive) barStateClass = 'bar-active';
+                else if (isCompleted) barStateClass = 'bar-completed';
+
                 return (
                   <div
                     key={phase.phase}
-                    className={`scale-label-item ${isActive ? 'scale-active' : ''}`}
+                    className={`staircase-bar staircase-bar--${phase.index} ${barStateClass}`}
                   >
-                    {phase.scaleLabel}
+                    {/* Left/Entrance Anchor Dot for SVG Line */}
+                    <div
+                      className="bar-anchor-dot bar-anchor-in"
+                      ref={(el) => {
+                        anchorInRefs.current[phase.index] = el;
+                      }}
+                    />
+
+                    {/* Top Row: Phase Num + Title on Left, Duration on Right */}
+                    <div className="bar-top-row">
+                      <div className="bar-title-group">
+                        <span className="bar-phase-num">{phase.phase}</span>
+                        <h3 className="bar-title-text">{phase.title}</h3>
+                      </div>
+                      <span className="bar-duration-text">{phase.duration}</span>
+                    </div>
+
+                    {/* Bottom Row: Short Description */}
+                    <p className="bar-desc-text">{phase.description}</p>
+
+                    {/* Right/Exit Anchor Dot for SVG Line */}
+                    <div
+                      className="bar-anchor-dot bar-anchor-out"
+                      ref={(el) => {
+                        anchorOutRefs.current[phase.index] = el;
+                      }}
+                    />
                   </div>
                 );
               })}
             </div>
-            <div className="staircase-scale-line" />
-          </div>
-
-          {/* Ascending Staircase Canvas (Bottom-Left to Top-Right) */}
-          <div className="staircase-canvas" ref={canvasRef}>
-            {/* Continuous SVG Connecting Path */}
-            <svg className="staircase-svg-overlay" ref={svgRef} xmlns="http://www.w3.org/2000/svg">
-              <defs>
-                <mask id="staircase-mask">
-                  <path
-                    ref={maskPathRef}
-                    d={pathD}
-                    fill="none"
-                    stroke="#FFFFFF"
-                    strokeWidth="12"
-                    strokeDasharray={totalLength || 1}
-                    strokeDashoffset={totalLength || 1}
-                  />
-                </mask>
-              </defs>
-
-              {/* Hidden Path for distance queries */}
-              <path
-                ref={hiddenPathRef}
-                d={pathD}
-                fill="none"
-                stroke="transparent"
-                strokeWidth="1"
-              />
-
-              {/* Faint Background Guide Line */}
-              {pathD && (
-                <path
-                  d={pathD}
-                  fill="none"
-                  stroke="rgba(255, 255, 255, 0.08)"
-                  strokeWidth="1.8"
-                  strokeDasharray="4 6"
-                />
-              )}
-
-              {/* Active Orange Dotted Connecting Line */}
-              {pathD && totalLength > 0 && (
-                <path
-                  d={pathD}
-                  fill="none"
-                  stroke="#FF6A00"
-                  strokeWidth="2.8"
-                  strokeDasharray="4 6"
-                  strokeLinecap="round"
-                  mask="url(#staircase-mask)"
-                />
-              )}
-
-              {/* Small Precise Arrowhead traveling at leading tip */}
-              {pathD && (
-                <g ref={arrowRef} className="timeline-arrowhead">
-                  <path
-                    d="M -5 -3.5 L 4 0 L -5 3.5 L -2.5 0 Z"
-                    fill="#FF6A00"
-                    stroke="#080808"
-                    strokeWidth="0.8"
-                  />
-                </g>
-              )}
-            </svg>
-
-            {/* Exactly Six Opaque Horizontal Phase Bars */}
-            {PHASES.map((phase) => {
-              const isActive = activePhaseIndex === phase.index;
-              const isCompleted = completedPhases.includes(phase.index);
-
-              let barStateClass = 'bar-inactive';
-              if (isActive) barStateClass = 'bar-active';
-              else if (isCompleted) barStateClass = 'bar-completed';
-
-              return (
-                <div
-                  key={phase.phase}
-                  className={`staircase-bar ${barStateClass}`}
-                >
-                  {/* Left/Entrance Anchor Dot for SVG Line */}
-                  <div
-                    className="bar-anchor-dot bar-anchor-in"
-                    ref={(el) => {
-                      anchorInRefs.current[phase.index] = el;
-                    }}
-                  />
-
-                  {/* Top Row: Phase Num + Title on Left, Duration on Right */}
-                  <div className="bar-top-row">
-                    <div className="bar-title-group">
-                      <span className="bar-phase-num">{phase.phase}</span>
-                      <h3 className="bar-title-text">{phase.title}</h3>
-                    </div>
-                    <span className="bar-duration-text">{phase.duration}</span>
-                  </div>
-
-                  {/* Bottom Row: Short Description */}
-                  <p className="bar-desc-text">{phase.description}</p>
-
-                  {/* Right/Exit Anchor Dot for SVG Line */}
-                  <div
-                    className="bar-anchor-dot bar-anchor-out"
-                    ref={(el) => {
-                      anchorOutRefs.current[phase.index] = el;
-                    }}
-                  />
-                </div>
-              );
-            })}
           </div>
         </div>
       </div>
