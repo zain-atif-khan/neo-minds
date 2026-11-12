@@ -3,7 +3,7 @@
    Exact Visual Recreation from Reference (media_1794509046963_28cbc87e.jpg)
    Ascending Staircase Composition: Bottom-Left to Top-Right
    Neo Minds Palette: Deep Black (#080808) & Luminous Orange (#FF6A00)
-   Zero Scroll Flickering, Progressive Card Reveals, High-Performance Scrub
+   Clean Editorial Heading, Separate Pinned Stage, Intentional SVG Geometry
    ========================================================================== */
 
 .roadmap-section {
@@ -21,7 +21,50 @@
   transform: none !important;
 }
 
-/* ── 1. PINNED WRAPPER & STAGE (Pins below navbar at 'top 70px') ── */
+/* ── 1. EDITORIAL HEADING BLOCK (Scrolls naturally, unpinned) ── */
+.roadmap-intro-block {
+  width: 100%;
+  max-width: 1360px;
+  margin: 0 auto;
+  /* Generous vertical breathing room after Hero */
+  padding: clamp(100px, 12vh, 145px) 5vw clamp(50px, 6vh, 80px) 5vw;
+  box-sizing: border-box;
+  background: #080808;
+}
+
+.roadmap-intro-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  max-width: 780px;
+}
+
+.roadmap-title {
+  font-family: 'Newsreader', 'Playfair Display', Georgia, serif;
+  font-size: clamp(2.4rem, 4vw, 3.6rem);
+  font-weight: 500;
+  letter-spacing: -0.025em;
+  line-height: 1.15;
+  color: #FFFFFF;
+  margin: 0;
+}
+
+.roadmap-title-orange {
+  color: #FF6A00;
+  font-style: italic;
+  font-weight: 500;
+}
+
+.roadmap-subtitle {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: clamp(0.92rem, 1.12vw, 1.05rem);
+  color: #8E8E8E;
+  line-height: 1.6;
+  margin: 0;
+  max-width: 640px;
+}
+
+/* ── 2. PINNED WRAPPER & STAGE (Pins below navbar at 'top 70px' AFTER heading scrolls past) ── */
 .roadmap-pin-wrapper {
   position: relative;
   width: 100%;
@@ -46,123 +89,15 @@
   padding: 16px 4vw;
 }
 
-.roadmap-stage-inner {
-  width: 100%;
-  max-width: 1360px;
-  margin: 0 auto;
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  justify-content: center;
-  height: 100%;
-  box-sizing: border-box;
-}
-
-/* ── 2. SECTION HEADING (Remains permanently visible throughout pinned scroll) ── */
-.roadmap-header {
-  width: 100%;
-  margin-bottom: 22px;
-  z-index: 10;
-}
-
-.roadmap-title-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  width: 100%;
-  gap: 24px;
-  flex-wrap: wrap;
-}
-
-.roadmap-title-block {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  max-width: 760px;
-}
-
-.roadmap-title {
-  font-family: 'Newsreader', 'Playfair Display', Georgia, serif;
-  font-size: clamp(2.2rem, 3.5vw, 3.3rem);
-  font-weight: 500;
-  letter-spacing: -0.025em;
-  line-height: 1.15;
-  color: #FFFFFF;
-  margin: 0;
-}
-
-.roadmap-title-orange {
-  color: #FF6A00;
-  font-style: italic;
-  font-weight: 500;
-}
-
-.roadmap-subtitle {
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  font-size: clamp(0.9rem, 1.05vw, 1rem);
-  color: #8E8E8E;
-  line-height: 1.55;
-  margin: 0;
-}
-
-/* Active Milestone Badge Indicator (Upper right of header) */
-.roadmap-context-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  padding: 8px 18px;
-  border-radius: 9999px;
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  margin-bottom: 4px;
-  transition: all 0.3s ease;
-}
-
-.roadmap-live-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 50%;
-  background: #FF6A00;
-  box-shadow: 0 0 10px #FF6A00;
-  animation: roadmapLivePulse 2s infinite ease-in-out;
-  flex-shrink: 0;
-}
-
-@keyframes roadmapLivePulse {
-  0%, 100% {
-    opacity: 1;
-    transform: scale(1);
-    box-shadow: 0 0 10px #FF6A00;
-  }
-  50% {
-    opacity: 0.45;
-    transform: scale(0.85);
-    box-shadow: 0 0 4px #FF6A00;
-  }
-}
-
-.roadmap-context-active-tag {
-  font-family: 'Space Grotesk', 'IBM Plex Mono', monospace;
-  font-size: 0.76rem;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-  color: #A0A0A0;
-}
-
-.roadmap-context-active-tag strong {
-  color: #FF6A00;
-  font-weight: 600;
-}
-
 /* ── 3. ASCENDING STAIRCASE CANVAS (Bottom-Left to Top-Right) ── */
 .roadmap-canvas {
   position: relative;
   width: 100%;
-  height: 480px;
-  min-height: 460px;
+  max-width: 1360px;
+  height: 520px;
+  min-height: 500px;
   background: #080808 !important;
+  margin: 0 auto;
 }
 
 /* SVG Connecting Overlay */
@@ -188,8 +123,8 @@
 /* ── 4. FIVE MILESTONE PANELS (Hidden Initially, Revealed Individual Scroll) ── */
 .roadmap-panel {
   position: absolute;
-  width: clamp(280px, 24vw, 345px);
-  min-height: 62px;
+  width: clamp(260px, 20vw, 310px);
+  min-height: 58px;
   border-radius: 14px; /* Exact 12-16px specification */
   padding: 10px 18px;
   box-sizing: border-box;
@@ -240,7 +175,7 @@
 /* Subtle Vertical Divider between Number and Content */
 .roadmap-panel-divider {
   width: 1px;
-  height: 30px;
+  height: 28px;
   background: rgba(255, 255, 255, 0.15);
   flex-shrink: 0;
   transition: background 0.35s ease;
@@ -257,7 +192,7 @@
 
 .roadmap-panel-title {
   font-family: 'Plus Jakarta Sans', sans-serif;
-  font-size: 0.85rem;
+  font-size: 0.84rem;
   font-weight: 600;
   line-height: 1.25;
   margin: 0;
@@ -267,7 +202,7 @@
 
 .roadmap-panel-desc {
   font-family: 'Plus Jakarta Sans', sans-serif;
-  font-size: 0.71rem;
+  font-size: 0.70rem;
   line-height: 1.35;
   margin: 0;
   white-space: normal;
@@ -344,7 +279,7 @@
   background: rgba(255, 255, 255, 0.15);
 }
 
-/* Active Panel: Vivid Neo Minds orange gradient with white text & glow (Exact Phase 05 reference recreation) */
+/* Active Panel: Vivid Neo Minds orange gradient with white text & glow */
 .roadmap-panel--active {
   background: linear-gradient(135deg, #FF6A00 0%, #FF5500 100%) !important;
   border: 1.5px solid #FF8533;
@@ -376,39 +311,39 @@
 @media (min-width: 901px) {
   /* Phase 01: Lowest position at bottom-left */
   .roadmap-panel--0 {
-    left: 5.5%;
-    top: 385px;
+    left: 4.5%;
+    top: 410px;
   }
 
   /* Phase 02: Higher & right */
   .roadmap-panel--1 {
     left: 21%;
-    top: 295px;
+    top: 310px;
   }
 
   /* Phase 03: Higher again */
   .roadmap-panel--2 {
-    left: 36%;
-    top: 205px;
+    left: 37.5%;
+    top: 210px;
   }
 
   /* Phase 04: Higher again */
   .roadmap-panel--3 {
-    left: 50.5%;
-    top: 115px;
+    left: 54%;
+    top: 110px;
   }
 
   /* Phase 05: Highest position at top-right */
   .roadmap-panel--4 {
-    left: 68%;
-    top: 25px;
+    left: 70.5%;
+    top: 15px;
   }
 }
 
 /* Medium Desktop Screens (901px to 1100px) */
 @media (min-width: 901px) and (max-width: 1100px) {
   .roadmap-panel {
-    width: clamp(240px, 21vw, 290px);
+    width: clamp(235px, 19vw, 275px);
     padding: 8px 14px;
   }
   .roadmap-panel-title {
@@ -417,20 +352,20 @@
   .roadmap-panel-desc {
     font-size: 0.67rem;
   }
-  .roadmap-panel--0 { left: 4%; top: 380px; }
-  .roadmap-panel--1 { left: 19.5%; top: 290px; }
-  .roadmap-panel--2 { left: 35%; top: 200px; }
-  .roadmap-panel--3 { left: 50%; top: 110px; }
-  .roadmap-panel--4 { left: 67%; top: 20px; }
+  .roadmap-panel--0 { left: 3.5%; top: 410px; }
+  .roadmap-panel--1 { left: 20%; top: 310px; }
+  .roadmap-panel--2 { left: 36.5%; top: 210px; }
+  .roadmap-panel--3 { left: 53%; top: 110px; }
+  .roadmap-panel--4 { left: 69.5%; top: 15px; }
 }
 
 /* Tablet Screens (769px to 900px) */
 @media (min-width: 769px) and (max-width: 900px) {
   .roadmap-canvas {
-    height: 440px;
+    height: 460px;
   }
   .roadmap-panel {
-    width: clamp(210px, 20vw, 250px);
+    width: clamp(210px, 19vw, 245px);
     padding: 8px 12px;
     min-height: 52px;
   }
@@ -446,37 +381,48 @@
   .roadmap-panel-desc {
     font-size: 0.65rem;
   }
-  .roadmap-panel--0 { left: 2%; top: 345px; }
-  .roadmap-panel--1 { left: 18%; top: 260px; }
-  .roadmap-panel--2 { left: 34%; top: 175px; }
-  .roadmap-panel--3 { left: 50%; top: 90px; }
-  .roadmap-panel--4 { left: 66%; top: 10px; }
+  .roadmap-panel--0 { left: 2%; top: 360px; }
+  .roadmap-panel--1 { left: 18%; top: 275px; }
+  .roadmap-panel--2 { left: 34%; top: 190px; }
+  .roadmap-panel--3 { left: 50%; top: 105px; }
+  .roadmap-panel--4 { left: 66%; top: 20px; }
 }
 
-/* ── 7. MOBILE RESPONSIVE PROGRESSION (<= 768px) ── */
+/* ── 7. BOTTOM SPACING BUFFER (Ensures generous separation before Programs section) ── */
+.roadmap-bottom-buffer {
+  width: 100%;
+  height: clamp(80px, 12vh, 130px);
+  background: #080808;
+}
+
+/* ── 8. MOBILE RESPONSIVE PROGRESSION (<= 768px) ── */
 @media (max-width: 768px) {
+  .roadmap-intro-block {
+    padding: 85px 5vw 35px 5vw;
+  }
+
   .roadmap-title {
     font-size: 1.85rem;
   }
 
   .roadmap-subtitle {
-    font-size: 0.84rem;
+    font-size: 0.86rem;
+  }
+
+  .roadmap-break {
+    display: none;
   }
 
   .roadmap-pinned-stage {
     height: auto;
     min-height: auto;
-    padding: 24px 5vw 40px 5vw;
-  }
-
-  .roadmap-header {
-    margin-bottom: 20px;
+    padding: 20px 5vw 40px 5vw;
   }
 
   .roadmap-canvas {
     position: relative;
     height: auto;
-    min-height: 440px;
+    min-height: 460px;
     display: flex;
     flex-direction: column;
     gap: 18px;
@@ -500,5 +446,9 @@
 
   .roadmap-node {
     left: -22px;
+  }
+
+  .roadmap-bottom-buffer {
+    height: 60px;
   }
 }

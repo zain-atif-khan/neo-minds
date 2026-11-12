@@ -55,13 +55,12 @@ export default function AscendingTimelineSection() {
 
   const panelRefs = useRef([]);
   const nodeRefs = useRef([]);
-  const contextTagRef = useRef(null);
 
   const [pathD, setPathD] = useState('');
   const [totalLength, setTotalLength] = useState(0);
   const [nodeStopLengths, setNodeStopLengths] = useState([0, 0, 0, 0, 0]);
 
-  // Dynamic, organic SVG path calculation using DOM layout offsets
+  // Dynamic, intentional SVG path calculation using DOM layout offsets
   const computePath = () => {
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -95,95 +94,93 @@ export default function AscendingTimelineSection() {
         d += ` C ${cp1x.toFixed(1)} ${cp1y.toFixed(1)}, ${cp2x.toFixed(1)} ${cp2y.toFixed(1)}, ${nB.x.toFixed(1)} ${nB.y.toFixed(1)}`;
       }
     } else {
-      // ── DESKTOP ASCENDING ROUTE WITH ORGANIC DIVERSE CURVES & 360-DEGREE LOOP ──
+      // ── DESKTOP ASCENDING ROUTE WITH INTENTIONAL CURVES & 360-DEGREE LOOP ──
       const n0 = nodes[0];
       const n1 = nodes[1];
       const n2 = nodes[2];
       const n3 = nodes[3];
       const n4 = nodes[4];
 
-      // Starting point: approach curve into Phase 01
+      // Starting point: approach curve near Phase 01
       const startX = n0.x - 45;
-      const startY = n0.y + 36;
+      const startY = n0.y + 35;
       d = `M ${startX.toFixed(1)} ${startY.toFixed(1)}`;
 
-      // Intro curve into Phase 01 node
+      // Intro curve into Phase 01 left anchor
       const cp_intro1_x = startX + 18;
       const cp_intro1_y = startY + 6;
-      const cp_intro2_x = n0.x - 22;
-      const cp_intro2_y = n0.y + 16;
+      const cp_intro2_x = n0.x - 20;
+      const cp_intro2_y = n0.y + 14;
       d += ` C ${cp_intro1_x.toFixed(1)} ${cp_intro1_y.toFixed(1)}, ${cp_intro2_x.toFixed(1)} ${cp_intro2_y.toFixed(1)}, ${n0.x.toFixed(1)} ${n0.y.toFixed(1)}`;
 
-      // 1. Connection 1 (Phase 01 -> Phase 02): Low sweeping pocket curve with gentle rise
+      // 1. Connection 1 (Phase 01 -> Phase 02): Long, smooth sweeping curve
       const dx0 = n1.x - n0.x;
-      const m1_x = n0.x + dx0 * 0.46;
-      const m1_y = n0.y + 26; // graceful pocket dip
-      // Sub-curve 1a: dip
-      const cp1_0a_x = n0.x + dx0 * 0.22;
-      const cp1_0a_y = n0.y + 20;
+      const m1_x = n0.x + dx0 * 0.44;
+      const m1_y = n0.y + 24; // pocket dip
+      // Sub-curve 1a: pocket dip
+      const cp1_0a_x = n0.x + dx0 * 0.20;
+      const cp1_0a_y = n0.y + 18;
       const cp2_0a_x = m1_x - dx0 * 0.12;
       const cp2_0a_y = m1_y + 4;
-      // Sub-curve 1b: ascent into Phase 02
-      const cp1_0b_x = m1_x + dx0 * 0.26;
-      const cp1_0b_y = m1_y - 32;
+      // Sub-curve 1b: long smooth upward sweep into Phase 02 left anchor
+      const cp1_0b_x = m1_x + dx0 * 0.28;
+      const cp1_0b_y = m1_y - 30;
       const cp2_0b_x = n1.x - dx0 * 0.20;
-      const cp2_0b_y = n1.y + 12;
+      const cp2_0b_y = n1.y + 14;
       d += ` C ${cp1_0a_x.toFixed(1)} ${cp1_0a_y.toFixed(1)}, ${cp2_0a_x.toFixed(1)} ${cp2_0a_y.toFixed(1)}, ${m1_x.toFixed(1)} ${m1_y.toFixed(1)}`;
       d += ` C ${cp1_0b_x.toFixed(1)} ${cp1_0b_y.toFixed(1)}, ${cp2_0b_x.toFixed(1)} ${cp2_0b_y.toFixed(1)}, ${n1.x.toFixed(1)} ${n1.y.toFixed(1)}`;
 
-      // 2. Connection 2 (Phase 02 -> Phase 03): Tall dramatic arch with serpentine crest
+      // 2. Connection 2 (Phase 02 -> Phase 03): Distinctive tall arching crest
       const dx1 = n2.x - n1.x;
-      const h_peak = n2.y - 54; // peaks above Phase 03
-      const s2_x = n1.x + dx1 * 0.52;
-      const s2_y = h_peak - 4;
+      const peak_y = n2.y - 48; // crests above Phase 03
+      const peak_x = n1.x + dx1 * 0.50;
       // Sub-curve 2a: steep upward surge
       const cp1_1a_x = n1.x + dx1 * 0.18;
-      const cp1_1a_y = n1.y - 38;
-      const cp2_1a_x = s2_x - dx1 * 0.16;
-      const cp2_1a_y = h_peak - 12;
-      // Sub-curve 2b: graceful swoop down into Phase 03
-      const cp1_1b_x = s2_x + dx1 * 0.22;
-      const cp1_1b_y = h_peak + 6;
+      const cp1_1a_y = n1.y - 36;
+      const cp2_1a_x = peak_x - dx1 * 0.16;
+      const cp2_1a_y = peak_y - 8;
+      // Sub-curve 2b: graceful swooping arrival into Phase 03 left anchor
+      const cp1_1b_x = peak_x + dx1 * 0.20;
+      const cp1_1b_y = peak_y + 6;
       const cp2_1b_x = n2.x - dx1 * 0.18;
-      const cp2_1b_y = n2.y - 24;
-      d += ` C ${cp1_1a_x.toFixed(1)} ${cp1_1a_y.toFixed(1)}, ${cp2_1a_x.toFixed(1)} ${cp2_1a_y.toFixed(1)}, ${s2_x.toFixed(1)} ${s2_y.toFixed(1)}`;
+      const cp2_1b_y = n2.y - 18;
+      d += ` C ${cp1_1a_x.toFixed(1)} ${cp1_1a_y.toFixed(1)}, ${cp2_1a_x.toFixed(1)} ${cp2_1a_y.toFixed(1)}, ${peak_x.toFixed(1)} ${peak_y.toFixed(1)}`;
       d += ` C ${cp1_1b_x.toFixed(1)} ${cp1_1b_y.toFixed(1)}, ${cp2_1b_x.toFixed(1)} ${cp2_1b_y.toFixed(1)}, ${n2.x.toFixed(1)} ${n2.y.toFixed(1)}`;
 
-      // 3. Connection 3 (Phase 03 -> Phase 04): Tight hook followed by expansive sweep
+      // 3. Connection 3 (Phase 03 -> Phase 04): Wider, more relaxed S-curve
       const dx2 = n3.x - n2.x;
-      const dy2 = n3.y - n2.y;
-      const m2_x = n2.x + dx2 * 0.35;
-      const m2_y = n2.y + dy2 * 0.74;
-      // Sub-curve 3a: tight hook rise
-      const cp1_2a_x = n2.x + dx2 * 0.12;
-      const cp1_2a_y = n2.y - 22;
-      const cp2_2a_x = m2_x - dx2 * 0.08;
-      const cp2_2a_y = m2_y + 16;
-      // Sub-curve 3b: wide expansive arrival
-      const cp1_2b_x = m2_x + dx2 * 0.35;
-      const cp1_2b_y = m2_y - 26;
-      const cp2_2b_x = n3.x - dx2 * 0.24;
-      const cp2_2b_y = n3.y;
-      d += ` C ${cp1_2a_x.toFixed(1)} ${cp1_2a_y.toFixed(1)}, ${cp2_2a_x.toFixed(1)} ${cp2_2a_y.toFixed(1)}, ${m2_x.toFixed(1)} ${m2_y.toFixed(1)}`;
+      const s_x = n2.x + dx2 * 0.48;
+      const s_y = n2.y - 42;
+      // Sub-curve 3a: first bend of S
+      const cp1_2a_x = n2.x + dx2 * 0.24;
+      const cp1_2a_y = n2.y + 16;
+      const cp2_2a_x = s_x - dx2 * 0.14;
+      const cp2_2a_y = s_y + 14;
+      // Sub-curve 3b: second bend of S into Phase 04 left anchor
+      const cp1_2b_x = s_x + dx2 * 0.18;
+      const cp1_2b_y = s_y - 22;
+      const cp2_2b_x = n3.x - dx2 * 0.22;
+      const cp2_2b_y = n3.y - 6;
+      d += ` C ${cp1_2a_x.toFixed(1)} ${cp1_2a_y.toFixed(1)}, ${cp2_2a_x.toFixed(1)} ${cp2_2a_y.toFixed(1)}, ${s_x.toFixed(1)} ${s_y.toFixed(1)}`;
       d += ` C ${cp1_2b_x.toFixed(1)} ${cp1_2b_y.toFixed(1)}, ${cp2_2b_x.toFixed(1)} ${cp2_2b_y.toFixed(1)}, ${n3.x.toFixed(1)} ${n3.y.toFixed(1)}`;
 
-      // 4. Connection 4 (Phase 04 -> Phase 05): Genuine, prominent 360-degree loop
+      // 4. Connection 4 (Phase 04 -> Phase 05): Distinctive, elegant loop
       const dx3 = n4.x - n3.x;
-      const loopR = 34;
-      const loopCx = n3.x + dx3 * 0.44;
-      const loopCy = Math.max(n4.y - 12, loopR + 6);
+      const loopR = 32;
+      const loopCx = n3.x + dx3 * 0.45;
+      const loopCy = Math.max(n4.y - 8, loopR + 6);
 
-      // Approach curve to bottom-left of loop
+      // Approach curve to bottom of loop
       const loopEntryX = loopCx - 10;
       const loopEntryY = loopCy + loopR;
       const cp1_3x = n3.x + dx3 * 0.18;
-      const cp1_3y = n3.y - 18;
+      const cp1_3y = n3.y - 20;
       const cp2_3x = loopCx - loopR * 0.85;
-      const cp2_3y = loopEntryY + 12;
+      const cp2_3y = loopEntryY + 10;
       d += ` C ${cp1_3x.toFixed(1)} ${cp1_3y.toFixed(1)}, ${cp2_3x.toFixed(1)} ${cp2_3y.toFixed(1)}, ${loopEntryX.toFixed(1)} ${loopEntryY.toFixed(1)}`;
 
       // Complete 360-Degree Loop (Clockwise):
-      // Loop Arc 1: sweep up left side to top (loopCx + 2, loopCy - loopR)
+      // Loop Arc 1: sweep up left side to top
       const cp1_loop_x = loopCx - loopR * 1.15;
       const cp1_loop_y = loopCy + loopR * 0.45;
       const cp2_loop_x = loopCx - loopR * 1.05;
@@ -192,7 +189,7 @@ export default function AscendingTimelineSection() {
       const loopTopY = loopCy - loopR;
       d += ` C ${cp1_loop_x.toFixed(1)} ${cp1_loop_y.toFixed(1)}, ${cp2_loop_x.toFixed(1)} ${cp2_loop_y.toFixed(1)}, ${loopTopX.toFixed(1)} ${loopTopY.toFixed(1)}`;
 
-      // Loop Arc 2: sweep down right side crossing bottom (loopCx + 12, loopCy + loopR)
+      // Loop Arc 2: sweep down right side crossing bottom
       const cp3_loop_x = loopCx + loopR * 1.15;
       const cp3_loop_y = loopCy - loopR * 0.45;
       const cp4_loop_x = loopCx + loopR * 1.05;
@@ -201,10 +198,10 @@ export default function AscendingTimelineSection() {
       const loopCrossY = loopCy + loopR;
       d += ` C ${cp3_loop_x.toFixed(1)} ${cp3_loop_y.toFixed(1)}, ${cp4_loop_x.toFixed(1)} ${cp4_loop_y.toFixed(1)}, ${loopCrossX.toFixed(1)} ${loopCrossY.toFixed(1)}`;
 
-      // Exit curve from loop towards Phase 05 entrance node
-      const cp1_exit_x = loopCx + loopR + 28;
+      // Exit curve from loop towards Phase 05 left anchor
+      const cp1_exit_x = loopCx + loopR + 26;
       const cp1_exit_y = loopCy + loopR * 0.35;
-      const cp2_exit_x = n4.x - 32;
+      const cp2_exit_x = n4.x - 30;
       const cp2_exit_y = n4.y + 2;
       d += ` C ${cp1_exit_x.toFixed(1)} ${cp1_exit_y.toFixed(1)}, ${cp2_exit_x.toFixed(1)} ${cp2_exit_y.toFixed(1)}, ${n4.x.toFixed(1)} ${n4.y.toFixed(1)}`;
     }
@@ -268,12 +265,11 @@ export default function AscendingTimelineSection() {
   }, [pathD]);
 
   // High-performance GSAP ScrollTrigger:
-  // Progressively draws SVG path and reveals each card strictly when line reaches it!
-  // ZERO React re-renders during scroll for buttery-smooth 60fps performance!
+  // Heading scrolls naturally above the pinned area.
+  // Stage pins ONLY when the heading has completely moved out of view!
+  // ZERO React re-renders during scroll for smooth 60fps performance!
   useEffect(() => {
     if (!pinnedStageRef.current || totalLength === 0 || nodeStopLengths.length < 5) return;
-
-    let activeIndexRef = -1;
 
     // Reveal thresholds (progress p when each milestone is reached and revealed)
     const revealThresholds = [0.06, 0.28, 0.50, 0.72, 0.94];
@@ -300,9 +296,9 @@ export default function AscendingTimelineSection() {
           // 1. Calculate continuous path distance synchronized with arrival intervals
           let currentDist = 0;
           if (p < 0.08) {
-            // Segment 0 (Pstart -> Phase 01)
+            // Segment 0 (Start -> Phase 01)
             const t = p / 0.06;
-            currentDist = L0 * Math.min(t, 1);
+            currentDist = L0 * Math.min(Math.max(t, 0), 1);
           } else if (p < 0.30) {
             // Segment 1 (Phase 01 -> Phase 02)
             const t = (p - 0.08) / 0.20;
@@ -381,18 +377,6 @@ export default function AscendingTimelineSection() {
             const isActive = isRevealed && i === currentActive;
             node.classList.toggle('roadmap-node--active', isActive);
           });
-
-          // Update Context Header Tag
-          if (currentActive !== activeIndexRef) {
-            activeIndexRef = currentActive;
-            if (contextTagRef.current) {
-              if (currentActive >= 0) {
-                contextTagRef.current.innerHTML = `Active Milestone: <strong>${PHASES[currentActive].phase} — ${PHASES[currentActive].title}</strong>`;
-              } else {
-                contextTagRef.current.innerHTML = `Active Milestone: <strong>Scroll to Begin</strong>`;
-              }
-            }
-          }
         },
       });
     }, pinnedStageRef);
@@ -402,124 +386,115 @@ export default function AscendingTimelineSection() {
 
   return (
     <section className="roadmap-section" id="how-it-works" ref={sectionRef}>
+      
+      {/* ── 1. EDITORIAL HEADING BLOCK (Scrolls naturally, unpinned) ── */}
+      <div className="roadmap-intro-block">
+        <div className="roadmap-intro-inner">
+          <h2 className="roadmap-title">
+            The Five-Phase <span className="roadmap-title-orange">Engineering Roadmap</span>
+          </h2>
+          <p className="roadmap-subtitle">
+            A structured progression taking engineering talent from diagnostic<br className="roadmap-break" />
+            evaluation to direct fellowship placement.
+          </p>
+        </div>
+      </div>
+
+      {/* ── 2. PINNED ANIMATION STAGE (Pins ONLY after heading has scrolled above) ── */}
       <div className="roadmap-pin-wrapper">
         <div className="roadmap-pinned-stage" ref={pinnedStageRef}>
-          <div className="roadmap-stage-inner">
-
-            {/* ── SECTION HEADING (Remains visible throughout pinned animation) ── */}
-            <div className="roadmap-header">
-              <div className="roadmap-title-row">
-                <div className="roadmap-title-block">
-                  <h2 className="roadmap-title">
-                    The Five-Phase <span className="roadmap-title-orange">Engineering Roadmap</span>
-                  </h2>
-                  <p className="roadmap-subtitle">
-                    A structured progression taking engineering talent from diagnostic<br />
-                    evaluation to direct fellowship placement.
-                  </p>
-                </div>
-
-                {/* Active Phase Badge Indicator */}
-                <div className="roadmap-context-badge">
-                  <span className="roadmap-live-dot" />
-                  <span className="roadmap-context-active-tag" ref={contextTagRef}>
-                    Active Milestone: <strong>Scroll to Begin</strong>
-                  </span>
-                </div>
-              </div>
-            </div>
-
-            {/* ── PROGRESSIVE ASCENDING STAIRCASE CANVAS (Cards reveal on arrival) ── */}
-            <div className="roadmap-canvas" ref={canvasRef}>
-              {/* Continuous SVG Connecting Path */}
-              <svg className="roadmap-svg" xmlns="http://www.w3.org/2000/svg">
-                <defs>
-                  <mask id="roadmap-mask">
-                    <path
-                      ref={maskPathRef}
-                      d={pathD}
-                      fill="none"
-                      stroke="#FFFFFF"
-                      strokeWidth="14"
-                      strokeDasharray={totalLength || 1}
-                      strokeDashoffset={totalLength || 1}
-                    />
-                  </mask>
-                </defs>
-
-                {/* Hidden path used for arc-length and coordinate sampling */}
-                <path
-                  ref={hiddenPathRef}
-                  d={pathD}
-                  fill="none"
-                  stroke="transparent"
-                  strokeWidth="1"
-                />
-
-                {/* Active Luminous Orange Dotted Line (Progressively revealed, future segments hidden!) */}
-                {pathD && totalLength > 0 && (
+          <div className="roadmap-canvas" ref={canvasRef}>
+            {/* Continuous SVG Connecting Path */}
+            <svg className="roadmap-svg" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <mask id="roadmap-mask">
                   <path
+                    ref={maskPathRef}
                     d={pathD}
                     fill="none"
-                    stroke="#FF6A00"
-                    strokeWidth="2.6"
-                    strokeDasharray="5 6"
-                    strokeLinecap="round"
-                    mask="url(#roadmap-mask)"
-                    className="roadmap-active-glow-path"
+                    stroke="#FFFFFF"
+                    strokeWidth="14"
+                    strokeDasharray={totalLength || 1}
+                    strokeDashoffset={totalLength || 1}
                   />
-                )}
+                </mask>
+              </defs>
 
-                {/* Moving Arrowhead traveling on leading tip */}
-                {pathD && (
-                  <g ref={arrowRef} className="roadmap-arrowhead" style={{ opacity: 0 }}>
-                    <polygon
-                      points="-7,-4.5 6,0 -7,4.5 -3.5,0"
-                      fill="#FF6A00"
-                      stroke="#080808"
-                      strokeWidth="0.8"
-                    />
-                  </g>
-                )}
-              </svg>
+              {/* Hidden path used for arc-length and coordinate sampling */}
+              <path
+                ref={hiddenPathRef}
+                d={pathD}
+                fill="none"
+                stroke="transparent"
+                strokeWidth="1"
+              />
 
-              {/* Five Opaque Milestone Panels (Hidden initially, reveal progressively on scroll!) */}
-              {PHASES.map((phase, idx) => (
+              {/* Active Luminous Orange Dotted Line (Progressively revealed, future segments hidden!) */}
+              {pathD && totalLength > 0 && (
+                <path
+                  d={pathD}
+                  fill="none"
+                  stroke="#FF6A00"
+                  strokeWidth="2.6"
+                  strokeDasharray="5 6"
+                  strokeLinecap="round"
+                  mask="url(#roadmap-mask)"
+                  className="roadmap-active-glow-path"
+                />
+              )}
+
+              {/* Moving Arrowhead traveling on leading tip */}
+              {pathD && (
+                <g ref={arrowRef} className="roadmap-arrowhead" style={{ opacity: 0 }}>
+                  <polygon
+                    points="-7,-4.5 6,0 -7,4.5 -3.5,0"
+                    fill="#FF6A00"
+                    stroke="#080808"
+                    strokeWidth="0.8"
+                  />
+                </g>
+              )}
+            </svg>
+
+            {/* Five Opaque Milestone Panels (Hidden initially, reveal progressively on scroll!) */}
+            {PHASES.map((phase) => (
+              <div
+                key={phase.phase}
+                ref={(el) => (panelRefs.current[phase.index] = el)}
+                className={`roadmap-panel roadmap-panel--${phase.index} roadmap-panel--inactive`}
+              >
+                {/* Glowing Node on Left Edge */}
                 <div
-                  key={phase.phase}
-                  ref={(el) => (panelRefs.current[idx] = el)}
-                  className={`roadmap-panel roadmap-panel--${phase.index} roadmap-panel--inactive`}
-                >
-                  {/* Glowing Node on Left Edge */}
-                  <div
-                    ref={(el) => (nodeRefs.current[idx] = el)}
-                    className="roadmap-node"
-                  />
+                  ref={(el) => (nodeRefs.current[phase.index] = el)}
+                  className="roadmap-node"
+                />
 
-                  {/* Left: Phase Number */}
-                  <div className="roadmap-panel-left">
-                    <span className="roadmap-panel-num">{phase.phase}</span>
-                  </div>
-
-                  {/* Vertical Divider */}
-                  <div className="roadmap-panel-divider" />
-
-                  {/* Middle: Title & Description */}
-                  <div className="roadmap-panel-middle">
-                    <h3 className="roadmap-panel-title">{phase.title}</h3>
-                    <p className="roadmap-panel-desc">{phase.description}</p>
-                  </div>
-
-                  {/* Right: Week Duration */}
-                  <div className="roadmap-panel-right">
-                    <span className="roadmap-panel-week">{phase.duration}</span>
-                  </div>
+                {/* Left: Phase Number */}
+                <div className="roadmap-panel-left">
+                  <span className="roadmap-panel-num">{phase.phase}</span>
                 </div>
-              ))}
-            </div>
+
+                {/* Vertical Divider */}
+                <div className="roadmap-panel-divider" />
+
+                {/* Middle: Title & Description */}
+                <div className="roadmap-panel-middle">
+                  <h3 className="roadmap-panel-title">{phase.title}</h3>
+                  <p className="roadmap-panel-desc">{phase.description}</p>
+                </div>
+
+                {/* Right: Week Duration */}
+                <div className="roadmap-panel-right">
+                  <span className="roadmap-panel-week">{phase.duration}</span>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </div>
+
+      {/* ── 3. BOTTOM SPACING BUFFER (Ensures generous separation before Programs section) ── */}
+      <div className="roadmap-bottom-buffer" />
     </section>
   );
 }
