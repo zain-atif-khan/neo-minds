@@ -9,7 +9,11 @@ export default function CollegeDetailModal({ college, onClose, onJoinCampus }) {
   return (
     <div className="modal-backdrop" onClick={onClose}>
       <div className="modal-card" onClick={(e) => e.stopPropagation()} style={{ maxWidth: '620px', padding: '0' }}>
+<<<<<<< HEAD
         <button className="modal-close-btn" onClick={onClose} style={{ zIndex: 10, background: 'rgba(21, 21, 21, 0.85)', color: '#F5F5F5' }}>
+=======
+        <button className="modal-close-btn" onClick={onClose} style={{ zIndex: 10, background: 'rgba(255, 255, 255, 0.9)' }}>
+>>>>>>> origin/main
           <X size={18} />
         </button>
 
@@ -23,7 +27,11 @@ export default function CollegeDetailModal({ college, onClose, onJoinCampus }) {
           <div style={{
             position: 'absolute',
             inset: 0,
+<<<<<<< HEAD
             background: 'linear-gradient(to top, rgba(8, 8, 8, 0.85) 0%, transparent 60%)'
+=======
+            background: 'linear-gradient(to top, rgba(11, 23, 54, 0.7) 0%, transparent 60%)'
+>>>>>>> origin/main
           }} />
 
           <div style={{ position: 'absolute', bottom: '1.25rem', left: '1.5rem', color: 'white' }}>
@@ -33,7 +41,11 @@ export default function CollegeDetailModal({ college, onClose, onJoinCampus }) {
             <h3 style={{ fontSize: '1.35rem', fontWeight: 700, color: 'white' }}>
               {college.name}
             </h3>
+<<<<<<< HEAD
             <div style={{ fontSize: '0.85rem', color: 'rgba(255, 255, 255, 0.8)', display: 'flex', alignItems: 'center', gap: '4px' }}>
+=======
+            <div style={{ fontSize: '0.85rem', color: '#E2EDFD', display: 'flex', alignItems: 'center', gap: '4px' }}>
+>>>>>>> origin/main
               <MapPin size={13} /> {college.city}, {college.state} • Est. {college.establishedYear}
             </div>
           </div>
@@ -85,11 +97,19 @@ export default function CollegeDetailModal({ college, onClose, onJoinCampus }) {
               <div style={{
                 flex: 1,
                 padding: '0.85rem',
+<<<<<<< HEAD
                 background: 'rgba(16, 185, 129, 0.12)',
                 border: '1px solid rgba(52, 211, 153, 0.35)',
                 borderRadius: '12px',
                 textAlign: 'center',
                 color: '#34D399',
+=======
+                background: '#ECFDF5',
+                border: '1px solid #A7F3D0',
+                borderRadius: '12px',
+                textAlign: 'center',
+                color: '#059669',
+>>>>>>> origin/main
                 fontWeight: 600,
                 display: 'flex',
                 alignItems: 'center',

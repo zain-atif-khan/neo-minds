@@ -45,9 +45,15 @@ export default function AuthModal({ isOpen, onClose, initialMode = 'login', onAu
                   padding: '0.5rem',
                   fontSize: '0.85rem',
                   borderRadius: '9999px',
+<<<<<<< HEAD
                   background: mode === 'login' ? '#FF6A00' : 'transparent',
                   color: mode === 'login' ? '#FFFFFF' : 'var(--text-muted)',
                   boxShadow: mode === 'login' ? 'var(--shadow-blue)' : 'none'
+=======
+                  background: mode === 'login' ? 'white' : 'transparent',
+                  color: mode === 'login' ? 'var(--text-primary)' : 'var(--text-muted)',
+                  boxShadow: mode === 'login' ? 'var(--shadow-sm)' : 'none'
+>>>>>>> origin/main
                 }}
                 onClick={() => setMode('login')}
               >
@@ -60,9 +66,15 @@ export default function AuthModal({ isOpen, onClose, initialMode = 'login', onAu
                   padding: '0.5rem',
                   fontSize: '0.85rem',
                   borderRadius: '9999px',
+<<<<<<< HEAD
                   background: mode === 'join' ? '#FF6A00' : 'transparent',
                   color: mode === 'join' ? '#FFFFFF' : 'var(--text-muted)',
                   boxShadow: mode === 'join' ? 'var(--shadow-blue)' : 'none'
+=======
+                  background: mode === 'join' ? 'white' : 'transparent',
+                  color: mode === 'join' ? 'var(--text-primary)' : 'var(--text-muted)',
+                  boxShadow: mode === 'join' ? 'var(--shadow-sm)' : 'none'
+>>>>>>> origin/main
                 }}
                 onClick={() => setMode('join')}
               >
@@ -70,6 +82,13 @@ export default function AuthModal({ isOpen, onClose, initialMode = 'login', onAu
               </button>
             </div>
 
+<<<<<<< HEAD
+=======
+            <div className="kicker">
+              {mode === 'login' ? 'WELCOME BACK' : 'START YOUR CAREER SPRINT'}
+            </div>
+
+>>>>>>> origin/main
             <h3 style={{ fontSize: '1.5rem', fontWeight: 700, color: 'var(--text-primary)', marginBottom: '0.5rem' }}>
               {mode === 'login' ? 'Sign in to Tech Hub' : 'Create Student Account'}
             </h3>
@@ -86,12 +105,21 @@ export default function AuthModal({ isOpen, onClose, initialMode = 'login', onAu
                   style={{
                     padding: '0.65rem 0.4rem',
                     borderRadius: '12px',
+<<<<<<< HEAD
                     border: `1.5px solid ${role === 'student' ? '#FF6A00' : 'rgba(255, 255, 255, 0.14)'}`,
                     background: role === 'student' ? 'rgba(255, 106, 0, 0.14)' : '#151515',
                     textAlign: 'center',
                     fontSize: '0.75rem',
                     fontWeight: 700,
                     color: role === 'student' ? '#FF6A00' : '#F5F5F5'
+=======
+                    border: `1.5px solid ${role === 'student' ? 'var(--accent-blue)' : 'var(--border-light)'}`,
+                    background: role === 'student' ? 'var(--bg-tertiary)' : 'white',
+                    textAlign: 'center',
+                    fontSize: '0.75rem',
+                    fontWeight: 700,
+                    color: role === 'student' ? 'var(--accent-blue)' : 'var(--text-secondary)'
+>>>>>>> origin/main
                   }}
                 >
                   <User size={16} style={{ margin: '0 auto 4px auto' }} />
@@ -104,12 +132,21 @@ export default function AuthModal({ isOpen, onClose, initialMode = 'login', onAu
                   style={{
                     padding: '0.65rem 0.4rem',
                     borderRadius: '12px',
+<<<<<<< HEAD
                     border: `1.5px solid ${role === 'ambassador' ? '#FF6A00' : 'rgba(255, 255, 255, 0.14)'}`,
                     background: role === 'ambassador' ? 'rgba(255, 106, 0, 0.14)' : '#151515',
                     textAlign: 'center',
                     fontSize: '0.75rem',
                     fontWeight: 700,
                     color: role === 'ambassador' ? '#FF6A00' : '#F5F5F5'
+=======
+                    border: `1.5px solid ${role === 'ambassador' ? 'var(--accent-blue)' : 'var(--border-light)'}`,
+                    background: role === 'ambassador' ? 'var(--bg-tertiary)' : 'white',
+                    textAlign: 'center',
+                    fontSize: '0.75rem',
+                    fontWeight: 700,
+                    color: role === 'ambassador' ? 'var(--accent-blue)' : 'var(--text-secondary)'
+>>>>>>> origin/main
                   }}
                 >
                   <Award size={16} style={{ margin: '0 auto 4px auto' }} />
@@ -122,12 +159,21 @@ export default function AuthModal({ isOpen, onClose, initialMode = 'login', onAu
                   style={{
                     padding: '0.65rem 0.4rem',
                     borderRadius: '12px',
+<<<<<<< HEAD
                     border: `1.5px solid ${role === 'industry' ? '#FF6A00' : 'rgba(255, 255, 255, 0.14)'}`,
                     background: role === 'industry' ? 'rgba(255, 106, 0, 0.14)' : '#151515',
                     textAlign: 'center',
                     fontSize: '0.75rem',
                     fontWeight: 700,
                     color: role === 'industry' ? '#FF6A00' : '#F5F5F5'
+=======
+                    border: `1.5px solid ${role === 'industry' ? 'var(--accent-blue)' : 'var(--border-light)'}`,
+                    background: role === 'industry' ? 'var(--bg-tertiary)' : 'white',
+                    textAlign: 'center',
+                    fontSize: '0.75rem',
+                    fontWeight: 700,
+                    color: role === 'industry' ? 'var(--accent-blue)' : 'var(--text-secondary)'
+>>>>>>> origin/main
                   }}
                 >
                   <Building size={16} style={{ margin: '0 auto 4px auto' }} />
@@ -186,8 +232,13 @@ export default function AuthModal({ isOpen, onClose, initialMode = 'login', onAu
               width: '56px',
               height: '56px',
               borderRadius: '50%',
+<<<<<<< HEAD
               background: 'rgba(16, 185, 129, 0.14)',
               color: '#34D399',
+=======
+              background: '#ECFDF5',
+              color: '#059669',
+>>>>>>> origin/main
               display: 'flex',
               alignItems: 'center',
               justifyContent: 'center',

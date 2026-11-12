@@ -167,8 +167,13 @@ const InfiniteMenu = ({
   intro = true,
   showInfo = true,
   renderInfo,
+<<<<<<< HEAD
   theme = 'dark',
   accentColor = '#FF6A00',
+=======
+  theme = 'light',
+  accentColor = '#1677FF',
+>>>>>>> origin/main
   backgroundColor = 'transparent',
   onActiveChange,
   onItemClick,
@@ -848,9 +853,15 @@ const InfiniteMenu = ({
   });
 
   const current = items.length ? items[active % items.length] : null;
+<<<<<<< HEAD
   const ink = '#F5F5F5';
   const accent = accentColor || '#FF6A00';
   const onAccent = '#FFFFFF';
+=======
+  const ink = settings.theme === 'light' ? '#0B1736' : '#ffffff';
+  const accent = accentColor || '#1677FF';
+  const onAccent = luminance(accent) > 0.5 ? '#0B1736' : '#ffffff';
+>>>>>>> origin/main
   const hasAction = Boolean(current?.link || onItemClick);
 
   const handleAction = event => {

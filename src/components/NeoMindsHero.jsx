@@ -644,21 +644,33 @@ export default function NeoMindsHero({ navigateTo, onOpenHowItWorks, openJoinMod
             {/* Lower-left upward sweep curve */}
             <path 
               d="M -150 480 C 120 440 260 620 420 950" 
+<<<<<<< HEAD
               stroke="rgba(255, 106, 0, 0.22)" 
+=======
+              stroke="#D2E3FC" 
+>>>>>>> origin/main
               strokeWidth="1.25" 
               strokeOpacity="0.85"
             />
             {/* Upper-right downward sweep curve */}
             <path 
               d="M 1150 -100 C 1170 200 1350 280 1550 320" 
+<<<<<<< HEAD
               stroke="rgba(255, 106, 0, 0.22)" 
+=======
+              stroke="#D2E3FC" 
+>>>>>>> origin/main
               strokeWidth="1.25" 
               strokeOpacity="0.85"
             />
             {/* Ambient subtle secondary flow line */}
             <path 
               d="M -80 620 C 180 580 320 780 480 980" 
+<<<<<<< HEAD
               stroke="rgba(255, 255, 255, 0.08)" 
+=======
+              stroke="#E8F0FE" 
+>>>>>>> origin/main
               strokeWidth="1" 
               strokeOpacity="0.5"
             />
@@ -669,7 +681,11 @@ export default function NeoMindsHero({ navigateTo, onOpenHowItWorks, openJoinMod
             {/* Upper-right primary curve flowing through upper-right empty quadrant */}
             <path 
               d="M 210 -15 C 260 45 320 85 365 130 C 395 160 415 190 430 220" 
+<<<<<<< HEAD
               stroke="rgba(255, 106, 0, 0.22)" 
+=======
+              stroke="#D2E3FC" 
+>>>>>>> origin/main
               strokeWidth="1.25" 
               strokeOpacity="0.85"
               strokeLinecap="round"
@@ -677,7 +693,11 @@ export default function NeoMindsHero({ navigateTo, onOpenHowItWorks, openJoinMod
             {/* Upper-right secondary ambient curve */}
             <path 
               d="M 290 -25 C 335 30 380 65 425 105" 
+<<<<<<< HEAD
               stroke="rgba(255, 255, 255, 0.08)" 
+=======
+              stroke="#E8F0FE" 
+>>>>>>> origin/main
               strokeWidth="1.0" 
               strokeOpacity="0.6"
               strokeLinecap="round"
@@ -685,7 +705,11 @@ export default function NeoMindsHero({ navigateTo, onOpenHowItWorks, openJoinMod
             {/* Lower-left primary curve flowing through bottom-left empty quadrant */}
             <path 
               d="M -30 650 C 35 680 75 725 90 765 C 105 805 135 840 185 865" 
+<<<<<<< HEAD
               stroke="rgba(255, 106, 0, 0.22)" 
+=======
+              stroke="#D2E3FC" 
+>>>>>>> origin/main
               strokeWidth="1.25" 
               strokeOpacity="0.85"
               strokeLinecap="round"
@@ -693,7 +717,11 @@ export default function NeoMindsHero({ navigateTo, onOpenHowItWorks, openJoinMod
             {/* Lower-left secondary ambient curve */}
             <path 
               d="M -25 735 C 20 755 55 795 95 860" 
+<<<<<<< HEAD
               stroke="rgba(255, 255, 255, 0.08)" 
+=======
+              stroke="#E8F0FE" 
+>>>>>>> origin/main
               strokeWidth="1.0" 
               strokeOpacity="0.6"
               strokeLinecap="round"

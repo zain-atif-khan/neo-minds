@@ -22,7 +22,11 @@
 }
 
 .final-cta-btn.is-dodging {
+<<<<<<< HEAD
   box-shadow: 0 8px 24px rgba(255, 106, 0, 0.45);
+=======
+  box-shadow: 0 8px 24px rgba(22, 119, 255, 0.45);
+>>>>>>> origin/main
   transform: scale(1.02);
 }
 
@@ -32,7 +36,11 @@
   left: 50%;
   transform: translateX(-50%);
   font-size: 0.75rem;
+<<<<<<< HEAD
   color: #888888;
+=======
+  color: #61718D;
+>>>>>>> origin/main
   white-space: nowrap;
   pointer-events: none;
 }

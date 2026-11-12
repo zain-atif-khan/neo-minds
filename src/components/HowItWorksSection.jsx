@@ -1,5 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
+<<<<<<< HEAD
 import { createPortal } from 'react-dom';
+=======
+>>>>>>> origin/main
 import { ArrowUpRight, X } from 'lucide-react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -373,6 +376,10 @@ export default function HowItWorksSection({ navigateTo }) {
             </div>
 
             <div className="journey-editorial-story">
+<<<<<<< HEAD
+=======
+              <div className="editorial-eyebrow">THE NEO MINDS JOURNEY</div>
+>>>>>>> origin/main
               <h3 className="editorial-statement">
                 &ldquo;Skills become valuable when you can prove them.&rdquo;
               </h3>
@@ -411,6 +418,19 @@ export default function HowItWorksSection({ navigateTo }) {
               <path className="journey-base-path" d={pathD} />
               <path ref={activePathRef} className="journey-active-path" d={pathD} />
 
+<<<<<<< HEAD
+=======
+              <circle cx="-30" cy="111" r="5" className="decorative-glow-dot" />
+              <circle cx="80" cy="115" r="7" className="decorative-glow-dot" />
+              <circle cx="160" cy="190" r="4" className="decorative-outline-dot" />
+              <circle cx="360" cy="225" r="5" className="decorative-outline-dot" />
+              <circle cx="580" cy="240" r="4" className="decorative-glow-dot" />
+              <circle cx="860" cy="210" r="4" className="decorative-outline-dot" />
+              <circle cx="1080" cy="245" r="5" className="decorative-outline-dot" />
+              <circle cx="1380" cy="250" r="7" className="decorative-glow-dot" />
+              <circle cx="1470" cy="256" r="7" className="decorative-glow-dot" />
+
+>>>>>>> origin/main
               <g className="travelling-point-group">
                 <circle
                   ref={blueHeadCircleRef}
@@ -509,6 +529,10 @@ export default function HowItWorksSection({ navigateTo }) {
         <div ref={mobilePinnedRef} className="journey-mobile-pinned">
           {/* Mobile Header */}
           <div className="journey-mobile-header">
+<<<<<<< HEAD
+=======
+            <div className="journey-mobile-eyebrow">THE NEO MINDS JOURNEY</div>
+>>>>>>> origin/main
             <h2 className="journey-mobile-heading">
               A clear path from learning to <span className="highlight-blue">real opportunities.</span>
             </h2>
@@ -527,6 +551,7 @@ export default function HowItWorksSection({ navigateTo }) {
               >
                 {/* Thin visible solid vertical connectors meeting wave and avatar with zero gap */}
                 {/* Discover (x1): wave crest at yCrest -> meets avatar top at 172 */}
+<<<<<<< HEAD
                 <line x1={x1} y1={yCrest} x2={x1} y2={172} stroke="#FF6A00" strokeWidth="2.5" strokeLinecap="round" />
                 {/* Assess (x2): wave trough at yTrough -> meets avatar bottom at 248 */}
                 <line x1={x2} y1={yTrough} x2={x2} y2={248} stroke="#FF6A00" strokeWidth="2.5" strokeLinecap="round" />
@@ -536,17 +561,33 @@ export default function HowItWorksSection({ navigateTo }) {
                 <line x1={x4} y1={yTrough} x2={x4} y2={248} stroke="#FF6A00" strokeWidth="2.5" strokeLinecap="round" />
                 {/* Intern (x5): wave crest at yCrest -> meets avatar top at 172 */}
                 <line x1={x5} y1={yCrest} x2={x5} y2={172} stroke="#FF6A00" strokeWidth="2.5" strokeLinecap="round" />
+=======
+                <line x1={x1} y1={yCrest} x2={x1} y2={172} stroke="#1677FF" strokeWidth="2.5" strokeLinecap="round" />
+                {/* Assess (x2): wave trough at yTrough -> meets avatar bottom at 248 */}
+                <line x1={x2} y1={yTrough} x2={x2} y2={248} stroke="#1677FF" strokeWidth="2.5" strokeLinecap="round" />
+                {/* Learn (x3): wave crest at yCrest -> meets avatar top at 172 */}
+                <line x1={x3} y1={yCrest} x2={x3} y2={172} stroke="#1677FF" strokeWidth="2.5" strokeLinecap="round" />
+                {/* Build (x4): wave trough at yTrough -> meets avatar bottom at 248 */}
+                <line x1={x4} y1={yTrough} x2={x4} y2={248} stroke="#1677FF" strokeWidth="2.5" strokeLinecap="round" />
+                {/* Intern (x5): wave crest at yCrest -> meets avatar top at 172 */}
+                <line x1={x5} y1={yCrest} x2={x5} y2={172} stroke="#1677FF" strokeWidth="2.5" strokeLinecap="round" />
+>>>>>>> origin/main
 
                 {/* Dark charcoal base path - smooth, elegant, continuous edge-to-edge */}
                 <path
                   ref={mobileSvgPathRef}
                   d={dynamicMobilePathD}
+<<<<<<< HEAD
                   stroke="rgba(255, 255, 255, 0.15)"
+=======
+                  stroke="#0B1736"
+>>>>>>> origin/main
                   strokeWidth="2.5"
                   strokeLinecap="round"
                   fill="none"
                 />
 
+<<<<<<< HEAD
                 {/* Glowing orange active drawing path */}
                 <path
                   ref={mobileActivePathRef}
@@ -569,6 +610,30 @@ export default function HowItWorksSection({ navigateTo }) {
                 <g ref={mobileIndicatorGroupRef} pointerEvents="none">
                   <circle r="14" fill="rgba(255, 106, 0, 0.25)" />
                   <circle r="7.5" fill="#FF6A00" stroke="#080808" strokeWidth="2.5" />
+=======
+                {/* Glowing blue active drawing path */}
+                <path
+                  ref={mobileActivePathRef}
+                  d={dynamicMobilePathD}
+                  stroke="#1677FF"
+                  strokeWidth="3.2"
+                  strokeLinecap="round"
+                  fill="none"
+                  filter="drop-shadow(0 0 6px rgba(22, 119, 255, 0.75))"
+                />
+
+                {/* Anchor node dots on wave at each stage crest & trough */}
+                <circle cx={x1} cy={yCrest} r="4.5" fill="#FFFFFF" stroke="#1677FF" strokeWidth="2.5" />
+                <circle cx={x2} cy={yTrough} r="4.5" fill="#FFFFFF" stroke="#1677FF" strokeWidth="2.5" />
+                <circle cx={x3} cy={yCrest} r="4.5" fill="#FFFFFF" stroke="#1677FF" strokeWidth="2.5" />
+                <circle cx={x4} cy={yTrough} r="4.5" fill="#FFFFFF" stroke="#1677FF" strokeWidth="2.5" />
+                <circle cx={x5} cy={yCrest} r="4.5" fill="#FFFFFF" stroke="#1677FF" strokeWidth="2.5" />
+
+                {/* Travelling Blue Dot INSIDE the exact same SVG element (scale 1:1, perfectly circular!) */}
+                <g ref={mobileIndicatorGroupRef} pointerEvents="none">
+                  <circle r="14" fill="rgba(22, 119, 255, 0.22)" />
+                  <circle r="7.5" fill="#1677FF" stroke="#FFFFFF" strokeWidth="2.5" />
+>>>>>>> origin/main
                   <circle r="2.5" fill="#FFFFFF" />
                 </g>
               </svg>
@@ -641,6 +706,7 @@ export default function HowItWorksSection({ navigateTo }) {
       </div>
 
       {/* CONTEXTUAL CARD POPUP WHEN CLICKED (Shared by both desktop and mobile) */}
+<<<<<<< HEAD
       {activePopupStage && typeof document !== 'undefined' &&
         createPortal(
           <div className="stage-context-popup-overlay" onClick={closePopup}>
@@ -683,6 +749,48 @@ export default function HowItWorksSection({ navigateTo }) {
           </div>,
           document.body
         )}
+=======
+      {activePopupStage && (
+        <div className="stage-context-popup-overlay" onClick={closePopup}>
+          <div
+            className="stage-context-popup-card"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="popup-top-row">
+              <div className="popup-phase-badge">
+                <span>STAGE {activePopupStage.number}</span>
+              </div>
+              <button
+                className="popup-close-btn"
+                onClick={closePopup}
+                type="button"
+                aria-label="Close details"
+              >
+                <X size={16} />
+              </button>
+            </div>
+
+            <h3 className="popup-card-title">{activePopupStage.title}</h3>
+            <p className="popup-card-tagline">{activePopupStage.tagline}</p>
+            <p className="popup-card-body">{activePopupStage.popupContent}</p>
+
+            <div className="popup-footer-row">
+              <button
+                className="popup-action-btn"
+                onClick={() => {
+                  closePopup();
+                  if (navigateTo) navigateTo(activePopupStage.route);
+                }}
+                type="button"
+              >
+                <span>Explore Pathway</span>
+                <ArrowUpRight size={14} />
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+>>>>>>> origin/main
     </section>
   );
 }

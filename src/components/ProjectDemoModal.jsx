@@ -44,8 +44,13 @@ export default function ProjectDemoModal({ project, onClose }) {
           <X size={18} />
         </button>
 
+<<<<<<< HEAD
         <div style={{ fontSize: '0.78rem', fontWeight: 700, color: '#FF6A00', marginBottom: '0.35rem', fontFamily: 'var(--font-mono)' }}>
           PROJECT #{project.number}
+=======
+        <div className="kicker">
+          INTERACTIVE WORKFLOW SIMULATOR • PROJECT #{project.number}
+>>>>>>> origin/main
         </div>
 
         <h3 style={{ fontSize: '1.45rem', fontWeight: 700, color: 'var(--text-primary)', marginBottom: '0.4rem' }}>
@@ -109,28 +114,49 @@ export default function ProjectDemoModal({ project, onClose }) {
 
         {/* Live Terminal / Console */}
         <div style={{
+<<<<<<< HEAD
           background: '#0D0D0D',
           borderRadius: '14px',
           padding: '1.25rem',
           color: '#F5F5F5',
+=======
+          background: '#0B1736',
+          borderRadius: '14px',
+          padding: '1.25rem',
+          color: '#E2EDFD',
+>>>>>>> origin/main
           fontFamily: 'var(--font-mono)',
           fontSize: '0.8rem',
           minHeight: '170px',
           maxHeight: '220px',
           overflowY: 'auto',
+<<<<<<< HEAD
           border: '1px solid rgba(255, 255, 255, 0.12)'
         }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '6px', color: '#94A3B8', marginBottom: '0.75rem', borderBottom: '1px solid rgba(255, 255, 255, 0.12)', paddingBottom: '0.5rem' }}>
+=======
+          border: '1px solid #1E293B'
+        }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: '6px', color: '#94A3B8', marginBottom: '0.75rem', borderBottom: '1px solid #1E293B', paddingBottom: '0.5rem' }}>
+>>>>>>> origin/main
             <Terminal size={14} /> <span>Automation Engine Stream Output</span>
           </div>
 
           {executionLogs.length === 0 ? (
+<<<<<<< HEAD
             <div style={{ color: '#888888', fontStyle: 'italic' }}>
+=======
+            <div style={{ color: '#64748B', fontStyle: 'italic' }}>
+>>>>>>> origin/main
               Click "Test Trigger Automation Workflow" above to dispatch live event payload...
             </div>
           ) : (
             executionLogs.map((log, idx) => (
+<<<<<<< HEAD
               <div key={idx} style={{ marginBottom: '0.35rem', color: log.includes('✅') ? '#34D399' : log.includes('🤖') ? '#FF6A00' : '#F1F5F9' }}>
+=======
+              <div key={idx} style={{ marginBottom: '0.35rem', color: log.includes('✅') ? '#34D399' : log.includes('🤖') ? '#60A5FA' : '#F1F5F9' }}>
+>>>>>>> origin/main
                 {log}
               </div>
             ))

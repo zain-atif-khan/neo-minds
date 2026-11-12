@@ -1,5 +1,9 @@
+<<<<<<< HEAD
 import React, { useState, useRef, useCallback, useEffect } from 'react';
 import { createPortal } from 'react-dom';
+=======
+import React, { useState, useRef, useCallback } from 'react';
+>>>>>>> origin/main
 import { X, ArrowRight, CheckCircle2 } from 'lucide-react';
 
 // ─── DATA ─────────────────────────────────────────────────────────
@@ -28,6 +32,7 @@ function ApplicationModal({ type, onClose }) {
   const [formData, setFormData] = useState(initialForm);
   const [submitted, setSubmitted] = useState(false);
 
+<<<<<<< HEAD
   useEffect(() => {
     document.body.style.overflow = 'hidden';
     return () => {
@@ -39,6 +44,12 @@ function ApplicationModal({ type, onClose }) {
   const handleSubmit = (e) => { e.preventDefault(); setSubmitted(true); };
 
   const modalContent = (
+=======
+  const handleChange = (field, value) => setFormData(prev => ({ ...prev, [field]: value }));
+  const handleSubmit = (e) => { e.preventDefault(); setSubmitted(true); };
+
+  return (
+>>>>>>> origin/main
     <div className="modal-backdrop" onClick={onClose}>
       <div className="modal-card" onClick={e => e.stopPropagation()} style={{ maxWidth: '580px' }}>
         <button className="modal-close-btn" onClick={onClose} aria-label="Close">
@@ -47,6 +58,12 @@ function ApplicationModal({ type, onClose }) {
 
         {!submitted ? (
           <div>
+<<<<<<< HEAD
+=======
+            <div className="kicker">
+              {isStudent ? 'STUDENT APPLICATION' : 'AMBASSADOR APPLICATION'}
+            </div>
+>>>>>>> origin/main
             <h3 style={{ fontSize: '1.55rem', fontWeight: 700, color: 'var(--text-primary)', marginBottom: '0.25rem', lineHeight: 1.2 }}>
               {isStudent ? 'Start building your skills.' : 'Lead Neo Minds on your campus.'}
             </h3>
@@ -133,7 +150,11 @@ function ApplicationModal({ type, onClose }) {
           </div>
         ) : (
           <div style={{ textAlign: 'center', padding: '2.5rem 1rem' }}>
+<<<<<<< HEAD
             <div style={{ width: 64, height: 64, borderRadius: '50%', background: 'rgba(16, 185, 129, 0.14)', color: '#34D399',
+=======
+            <div style={{ width: 64, height: 64, borderRadius: '50%', background: '#ECFDF5', color: '#059669',
+>>>>>>> origin/main
               display: 'flex', alignItems: 'center', justifyContent: 'center', margin: '0 auto 1.25rem auto' }}>
               <CheckCircle2 size={36} />
             </div>
@@ -150,8 +171,11 @@ function ApplicationModal({ type, onClose }) {
       </div>
     </div>
   );
+<<<<<<< HEAD
 
   return typeof document !== 'undefined' ? createPortal(modalContent, document.body) : modalContent;
+=======
+>>>>>>> origin/main
 }
 
 // ─── PATHWAY ITEMS — shared renderer ────────────────────────────────
@@ -245,9 +269,16 @@ export default function ApplicationSection() {
           {/* ── Section Header + Editorial Composition ── */}
           <div className="app-header-grid">
             <div className="app-section-header">
+<<<<<<< HEAD
               <h2 className="app-section-headline editorial-serif">
                 Build skills.<br />
                 <span style={{ color: '#FF6A00' }}>Join the movement.</span>
+=======
+              <div className="kicker">JOIN NEO MINDS</div>
+              <h2 className="app-section-headline editorial-serif">
+                Build skills.<br />
+                <span style={{ color: '#1677FF' }}>Join the movement.</span>
+>>>>>>> origin/main
               </h2>
               <p className="app-section-desc">
                 Develop practical, industry-ready skills through projects, assessments, and real opportunities.

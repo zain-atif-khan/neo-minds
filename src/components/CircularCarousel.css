@@ -66,8 +66,13 @@
   position: relative;
   width: 100%;
   overflow: hidden;
+<<<<<<< HEAD
   background: #111111;
   box-shadow: 0 10px 28px rgba(0, 0, 0, 0.6);
+=======
+  background: #0B1736;
+  box-shadow: 0 10px 28px rgba(11, 23, 54, 0.16);
+>>>>>>> origin/main
 }
 
 .circular-carousel__photo {
@@ -123,6 +128,7 @@
   gap: 1.25rem;
   padding: 0.65rem 1.4rem;
   border-radius: 9999px;
+<<<<<<< HEAD
   background: rgba(17, 17, 17, 0.95);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
@@ -132,6 +138,17 @@
   pointer-events: none;
   font-family: var(--font-sans, sans-serif);
   color: #F5F5F5;
+=======
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border: 1px solid rgba(22, 119, 255, 0.14);
+  box-shadow: 0 8px 24px rgba(11, 23, 54, 0.08);
+  z-index: 10;
+  pointer-events: none;
+  font-family: var(--font-sans, sans-serif);
+  color: #0B1736;
+>>>>>>> origin/main
   max-width: calc(100% - 2rem);
   box-sizing: border-box;
 }
@@ -151,7 +168,11 @@
 .circular-carousel__subtitle {
   font-weight: 500;
   font-size: 0.76rem;
+<<<<<<< HEAD
   color: #CCCCCC;
+=======
+  color: #64748B;
+>>>>>>> origin/main
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -164,7 +185,11 @@
   font-family: var(--font-mono, monospace);
   font-size: 0.8rem;
   font-weight: 700;
+<<<<<<< HEAD
   color: #FF6A00;
+=======
+  color: #1677FF;
+>>>>>>> origin/main
   flex-shrink: 0;
 }
 

@@ -20,12 +20,20 @@
 }
 
 .scroll-list::-webkit-scrollbar-thumb {
+<<<<<<< HEAD
   background: rgba(255, 255, 255, 0.15);
+=======
+  background: #E2E8F0;
+>>>>>>> origin/main
   border-radius: 9999px;
 }
 
 .scroll-list::-webkit-scrollbar-thumb:hover {
+<<<<<<< HEAD
   background: rgba(255, 255, 255, 0.25);
+=======
+  background: #CBD5E1;
+>>>>>>> origin/main
 }
 
 .no-scrollbar::-webkit-scrollbar {
@@ -39,20 +47,34 @@
 
 .item {
   padding: 16px;
+<<<<<<< HEAD
   background-color: #111111;
   border: 1px solid rgba(255, 255, 255, 0.08);
+=======
+  background-color: #F8FAFC;
+  border: 1px solid #E2E8F0;
+>>>>>>> origin/main
   border-radius: 12px;
   margin-bottom: 0.75rem;
   transition: all 0.2s ease;
 }
 
 .item.selected {
+<<<<<<< HEAD
   background-color: rgba(255, 106, 0, 0.12);
   border-color: rgba(255, 106, 0, 0.35);
 }
 
 .item-text {
   color: #F5F5F5;
+=======
+  background-color: #EFF6FF;
+  border-color: #BFDBFE;
+}
+
+.item-text {
+  color: #0F172A;
+>>>>>>> origin/main
   margin: 0;
   font-size: 1rem;
 }
@@ -63,7 +85,11 @@
   left: 0;
   right: 0;
   height: 48px;
+<<<<<<< HEAD
   background: linear-gradient(to bottom, #080808 20%, rgba(8, 8, 8, 0));
+=======
+  background: linear-gradient(to bottom, #FFFFFF 20%, rgba(255, 255, 255, 0));
+>>>>>>> origin/main
   pointer-events: none;
   z-index: 10;
   transition: opacity 0.3s ease;
@@ -75,7 +101,11 @@
   left: 0;
   right: 0;
   height: 72px;
+<<<<<<< HEAD
   background: linear-gradient(to top, #080808 20%, rgba(8, 8, 8, 0));
+=======
+  background: linear-gradient(to top, #FFFFFF 20%, rgba(255, 255, 255, 0));
+>>>>>>> origin/main
   pointer-events: none;
   z-index: 10;
   transition: opacity 0.3s ease;
@@ -84,7 +114,11 @@
 /* Event Specific Refinements inside AnimatedList */
 .events-editorial-animated-list {
   margin-top: 1.5rem;
+<<<<<<< HEAD
   border-top: 1px solid var(--border-light, rgba(255, 255, 255, 0.10));
+=======
+  border-top: 1px solid var(--border-light, #E2E8F0);
+>>>>>>> origin/main
   padding-top: 0.5rem;
 }
 
@@ -95,25 +129,42 @@
 .events-editorial-animated-list .event-row-item {
   border-radius: 12px;
   padding: 1.5rem 1rem;
+<<<<<<< HEAD
   border-bottom: 1px solid var(--border-light, rgba(255, 255, 255, 0.10));
+=======
+  border-bottom: 1px solid var(--border-light, #E2E8F0);
+>>>>>>> origin/main
   background: transparent;
   transition: background-color 0.2s ease, border-color 0.2s ease, padding 0.2s ease;
 }
 
 .events-editorial-animated-list .event-row-item:hover,
 .events-editorial-animated-list .event-row-item.selected {
+<<<<<<< HEAD
   background: var(--bg-secondary, #151515);
+=======
+  background: var(--bg-secondary, #F8FAFC);
+>>>>>>> origin/main
   padding-left: 1.25rem;
   padding-right: 1.25rem;
 }
 
 .events-editorial-animated-list .event-row-item.selected .event-title-text {
+<<<<<<< HEAD
   color: #FF6A00;
 }
 
 .events-editorial-animated-list .event-row-item.selected .event-arrow-circle {
   background: #FF6A00;
   border-color: #FF6A00;
+=======
+  color: #1677FF;
+}
+
+.events-editorial-animated-list .event-row-item.selected .event-arrow-circle {
+  background: #1677FF;
+  border-color: #1677FF;
+>>>>>>> origin/main
   color: #FFFFFF;
   transform: translate(2px, -2px);
 }

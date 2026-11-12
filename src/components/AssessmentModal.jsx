@@ -93,7 +93,11 @@ export default function AssessmentModal({ isOpen, onClose, onCompleteScore, navi
 
             <div style={{
               height: '4px',
+<<<<<<< HEAD
               background: 'rgba(255, 255, 255, 0.08)',
+=======
+              background: '#EEF5FF',
+>>>>>>> origin/main
               borderRadius: '4px',
               margin: '0.8rem 0 1.5rem 0',
               overflow: 'hidden'
@@ -138,7 +142,11 @@ export default function AssessmentModal({ isOpen, onClose, onCompleteScore, navi
                       padding: '1rem 1.25rem',
                       borderRadius: '14px',
                       border: `1.5px solid ${isSelected ? 'var(--accent-blue)' : 'var(--border-light)'}`,
+<<<<<<< HEAD
                       background: isSelected ? 'var(--bg-tertiary)' : 'var(--bg-card)',
+=======
+                      background: isSelected ? 'var(--bg-tertiary)' : '#FFFFFF',
+>>>>>>> origin/main
                       cursor: 'pointer',
                       display: 'flex',
                       alignItems: 'center',
@@ -150,7 +158,11 @@ export default function AssessmentModal({ isOpen, onClose, onCompleteScore, navi
                       width: '20px',
                       height: '20px',
                       borderRadius: '50%',
+<<<<<<< HEAD
                       border: `2px solid ${isSelected ? 'var(--accent-blue)' : 'rgba(255, 255, 255, 0.25)'}`,
+=======
+                      border: `2px solid ${isSelected ? 'var(--accent-blue)' : '#CBD5E1'}`,
+>>>>>>> origin/main
                       background: isSelected ? 'var(--accent-blue)' : 'transparent',
                       display: 'flex',
                       alignItems: 'center',
@@ -218,7 +230,11 @@ export default function AssessmentModal({ isOpen, onClose, onCompleteScore, navi
                       <span>{item.skill}</span>
                       <span style={{ color: item.score >= 70 ? 'var(--accent-blue)' : '#EF4444' }}>{item.score}%</span>
                     </div>
+<<<<<<< HEAD
                     <div style={{ height: '6px', background: 'rgba(255, 255, 255, 0.08)', borderRadius: '4px', overflow: 'hidden' }}>
+=======
+                    <div style={{ height: '6px', background: '#F1F5F9', borderRadius: '4px', overflow: 'hidden' }}>
+>>>>>>> origin/main
                       <div style={{ height: '100%', width: `${item.score}%`, background: item.score >= 70 ? 'var(--accent-blue)' : '#F59E0B' }} />
                     </div>
                   </div>
@@ -228,9 +244,15 @@ export default function AssessmentModal({ isOpen, onClose, onCompleteScore, navi
 
             <div style={{
               padding: '1rem 1.25rem',
+<<<<<<< HEAD
               background: 'rgba(255, 106, 0, 0.10)',
               borderRadius: '14px',
               border: '1px solid rgba(255, 106, 0, 0.22)',
+=======
+              background: '#EEF5FF',
+              borderRadius: '14px',
+              border: '1px solid #DCEBFF',
+>>>>>>> origin/main
               marginBottom: '1.5rem',
               display: 'flex',
               alignItems: 'center',
