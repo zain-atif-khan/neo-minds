@@ -38,10 +38,16 @@ export default function App() {
   // Track Hero animation on Home page (Defaults to true if visitor reloads below the hero)
   const [isHeroAnimationComplete, setIsHeroAnimationComplete] = useState(() => isReloadBelowHero);
 
-  // Continuously record the exact scroll position in sessionStorage
+  // Continuously record the exact scroll position in sessionStorage (throttled with rAF for 60fps performance)
   React.useEffect(() => {
+    let scrollRaf = null;
     const handleScroll = () => {
-      saveCurrentScrollY();
+      if (!scrollRaf) {
+        scrollRaf = requestAnimationFrame(() => {
+          saveCurrentScrollY();
+          scrollRaf = null;
+        });
+      }
     };
 
     const handleBeforeUnload = () => {
@@ -56,6 +62,7 @@ export default function App() {
       window.removeEventListener('scroll', handleScroll);
       window.removeEventListener('beforeunload', handleBeforeUnload);
       window.removeEventListener('pagehide', handleBeforeUnload);
+      if (scrollRaf) cancelAnimationFrame(scrollRaf);
     };
   }, []);
 
