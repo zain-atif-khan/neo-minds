@@ -11,136 +11,123 @@ const PHASES = [
   {
     index: 0,
     phase: '01',
-    title: 'Diagnostic Baseline & Squad Formation',
-    duration: 'Weeks 1 – 2',
-    status: 'Foundation',
-    description: 'Algorithmic assessment, codebase diagnostic capability, and high-impact squad alignment.',
-    colIndex: 0,
-    colSpanLabel: 'Weeks 1 – 2',
+    title: 'Diagnostic Baseline',
+    duration: '1–2 WEEKS',
+    description: 'Algorithmic diagnostics & squad alignment',
+    scaleLabel: 'WEEK 1–2',
   },
   {
     index: 1,
     phase: '02',
-    title: 'Core Systems & Production Tooling',
-    duration: 'Weeks 3 – 5',
-    status: 'Acceleration',
-    description: 'Mastery of modern engineering stacks, automated CI/CD pipelines, and enterprise testing standards.',
-    colIndex: 1,
-    colSpanLabel: 'Weeks 3 – 5',
+    title: 'Core Systems & Tooling',
+    duration: '3–5 WEEKS',
+    description: 'Modern engineering stacks & CI/CD pipelines',
+    scaleLabel: 'WEEK 3–5',
   },
   {
     index: 2,
     phase: '03',
-    title: 'Applied Architecture & Micro-Sprints',
-    duration: 'Weeks 6 – 8',
-    status: 'Development',
-    description: 'Designing distributed services, real-time databases, and responsive interfaces under strict latency constraints.',
-    colIndex: 2,
-    colSpanLabel: 'Weeks 6 – 8',
+    title: 'Applied Architecture',
+    duration: '6–8 WEEKS',
+    description: 'Distributed services & real-time systems',
+    scaleLabel: 'WEEK 6–8',
   },
   {
     index: 3,
     phase: '04',
-    title: 'Real-World Partner Project Gate',
-    duration: 'Weeks 9 – 12',
-    status: 'Immersion',
-    description: 'Engineering battle-tested solutions for actual commercial partner briefs with weekly PR reviews from principal engineers.',
-    colIndex: 3,
-    colSpanLabel: 'Weeks 9 – 12',
+    title: 'Partner Project Gate',
+    duration: '9–12 WEEKS',
+    description: 'Production code for industry partner briefs',
+    scaleLabel: 'WEEK 9–12',
   },
   {
     index: 4,
     phase: '05',
-    title: 'Technical Defense & Security Audit',
-    duration: 'Weeks 13 – 14',
-    status: 'Hardening',
-    description: 'Architectural defense presentations, rigorous stress testing, vulnerability scans, and performance optimizations.',
-    colIndex: 4,
-    colSpanLabel: 'Weeks 13 – 14',
+    title: 'Technical Defense & Audit',
+    duration: '13–14 WEEKS',
+    description: 'Security fuzzing, architecture defense & stress tests',
+    scaleLabel: 'WEEK 13–14',
   },
   {
     index: 5,
     phase: '06',
-    title: 'Fellowship Placement & Career Launch',
-    duration: 'Week 15+',
-    status: 'Placement',
-    description: 'Direct onboarding into partner company engineering teams, high-growth startup roles, and lifetime access to the Neo Minds talent network.',
-    colIndex: 5,
-    colSpanLabel: 'Week 15+',
+    title: 'Fellowship & Career Launch',
+    duration: 'WEEK 15+',
+    description: 'Direct company placement & talent network entry',
+    scaleLabel: 'WEEK 15+',
   },
-];
-
-// Ascending row layout: Row 6 (Phase 06) is at top, down to Row 1 (Phase 01) at bottom
-const DISPLAY_ROWS = [...PHASES].reverse();
-
-const TIMELINE_COLUMNS = [
-  { label: 'WEEKS 1 – 2', phase: '01' },
-  { label: 'WEEKS 3 – 5', phase: '02' },
-  { label: 'WEEKS 6 – 8', phase: '03' },
-  { label: 'WEEKS 9 – 12', phase: '04' },
-  { label: 'WEEKS 13 – 14', phase: '05' },
-  { label: 'WEEK 15+', phase: '06' },
 ];
 
 export default function AscendingTimelineSection() {
   const sectionRef = useRef(null);
-  const rowsContainerRef = useRef(null);
+  const canvasRef = useRef(null);
   const svgRef = useRef(null);
   const hiddenPathRef = useRef(null);
   const maskPathRef = useRef(null);
   const arrowRef = useRef(null);
-  const anchorRefs = useRef([]);
+  const anchorInRefs = useRef([]);
+  const anchorOutRefs = useRef([]);
 
   const [pathD, setPathD] = useState('');
   const [totalLength, setTotalLength] = useState(0);
-  const [phaseLengths, setPhaseLengths] = useState([0, 0, 0, 0, 0, 0]);
+  const [segmentStopLengths, setSegmentStopLengths] = useState([0, 0, 0, 0, 0, 0]);
   const [activePhaseIndex, setActivePhaseIndex] = useState(0);
   const [completedPhases, setCompletedPhases] = useState([]);
 
-  // Calculate coordinates of connection anchors relative to SVG overlay
-  const recalculateGeometry = () => {
-    if (!svgRef.current || !rowsContainerRef.current) return;
+  // Calculate the staircase connecting path
+  const recalculatePath = () => {
+    if (!svgRef.current || !canvasRef.current) return;
     const svgRect = svgRef.current.getBoundingClientRect();
     if (svgRect.width === 0 || svgRect.height === 0) return;
 
     const isMobile = window.innerWidth <= 768;
 
-    // Collect coordinates in chronological order (Phase 01 -> Phase 06)
-    const points = PHASES.map((p) => {
-      const el = anchorRefs.current[p.index];
-      if (!el) return { x: 0, y: 0 };
-      const r = el.getBoundingClientRect();
-      return {
-        x: r.left - svgRect.left + r.width / 2,
-        y: r.top - svgRect.top + r.height / 2,
-      };
-    });
+    // Collect exit and entrance points for each bar
+    const points = [];
+    for (let i = 0; i < PHASES.length; i++) {
+      const elIn = anchorInRefs.current[i];
+      const elOut = anchorOutRefs.current[i] || elIn;
+      if (!elIn) return;
 
-    if (points.some((pt) => pt.x === 0 && pt.y === 0)) return;
+      const rIn = elIn.getBoundingClientRect();
+      const rOut = elOut.getBoundingClientRect();
 
-    // Build the ascending staircase path from Phase 01 (bottom-left) to Phase 06 (top-right)
-    let d = `M ${points[0].x.toFixed(1)} ${points[0].y.toFixed(1)}`;
+      points.push({
+        in: {
+          x: rIn.left - svgRect.left + rIn.width / 2,
+          y: rIn.top - svgRect.top + rIn.height / 2,
+        },
+        out: {
+          x: rOut.left - svgRect.left + rOut.width / 2,
+          y: rOut.top - svgRect.top + rOut.height / 2,
+        },
+      });
+    }
+
+    if (points.length < 6) return;
+
+    // Build the continuous connecting SVG path from Phase 01 to Phase 06
+    let d = `M ${points[0].out.x.toFixed(1)} ${points[0].out.y.toFixed(1)}`;
     for (let i = 0; i < points.length - 1; i++) {
-      const p1 = points[i];
-      const p2 = points[i + 1];
-      const dx = p2.x - p1.x;
-      const dy = p2.y - p1.y;
+      const pOut = points[i].out;
+      const pIn = points[i + 1].in;
+      const dx = pIn.x - pOut.x;
+      const dy = pIn.y - pOut.y;
 
       if (isMobile) {
-        // Vertical connecting line on mobile
-        const cp1x = p1.x;
-        const cp1y = p1.y + dy * 0.45;
-        const cp2x = p2.x;
-        const cp2y = p2.y - dy * 0.45;
-        d += ` C ${cp1x.toFixed(1)} ${cp1y.toFixed(1)}, ${cp2x.toFixed(1)} ${cp2y.toFixed(1)}, ${p2.x.toFixed(1)} ${p2.y.toFixed(1)}`;
+        // Vertical connecting segment on mobile
+        const cp1x = pOut.x;
+        const cp1y = pOut.y + dy * 0.45;
+        const cp2x = pIn.x;
+        const cp2y = pIn.y - dy * 0.45;
+        d += ` C ${cp1x.toFixed(1)} ${cp1y.toFixed(1)}, ${cp2x.toFixed(1)} ${cp2y.toFixed(1)}, ${pIn.x.toFixed(1)} ${pIn.y.toFixed(1)}`;
       } else {
-        // Precision engineering staircase curve:
-        // Leaves p1 moving rightwards, curves smoothly upward, enters p2 horizontally
-        const cp1x = p1.x + dx * 0.52;
-        const cp1y = p1.y;
-        const cp2x = p1.x + dx * 0.52;
-        const cp2y = p2.y;
-        d += ` C ${cp1x.toFixed(1)} ${cp1y.toFixed(1)}, ${cp2x.toFixed(1)} ${cp2y.toFixed(1)}, ${p2.x.toFixed(1)} ${p2.y.toFixed(1)}`;
+        // Architectural staircase curve: Leaves pOut horizontally, curves upward, enters pIn horizontally
+        const cp1x = pOut.x + dx * 0.52;
+        const cp1y = pOut.y;
+        const cp2x = pOut.x + dx * 0.52;
+        const cp2y = pIn.y;
+        d += ` C ${cp1x.toFixed(1)} ${cp1y.toFixed(1)}, ${cp2x.toFixed(1)} ${cp2y.toFixed(1)}, ${pIn.x.toFixed(1)} ${pIn.y.toFixed(1)}`;
       }
     }
 
@@ -148,23 +135,23 @@ export default function AscendingTimelineSection() {
   };
 
   useEffect(() => {
-    recalculateGeometry();
+    recalculatePath();
     const handleResize = () => {
-      recalculateGeometry();
+      recalculatePath();
     };
 
     window.addEventListener('resize', handleResize);
-    const timer1 = setTimeout(recalculateGeometry, 80);
-    const timer2 = setTimeout(recalculateGeometry, 300);
+    const t1 = setTimeout(recalculatePath, 80);
+    const t2 = setTimeout(recalculatePath, 350);
 
     return () => {
       window.removeEventListener('resize', handleResize);
-      clearTimeout(timer1);
-      clearTimeout(timer2);
+      clearTimeout(t1);
+      clearTimeout(t2);
     };
   }, []);
 
-  // Compute exact arc lengths once path `d` updates
+  // Compute exact arc lengths once SVG path `d` changes
   useEffect(() => {
     if (!hiddenPathRef.current || !pathD || !svgRef.current) return;
     try {
@@ -172,8 +159,8 @@ export default function AscendingTimelineSection() {
       setTotalLength(len);
 
       const svgRect = svgRef.current.getBoundingClientRect();
-      const points = PHASES.map((p) => {
-        const el = anchorRefs.current[p.index];
+      const entrancePoints = PHASES.map((_, i) => {
+        const el = anchorInRefs.current[i];
         if (!el) return { x: 0, y: 0 };
         const r = el.getBoundingClientRect();
         return {
@@ -182,11 +169,11 @@ export default function AscendingTimelineSection() {
         };
       });
 
-      // Sample along path to locate exact distances for each phase connection
-      const samples = 300;
+      // Sample along the curve to find exact arc lengths when reaching each bar
+      const samples = 350;
       const lengths = [0];
-      for (let i = 1; i < points.length; i++) {
-        const target = points[i];
+      for (let i = 1; i < entrancePoints.length; i++) {
+        const target = entrancePoints[i];
         let bestDist = 0;
         let minDistSq = Infinity;
         for (let s = 0; s <= samples; s++) {
@@ -201,9 +188,9 @@ export default function AscendingTimelineSection() {
         lengths.push(bestDist);
       }
       lengths[lengths.length - 1] = len;
-      setPhaseLengths(lengths);
+      setSegmentStopLengths(lengths);
 
-      // Initial arrowhead alignment at Phase 01
+      // Initial arrowhead setup at Phase 01
       if (arrowRef.current && len > 0) {
         const p1 = hiddenPathRef.current.getPointAtLength(0);
         const p2 = hiddenPathRef.current.getPointAtLength(Math.min(4, len));
@@ -214,13 +201,13 @@ export default function AscendingTimelineSection() {
         );
       }
     } catch {
-      // SVG geometry fallback
+      // Geometry fallback
     }
   }, [pathD]);
 
   // GSAP ScrollTrigger Pinned Animation
   useEffect(() => {
-    if (!sectionRef.current || totalLength === 0 || phaseLengths.length < 6) return;
+    if (!sectionRef.current || totalLength === 0 || segmentStopLengths.length < 6) return;
 
     const ctx = gsap.context(() => {
       ScrollTrigger.create({
@@ -241,8 +228,8 @@ export default function AscendingTimelineSection() {
 
           // 82% of segment draws the line, 18% pauses at arrival for reveal
           const drawRatio = 0.82;
-          const startLen = phaseLengths[segIdx];
-          const endLen = phaseLengths[segIdx + 1];
+          const startLen = segmentStopLengths[segIdx];
+          const endLen = segmentStopLengths[segIdx + 1];
 
           let currentDist = 0;
           if (segProgress < drawRatio) {
@@ -301,172 +288,155 @@ export default function AscendingTimelineSection() {
     }, sectionRef);
 
     return () => ctx.revert();
-  }, [totalLength, phaseLengths]);
+  }, [totalLength, segmentStopLengths]);
 
   return (
     <section className="ascending-timeline-section" id="ascending-timeline" ref={sectionRef}>
       <div className="ascending-timeline-pin-container">
-        {/* Section Header (Editorial, Strictly NO eyebrow) */}
-        <div className="ascending-timeline-header-block">
-          <div className="timeline-title-wrap">
-            <h2 className="timeline-main-title">
-              The Six-Phase <span>Engineering Roadmap</span>
+        {/* Section Header (Clean, spacious, strictly NO eyebrow) */}
+        <div className="staircase-header-row">
+          <div className="staircase-title-block">
+            <h2 className="staircase-heading">
+              Where the six phases <span>actually lead.</span>
             </h2>
-            <p className="timeline-subtitle">
+            <p className="staircase-subtext">
               A structured progression taking engineering talent from diagnostic evaluation to direct fellowship placement.
             </p>
           </div>
 
-          <div className="timeline-active-status">
-            <span className="status-indicator-dot" />
+          <div className="staircase-status-badge">
+            <span className="badge-live-dot" />
             <span>Active Milestone:</span>
-            <span className="status-highlight-text">Phase {PHASES[activePhaseIndex].phase}</span>
+            <span className="badge-phase-text">Phase {PHASES[activePhaseIndex].phase}</span>
           </div>
         </div>
 
-        {/* Structured Timeline Board */}
-        <div className="timeline-board">
-          {/* Horizontal Timeline Scale Across the Top */}
-          <div className="timeline-scale-header">
-            <div className="scale-label-col">Program Milestone Track</div>
-            <div className="scale-columns-grid">
-              {TIMELINE_COLUMNS.map((col, idx) => {
-                const isActive = activePhaseIndex === idx;
-                return (
-                  <div
-                    key={col.phase}
-                    className={`scale-column-slot ${isActive ? 'slot-active' : ''}`}
-                  >
-                    {col.label}
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-
-          {/* Staggered Rows Canvas */}
-          <div className="timeline-rows-container" ref={rowsContainerRef}>
-            {/* Background Column Lines */}
-            <div className="timeline-grid-vertical-lines">
-              {TIMELINE_COLUMNS.map((col) => (
-                <div key={col.phase} className="grid-line-col" />
-              ))}
-            </div>
-
-            {/* Continuous SVG Connecting Path */}
-            <svg className="timeline-connecting-svg" ref={svgRef} xmlns="http://www.w3.org/2000/svg">
-              <defs>
-                <mask id="timeline-gantt-mask">
-                  <path
-                    ref={maskPathRef}
-                    d={pathD}
-                    fill="none"
-                    stroke="#FFFFFF"
-                    strokeWidth="12"
-                    strokeDasharray={totalLength || 1}
-                    strokeDashoffset={totalLength || 1}
-                  />
-                </mask>
-              </defs>
-
-              {/* Hidden Path for length sampling */}
-              <path
-                ref={hiddenPathRef}
-                d={pathD}
-                fill="none"
-                stroke="transparent"
-                strokeWidth="1"
-              />
-
-              {/* Faint Background Guide Line */}
-              {pathD && (
-                <path
-                  d={pathD}
-                  fill="none"
-                  stroke="rgba(255, 255, 255, 0.08)"
-                  strokeWidth="1.8"
-                  strokeDasharray="4 6"
-                />
-              )}
-
-              {/* Active Orange Dotted Connecting Line */}
-              {pathD && totalLength > 0 && (
-                <path
-                  d={pathD}
-                  fill="none"
-                  stroke="#FF6A00"
-                  strokeWidth="2.8"
-                  strokeDasharray="3 7"
-                  strokeLinecap="round"
-                  mask="url(#timeline-gantt-mask)"
-                />
-              )}
-
-              {/* Precision Arrowhead traveling at leading edge of line */}
-              {pathD && (
-                <g ref={arrowRef} className="timeline-arrowhead">
-                  <path
-                    d="M -5 -3.5 L 4 0 L -5 3.5 L -2.5 0 Z"
-                    fill="#FF6A00"
-                    stroke="#080808"
-                    strokeWidth="0.8"
-                  />
-                </g>
-              )}
-            </svg>
-
-            {/* Render Rows in Ascending Order: Phase 06 at top, Phase 01 at bottom */}
-            {DISPLAY_ROWS.map((phase) => {
-              const isActive = activePhaseIndex === phase.index;
-              const isCompleted = completedPhases.includes(phase.index);
-
-              let rowClass = '';
-              if (isActive) rowClass = 'row-state-active';
-              else if (isCompleted) rowClass = 'row-state-completed';
-
-              // Desktop column offset: each column is 16.666%
-              const leftPercent = `${(phase.colIndex * 16.666).toFixed(2)}%`;
-              const widthPercent = '16.666%';
-
+        {/* Horizontal Timeline Scale Across the Top (Matching Image 2) */}
+        <div className="staircase-scale-track">
+          <div className="staircase-scale-labels">
+            {PHASES.map((phase, idx) => {
+              const isActive = activePhaseIndex === idx;
               return (
-                <div key={phase.phase} className={`timeline-phase-row ${rowClass}`}>
-                  {/* Left Phase Information Cell */}
-                  <div className="phase-info-cell">
-                    <span className="phase-number-box">{phase.phase}</span>
-                    <div className="phase-content-text">
-                      <h3 className="phase-row-title">{phase.title}</h3>
-                      <p className="phase-row-desc">{phase.description}</p>
-                    </div>
-                  </div>
-
-                  {/* Right Track with Staggered Horizontal Bar Segment */}
-                  <div className="phase-track-cell">
-                    <div
-                      className="timeline-bar-segment"
-                      style={{
-                        left: leftPercent,
-                        width: widthPercent,
-                      }}
-                    >
-                      <span className="bar-status-label">{phase.status}</span>
-                      <span className="bar-duration-label">{phase.duration}</span>
-
-                      {/* Bar Anchor Connection Point */}
-                      <div
-                        className="bar-connection-anchor"
-                        ref={(el) => {
-                          anchorRefs.current[phase.index] = el;
-                        }}
-                      />
-                    </div>
-                  </div>
-
-                  {/* Mobile Left Anchor Point */}
-                  <div className="mobile-row-anchor" />
+                <div
+                  key={phase.phase}
+                  className={`scale-label-item ${isActive ? 'scale-active' : ''}`}
+                >
+                  {phase.scaleLabel}
                 </div>
               );
             })}
           </div>
+          <div className="staircase-scale-line" />
+        </div>
+
+        {/* Ascending Staircase Canvas (Bottom-Left to Top-Right) */}
+        <div className="staircase-canvas" ref={canvasRef}>
+          {/* Continuous SVG Connecting Path */}
+          <svg className="staircase-svg-overlay" ref={svgRef} xmlns="http://www.w3.org/2000/svg">
+            <defs>
+              <mask id="staircase-mask">
+                <path
+                  ref={maskPathRef}
+                  d={pathD}
+                  fill="none"
+                  stroke="#FFFFFF"
+                  strokeWidth="12"
+                  strokeDasharray={totalLength || 1}
+                  strokeDashoffset={totalLength || 1}
+                />
+              </mask>
+            </defs>
+
+            {/* Hidden Path for distance queries */}
+            <path
+              ref={hiddenPathRef}
+              d={pathD}
+              fill="none"
+              stroke="transparent"
+              strokeWidth="1"
+            />
+
+            {/* Faint Background Guide Line */}
+            {pathD && (
+              <path
+                d={pathD}
+                fill="none"
+                stroke="rgba(255, 255, 255, 0.08)"
+                strokeWidth="1.8"
+                strokeDasharray="4 6"
+              />
+            )}
+
+            {/* Active Orange Dotted Connecting Line */}
+            {pathD && totalLength > 0 && (
+              <path
+                d={pathD}
+                fill="none"
+                stroke="#FF6A00"
+                strokeWidth="2.8"
+                strokeDasharray="4 6"
+                strokeLinecap="round"
+                mask="url(#staircase-mask)"
+              />
+            )}
+
+            {/* Small Precise Arrowhead traveling at leading tip */}
+            {pathD && (
+              <g ref={arrowRef} className="timeline-arrowhead">
+                <path
+                  d="M -5 -3.5 L 4 0 L -5 3.5 L -2.5 0 Z"
+                  fill="#FF6A00"
+                  stroke="#080808"
+                  strokeWidth="0.8"
+                />
+              </g>
+            )}
+          </svg>
+
+          {/* Exactly Six Opaque Horizontal Phase Bars */}
+          {PHASES.map((phase) => {
+            const isActive = activePhaseIndex === phase.index;
+            const isCompleted = completedPhases.includes(phase.index);
+
+            let barStateClass = 'bar-inactive';
+            if (isActive) barStateClass = 'bar-active';
+            else if (isCompleted) barStateClass = 'bar-completed';
+
+            return (
+              <div
+                key={phase.phase}
+                className={`staircase-bar ${barStateClass}`}
+              >
+                {/* Left/Entrance Anchor Dot for SVG Line */}
+                <div
+                  className="bar-anchor-dot bar-anchor-in"
+                  ref={(el) => {
+                    anchorInRefs.current[phase.index] = el;
+                  }}
+                />
+
+                {/* Top Row: Phase Num + Title on Left, Duration on Right */}
+                <div className="bar-top-row">
+                  <div className="bar-title-group">
+                    <span className="bar-phase-num">{phase.phase}</span>
+                    <h3 className="bar-title-text">{phase.title}</h3>
+                  </div>
+                  <span className="bar-duration-text">{phase.duration}</span>
+                </div>
+
+                {/* Bottom Row: Short Description */}
+                <p className="bar-desc-text">{phase.description}</p>
+
+                {/* Right/Exit Anchor Dot for SVG Line */}
+                <div
+                  className="bar-anchor-dot bar-anchor-out"
+                  ref={(el) => {
+                    anchorOutRefs.current[phase.index] = el;
+                  }}
+                />
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>

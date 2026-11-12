@@ -1,6 +1,7 @@
 /* ==========================================================================
-   SIX-PHASE ASCENDING ENGINEERING TIMELINE — STRUCTURED ROADMAP
-   Inspired by Precision Engineering Gantt & Timeline Architecture
+   ASCENDING SIX-PHASE STAIRCASE TIMELINE
+   Inspired by Reference Architecture (Image 2)
+   Ascending Staircase: Bottom-Left to Top-Right
    Deep Black (#080808) & Neo Minds Orange (#FF6A00)
    ========================================================================== */
 
@@ -24,30 +25,32 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 80px 4vw 60px 4vw;
+  padding: 80px 4vw 50px 4vw;
   box-sizing: border-box;
+  max-width: 1400px;
+  margin: 0 auto;
 }
 
-/* Section Header (Separated from timeline, NO eyebrow text) */
-.ascending-timeline-header-block {
+/* Header Area (Clean, spacious, strictly NO eyebrow) */
+.staircase-header-row {
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
-  max-width: 1360px;
   width: 100%;
-  margin: 0 auto 32px auto;
+  margin-bottom: 28px;
   gap: 24px;
 }
 
-.timeline-title-wrap {
+.staircase-title-block {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 6px;
+  max-width: 680px;
 }
 
-.timeline-main-title {
+.staircase-heading {
   font-family: 'Newsreader', 'Playfair Display', Georgia, serif;
-  font-size: clamp(2rem, 3.2vw, 3rem);
+  font-size: clamp(2.1rem, 3.4vw, 3.2rem);
   font-weight: 500;
   letter-spacing: -0.025em;
   line-height: 1.1;
@@ -55,37 +58,37 @@
   margin: 0;
 }
 
-.timeline-main-title span {
+.staircase-heading span {
   color: #FF6A00;
   font-style: italic;
 }
 
-.timeline-subtitle {
+.staircase-subtext {
   font-family: 'Plus Jakarta Sans', sans-serif;
   font-size: clamp(0.88rem, 1.05vw, 1.02rem);
   color: #888888;
   line-height: 1.5;
   margin: 0;
-  max-width: 600px;
+  max-width: 540px;
 }
 
-/* Active Stage Status Tracker */
-.timeline-active-status {
+.staircase-status-badge {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
   font-family: 'Space Grotesk', 'IBM Plex Mono', monospace;
-  font-size: 0.8rem;
+  font-size: 0.78rem;
   letter-spacing: 0.06em;
   text-transform: uppercase;
   color: #888888;
   padding: 6px 14px;
   border-radius: 4px;
-  background: #111111;
+  background: #121212;
   border: 1px solid rgba(255, 255, 255, 0.08);
+  white-space: nowrap;
 }
 
-.status-indicator-dot {
+.badge-live-dot {
   width: 6px;
   height: 6px;
   border-radius: 50%;
@@ -93,479 +96,391 @@
   box-shadow: 0 0 8px #FF6A00;
 }
 
-.status-highlight-text {
+.badge-phase-text {
   color: #FFFFFF;
   font-weight: 600;
 }
 
 /* ==========================================================================
-   TIMELINE BOARD / STAGGERED GANTT COMPOSITION
+   HORIZONTAL TIMELINE SCALE ACROSS THE TOP (Exact layout of Image 2)
    ========================================================================== */
-.timeline-board {
-  position: relative;
-  max-width: 1360px;
+.staircase-scale-track {
   width: 100%;
-  margin: 0 auto;
-  background: #0C0C0C;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 6px;
-  overflow: hidden;
-  box-sizing: border-box;
-}
-
-/* Horizontal Timeline Scale Across the Top */
-.timeline-scale-header {
-  display: grid;
-  grid-template-columns: 360px 1fr;
-  background: #111111;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  box-sizing: border-box;
-}
-
-.scale-label-col {
-  padding: 14px 24px;
-  font-family: 'Space Grotesk', 'IBM Plex Mono', monospace;
-  font-size: 0.72rem;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: #777777;
-  border-right: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.scale-columns-grid {
-  display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  width: 100%;
-}
-
-.scale-column-slot {
-  padding: 14px 12px;
-  font-family: 'Space Grotesk', 'IBM Plex Mono', monospace;
-  font-size: 0.72rem;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  color: #777777;
-  text-align: center;
-  border-right: 1px solid rgba(255, 255, 255, 0.05);
-  box-sizing: border-box;
-}
-
-.scale-column-slot:last-child {
-  border-right: none;
-}
-
-.scale-column-slot.slot-active {
-  color: #FF6A00;
-  font-weight: 600;
-}
-
-/* Rows Canvas Container */
-.timeline-rows-container {
-  position: relative;
   display: flex;
   flex-direction: column;
-  width: 100%;
+  margin-bottom: 24px;
 }
 
-/* Background Vertical Column Grid Lines for Timeline Area */
-.timeline-grid-vertical-lines {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 360px;
-  right: 0;
+.staircase-scale-labels {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
-  pointer-events: none;
-  z-index: 1;
+  width: 100%;
+  padding-bottom: 12px;
 }
 
-.grid-line-col {
-  border-right: 1px dashed rgba(255, 255, 255, 0.04);
-  height: 100%;
+.scale-label-item {
+  font-family: 'Space Grotesk', 'IBM Plex Mono', monospace;
+  font-size: 0.74rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #666666;
+  transition: color 0.35s ease;
 }
 
-.grid-line-col:last-child {
-  border-right: none;
+.scale-label-item.scale-active {
+  color: #FF6A00;
 }
 
-/* SVG Overlay for Connecting Path & Arrow */
-.timeline-connecting-svg {
+/* Thin horizontal baseline line right beneath the labels */
+.staircase-scale-line {
+  width: 100%;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.12);
+}
+
+/* ==========================================================================
+   ASCENDING STAIRCASE CANVAS (Bottom-Left to Top-Right)
+   ========================================================================== */
+.staircase-canvas {
+  position: relative;
+  width: 100%;
+  height: 480px;
+  min-height: 440px;
+}
+
+/* Connecting SVG Overlay */
+.staircase-svg-overlay {
   position: absolute;
-  top: 0;
-  left: 360px;
-  right: 0;
-  bottom: 0;
-  width: calc(100% - 360px);
+  inset: 0;
+  width: 100%;
   height: 100%;
   pointer-events: none;
-  z-index: 3;
+  z-index: 2;
   overflow: visible;
 }
 
-/* Each Individual Phase Row */
-.timeline-phase-row {
-  position: relative;
-  display: grid;
-  grid-template-columns: 360px 1fr;
-  min-height: 72px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+/* ==========================================================================
+   OPAQUE HORIZONTAL PHASE BARS (Clean segments, NOT pill buttons)
+   ========================================================================== */
+.staircase-bar {
+  position: absolute;
+  width: clamp(260px, 24vw, 340px);
+  min-height: 58px;
+  border-radius: 6px;
+  padding: 10px 16px;
   box-sizing: border-box;
-  z-index: 2;
-  transition: background 0.3s ease;
-}
-
-.timeline-phase-row:last-child {
-  border-bottom: none;
-}
-
-/* Left Phase Info Column */
-.phase-info-cell {
-  padding: 14px 24px;
-  border-right: 1px solid rgba(255, 255, 255, 0.08);
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  background: #0E0E0E;
-  transition: background 0.3s ease;
-}
-
-.phase-number-box {
-  font-family: 'Space Grotesk', 'IBM Plex Mono', monospace;
-  font-size: 1.25rem;
-  font-weight: 700;
-  color: #444444;
-  line-height: 1;
-  min-width: 28px;
-  transition: color 0.35s ease;
-}
-
-.phase-content-text {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   gap: 3px;
-  flex: 1;
+  z-index: 3;
+  cursor: default;
+  transition: background 0.35s ease, border-color 0.35s ease, color 0.35s ease, box-shadow 0.35s ease, transform 0.35s ease;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.65);
+}
+
+/* Content rows inside the bar */
+.bar-top-row {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.bar-title-group {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
   min-width: 0;
 }
 
-.phase-row-title {
+.bar-phase-num {
+  font-family: 'Space Grotesk', 'IBM Plex Mono', monospace;
+  font-size: 0.85rem;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.bar-title-text {
   font-family: 'Plus Jakarta Sans', sans-serif;
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   font-weight: 600;
-  color: #777777;
+  line-height: 1.2;
   margin: 0;
-  line-height: 1.25;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  transition: color 0.35s ease;
 }
 
-.phase-row-desc {
-  font-family: 'Plus Jakarta Sans', sans-serif;
-  font-size: 0.76rem;
-  color: #555555;
-  margin: 0;
-  line-height: 1.35;
-  display: -webkit-box;
-  -webkit-line-clamp: 1;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-  transition: color 0.35s ease;
-}
-
-/* Right Timeline Grid Track */
-.phase-track-cell {
-  position: relative;
-  display: flex;
-  align-items: center;
-  padding: 0 12px;
-  width: 100%;
-  box-sizing: border-box;
-}
-
-/* Horizontal Timeline Bar Segment (clean engineering segment, NOT a pill) */
-.timeline-bar-segment {
-  position: relative;
-  height: 34px;
-  border-radius: 4px;
-  box-sizing: border-box;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 12px;
+.bar-duration-text {
   font-family: 'Space Grotesk', 'IBM Plex Mono', monospace;
-  font-size: 0.72rem;
+  font-size: 0.7rem;
+  font-weight: 600;
   letter-spacing: 0.04em;
   text-transform: uppercase;
-  background: #141414;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  color: #555555;
-  transition: background 0.35s ease, border-color 0.35s ease, color 0.35s ease, box-shadow 0.35s ease;
+  white-space: nowrap;
 }
 
-.bar-status-label {
-  font-weight: 600;
+.bar-desc-text {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.73rem;
+  line-height: 1.35;
+  margin: 0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-.bar-duration-label {
-  font-size: 0.68rem;
-  opacity: 0.8;
-}
-
-/* Anchor dot on the bar for precise SVG connection */
-.bar-connection-anchor {
+/* Connection Anchor Dots on the bar for exact SVG path pinning */
+.bar-anchor-dot {
   position: absolute;
   top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 8px;
-  height: 8px;
+  transform: translateY(-50%);
+  width: 7px;
+  height: 7px;
   border-radius: 50%;
-  background: #333333;
-  border: 1.5px solid #0C0C0C;
-  z-index: 4;
-  transition: background 0.35s ease, transform 0.35s ease;
+  pointer-events: none;
+  transition: background 0.35s ease;
+}
+
+.bar-anchor-in {
+  left: -3.5px;
+}
+
+.bar-anchor-out {
+  right: -3.5px;
 }
 
 /* ==========================================================================
-   ACTIVE & COMPLETED ROW STATES
+   BAR STATES: INACTIVE, ACTIVE & COMPLETED
    ========================================================================== */
 
-/* Active Phase Row */
-.timeline-phase-row.row-state-active {
-  background: rgba(255, 106, 0, 0.03);
+/* 1. INACTIVE BAR (Solid, opaque, elegant dark charcoal) */
+.staircase-bar.bar-inactive {
+  background: #141414;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  color: #999999;
 }
 
-.timeline-phase-row.row-state-active .phase-info-cell {
-  background: rgba(255, 106, 0, 0.05);
+.staircase-bar.bar-inactive .bar-phase-num {
+  color: #555555;
 }
 
-.timeline-phase-row.row-state-active .phase-number-box {
-  color: #FF6A00;
-}
-
-.timeline-phase-row.row-state-active .phase-row-title {
-  color: #FFFFFF;
-}
-
-.timeline-phase-row.row-state-active .phase-row-desc {
+.staircase-bar.bar-inactive .bar-title-text {
   color: #B5B5B5;
 }
 
-.timeline-phase-row.row-state-active .timeline-bar-segment {
-  background: rgba(255, 106, 0, 0.16);
-  border: 1.5px solid #FF6A00;
-  color: #FFFFFF;
-  box-shadow: 0 0 14px rgba(255, 106, 0, 0.22);
+.staircase-bar.bar-inactive .bar-duration-text {
+  color: #666666;
 }
 
-.timeline-phase-row.row-state-active .bar-connection-anchor {
+.staircase-bar.bar-inactive .bar-desc-text {
+  color: #666666;
+}
+
+.staircase-bar.bar-inactive .bar-anchor-dot {
+  background: #2A2A2A;
+}
+
+/* 2. ACTIVE BAR (Vibrant Neo Minds Orange - matching Image 2 highlighted bar) */
+.staircase-bar.bar-active {
   background: #FF6A00;
-  box-shadow: 0 0 8px #FF6A00;
-  transform: translate(-50%, -50%) scale(1.25);
+  border: 1.5px solid #FF8533;
+  color: #FFFFFF;
+  box-shadow: 0 6px 28px rgba(255, 106, 0, 0.42);
+  transform: scale(1.02);
 }
 
-/* Completed Phase Row (Passed earlier) */
-.timeline-phase-row.row-state-completed .phase-number-box {
+.staircase-bar.bar-active .bar-phase-num {
+  color: #FFFFFF;
+}
+
+.staircase-bar.bar-active .bar-title-text {
+  color: #FFFFFF;
+}
+
+.staircase-bar.bar-active .bar-duration-text {
+  color: rgba(255, 255, 255, 0.95);
+}
+
+.staircase-bar.bar-active .bar-desc-text {
+  color: rgba(255, 255, 255, 0.88);
+}
+
+.staircase-bar.bar-active .bar-anchor-dot {
+  background: #FFFFFF;
+  box-shadow: 0 0 8px #FFFFFF;
+}
+
+/* 3. COMPLETED BAR (Passed earlier in scroll, remains solid & readable) */
+.staircase-bar.bar-completed {
+  background: #1A1A1A;
+  border: 1px solid rgba(255, 106, 0, 0.45);
+  color: #FFFFFF;
+}
+
+.staircase-bar.bar-completed .bar-phase-num {
+  color: #FF6A00;
+}
+
+.staircase-bar.bar-completed .bar-title-text {
+  color: #E6E6E6;
+}
+
+.staircase-bar.bar-completed .bar-duration-text {
+  color: #FF6A00;
+}
+
+.staircase-bar.bar-completed .bar-desc-text {
   color: #888888;
 }
 
-.timeline-phase-row.row-state-completed .phase-row-title {
-  color: #E2E2E2;
-}
-
-.timeline-phase-row.row-state-completed .phase-row-desc {
-  color: #777777;
-}
-
-.timeline-phase-row.row-state-completed .timeline-bar-segment {
-  background: #181818;
-  border: 1px solid rgba(255, 106, 0, 0.35);
-  color: #CCCCCC;
-}
-
-.timeline-phase-row.row-state-completed .bar-connection-anchor {
+.staircase-bar.bar-completed .bar-anchor-dot {
   background: #FF6A00;
 }
 
 /* ==========================================================================
-   RESPONSIVE DESIGN (TABLET & MOBILE)
+   DESKTOP ASCENDING STAIRCASE POSITIONING (Bottom-Left to Top-Right)
    ========================================================================== */
+@media (min-width: 901px) {
+  /* Phase 01: Lowest row at bottom-left */
+  .staircase-bar:nth-child(1) {
+    left: 0%;
+    top: 79%;
+  }
 
-/* Medium Screens (991px to 1200px) */
-@media (max-width: 1200px) {
-  .timeline-scale-header {
-    grid-template-columns: 310px 1fr;
+  /* Phase 02: Slightly higher, further right */
+  .staircase-bar:nth-child(2) {
+    left: 15%;
+    top: 63%;
   }
-  .timeline-grid-vertical-lines,
-  .timeline-connecting-svg {
-    left: 310px;
-    width: calc(100% - 310px);
+
+  /* Phase 03: Higher again */
+  .staircase-bar:nth-child(3) {
+    left: 30%;
+    top: 47%;
   }
-  .timeline-phase-row {
-    grid-template-columns: 310px 1fr;
+
+  /* Phase 04: Continues upwards */
+  .staircase-bar:nth-child(4) {
+    left: 45%;
+    top: 31%;
   }
-  .phase-info-cell {
-    padding: 12px 18px;
-    gap: 12px;
+
+  /* Phase 05: Moves further towards top-right */
+  .staircase-bar:nth-child(5) {
+    left: 59%;
+    top: 15%;
   }
-  .phase-row-title {
-    font-size: 0.88rem;
+
+  /* Phase 06: Highest position at top-right */
+  .staircase-bar:nth-child(6) {
+    left: 72%;
+    top: 0%;
   }
 }
 
-/* Tablet Layout (769px to 990px) */
-@media (max-width: 990px) {
-  .ascending-timeline-pin-container {
-    padding: 70px 3vw 40px 3vw;
+/* Medium Desktop Screens (901px to 1100px) */
+@media (min-width: 901px) and (max-width: 1100px) {
+  .staircase-bar {
+    width: 250px;
+    padding: 8px 12px;
   }
-  .timeline-scale-header {
-    grid-template-columns: 260px 1fr;
-  }
-  .timeline-grid-vertical-lines,
-  .timeline-connecting-svg {
-    left: 260px;
-    width: calc(100% - 260px);
-  }
-  .timeline-phase-row {
-    grid-template-columns: 260px 1fr;
-    min-height: 64px;
-  }
-  .phase-info-cell {
-    padding: 10px 14px;
-    gap: 10px;
-  }
-  .phase-row-title {
+  .bar-title-text {
     font-size: 0.82rem;
   }
-  .phase-row-desc {
+  .bar-desc-text {
+    font-size: 0.68rem;
+  }
+}
+
+/* Tablet Screens (769px to 900px) */
+@media (min-width: 769px) and (max-width: 900px) {
+  .staircase-canvas {
+    height: 420px;
+  }
+  .staircase-bar {
+    width: 210px;
+    padding: 8px 10px;
+    min-height: 50px;
+  }
+  .bar-title-text {
+    font-size: 0.78rem;
+  }
+  .bar-duration-text {
+    font-size: 0.64rem;
+  }
+  .bar-desc-text {
     display: none;
   }
-  .timeline-bar-segment {
-    height: 30px;
-    font-size: 0.65rem;
-    padding: 0 8px;
-  }
-  .bar-duration-label {
-    display: none;
-  }
+  .staircase-bar:nth-child(1) { left: 0%; top: 79%; }
+  .staircase-bar:nth-child(2) { left: 14%; top: 63%; }
+  .staircase-bar:nth-child(3) { left: 28%; top: 47%; }
+  .staircase-bar:nth-child(4) { left: 42%; top: 31%; }
+  .staircase-bar:nth-child(5) { left: 56%; top: 15%; }
+  .staircase-bar:nth-child(6) { left: 70%; top: 0%; }
 }
 
 /* ==========================================================================
-   MOBILE VERTICAL TIMELINE SEQUENCE (<= 768px)
+   MOBILE VERTICAL SEQUENCE (<= 768px)
+   Reorganised into a clean ascending vertical progression
    ========================================================================== */
 @media (max-width: 768px) {
   .ascending-timeline-pin-container {
     padding: 75px 4vw 30px 4vw;
-    min-height: 100vh;
   }
 
-  .ascending-timeline-header-block {
+  .staircase-header-row {
     flex-direction: column;
     align-items: flex-start;
     gap: 12px;
     margin-bottom: 20px;
   }
 
-  .timeline-main-title {
-    font-size: 1.7rem;
+  .staircase-heading {
+    font-size: 1.75rem;
   }
 
-  .timeline-subtitle {
+  .staircase-subtext {
     font-size: 0.82rem;
   }
 
-  .timeline-active-status {
-    padding: 4px 10px;
-    font-size: 0.72rem;
+  .staircase-scale-track {
+    display: none; /* Hide horizontal desktop scale on mobile */
   }
 
-  .timeline-board {
-    border-radius: 4px;
-  }
-
-  .timeline-scale-header {
-    display: none;
-  }
-
-  .timeline-grid-vertical-lines {
-    display: none;
-  }
-
-  .timeline-connecting-svg {
-    left: 24px;
-    width: 20px;
-  }
-
-  .timeline-phase-row {
+  .staircase-canvas {
+    position: relative;
+    height: auto;
+    min-height: 450px;
     display: flex;
     flex-direction: column;
-    min-height: auto;
-    padding: 12px 14px 12px 48px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    gap: 14px;
+    padding-left: 28px; /* Space for vertical left SVG line */
+    box-sizing: border-box;
   }
 
-  .phase-info-cell {
-    background: transparent;
-    padding: 0;
-    border-right: none;
-    gap: 10px;
-    width: 100%;
+  .staircase-svg-overlay {
+    left: 10px;
+    width: 16px;
   }
 
-  .phase-number-box {
-    font-size: 1.1rem;
-    min-width: 24px;
-  }
-
-  .phase-row-title {
-    font-size: 0.85rem;
-    white-space: normal;
-  }
-
-  .phase-row-desc {
-    display: block;
-    font-size: 0.72rem;
-    line-height: 1.35;
-    -webkit-line-clamp: 2;
-  }
-
-  .phase-track-cell {
-    padding: 8px 0 0 0;
-  }
-
-  .timeline-bar-segment {
-    width: 100% !important;
+  .staircase-bar {
+    position: relative !important;
     left: 0 !important;
-    height: 26px;
-    font-size: 0.68rem;
-    padding: 0 10px;
+    top: auto !important;
+    width: 100% !important;
+    min-height: 54px;
+    padding: 10px 14px;
   }
 
-  .bar-duration-label {
-    display: inline;
+  .bar-anchor-in {
+    left: -22px;
   }
 
-  .mobile-row-anchor {
-    position: absolute;
-    left: 24px;
-    top: 24px;
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: #333333;
-    transform: translate(-50%, -50%);
-    z-index: 5;
-    transition: background 0.35s ease;
-  }
-
-  .timeline-phase-row.row-state-active .mobile-row-anchor {
-    background: #FF6A00;
-    box-shadow: 0 0 8px #FF6A00;
-  }
-
-  .timeline-phase-row.row-state-completed .mobile-row-anchor {
-    background: #FF6A00;
+  .bar-anchor-out {
+    display: none;
   }
 }
