@@ -1,6 +1,7 @@
 import React from 'react';
 import HeroSection from '../components/HeroSection';
 import HowItWorksSection from '../components/HowItWorksSection';
+import AscendingTimelineSection from '../components/AscendingTimelineSection';
 import ProgramsSection from '../components/ProgramsSection';
 import CampusNetworkSection from '../components/CampusNetworkSection';
 import ProjectsSection from '../components/ProjectsSection';
@@ -37,6 +38,9 @@ export default function HomePage({
 
       {/* 02 — HOW IT WORKS / NEO MINDS LEARNING PATHWAY */}
       <HowItWorksSection navigateTo={navigateTo} />
+
+      {/* 02.5 — SIX-PHASE ASCENDING TIMELINE */}
+      <AscendingTimelineSection />
 
       {/* 03 — PROGRAMS */}
       <ProgramsSection 
