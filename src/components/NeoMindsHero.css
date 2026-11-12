@@ -1,0 +1,751 @@
+/* ==========================================================================
+   ORIGINAL SUPPLIED HERO COMPONENT STYLES
+   Exact 1:1 Implementation from code1/code/styles.css
+   ========================================================================== */
+
+.hero-component-root {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  min-height: 720px;
+  overflow: hidden;
+  background-color: #080808;
+  color: #F5F5F5;
+  font-family: "PP Neue Montreal", "Plus Jakarta Sans", sans-serif;
+}
+
+.hero-component-root img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.hero-component-root p {
+  text-transform: uppercase;
+  font-family: "Akkurat Mono", "IBM Plex Mono", monospace;
+  font-size: 0.7rem;
+  margin: 0;
+}
+
+.hero-component-root a {
+  text-decoration: none;
+  text-transform: uppercase;
+  font-family: "Akkurat Mono", "IBM Plex Mono", monospace;
+  font-size: 0.7rem;
+  color: #F5F5F5;
+}
+
+/* ==========================================================================
+   OVERLAY LOADER (Original Black #000 with White Text and Gradient Wipe)
+   ========================================================================== */
+.hero-component-root .overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100svh;
+  padding: 2em;
+  background-color: #000;
+  color: #fff;
+  display: flex;
+  gap: 2em;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.hero-component-root .projects,
+.hero-component-root .loader,
+.hero-component-root .locations {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1em;
+}
+
+.hero-component-root .loader {
+  align-items: center;
+  gap: 0;
+}
+
+.hero-component-root .loader h1 {
+  text-align: center;
+  text-transform: uppercase;
+  font-family: "Druk", "Space Grotesk", Impact, "Arial Black", sans-serif;
+  font-size: 2.5rem;
+  font-style: italic;
+  line-height: 1;
+  padding: 0.1em 0.25em 0.1em 0.1em;
+  overflow: visible;
+  white-space: nowrap;
+  letter-spacing: 0.02em;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  -webkit-background-clip: text;
+  background-image: linear-gradient(0deg, #3a3a3a, #3a3a3a 50%, #fff 0);
+  background-size: 100% 200%;
+  background-position: 0% 100%;
+  color: #3a3a3a;
+  margin: 0;
+}
+
+.hero-component-root .projects-header,
+.hero-component-root .project-item,
+.hero-component-root .locations-header,
+.hero-component-root .location-item {
+  display: flex;
+  gap: 2em;
+  opacity: 0;
+}
+
+.hero-component-root .projects-header > *,
+.hero-component-root .project-item > * {
+  flex: 1;
+}
+
+.hero-component-root .locations {
+  align-items: center;
+}
+
+.hero-component-root .locations-header,
+.hero-component-root .location-item {
+  width: 50%;
+}
+
+.hero-component-root .project-item,
+.hero-component-root .location-item {
+  color: #4f4f4f;
+}
+
+/* ==========================================================================
+   IMAGE GRID (Exact 30% Width, Aspect Ratio 1, Gap 1em)
+   ========================================================================== */
+.hero-component-root .image-grid {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 30%;
+  aspect-ratio: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  z-index: 5;
+}
+
+.hero-component-root .grid-row {
+  width: 100%;
+  display: flex;
+  gap: 1em;
+}
+
+.hero-component-root .img {
+  position: relative;
+  flex: 1;
+  aspect-ratio: 1;
+  clip-path: polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%);
+}
+
+.hero-component-root .img.hero-img {
+  z-index: 10;
+}
+
+/* ==========================================================================
+   BANNER IMAGES (20% Width, 4/5 Aspect Ratio, Angled Rotation)
+   ========================================================================== */
+.hero-component-root .banner-img {
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  width: 20%;
+  aspect-ratio: 4/5;
+  z-index: 2;
+}
+
+.hero-component-root .banner-img-1 {
+  z-index: 2;
+}
+
+.hero-component-root .banner-img-2 {
+  z-index: 2;
+}
+
+/* ==========================================================================
+   INTRO COPY & TITLE (Exact Original Druk Italic Styling)
+   ========================================================================== */
+.hero-component-root .intro-copy {
+  position: absolute;
+  top: 45%;
+  transform: translateY(-50%);
+  width: 100%;
+  padding: 0 4em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 4;
+  pointer-events: none;
+}
+
+.hero-component-root .title {
+  position: absolute;
+  bottom: 14%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 5;
+  text-align: center;
+}
+
+.hero-component-root .intro-copy h3,
+.hero-component-root .title h1 {
+  position: relative;
+  text-transform: uppercase;
+  color: #F5F5F5;
+  font-family: "Druk", "Space Grotesk", Impact, "Arial Black", sans-serif;
+  font-weight: 500;
+  font-style: italic;
+  line-height: 0.9;
+  margin: 0;
+}
+
+.hero-component-root .title h1 {
+  font-size: 3.5rem;
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+}
+
+.hero-component-root .intro-copy h3 {
+  font-size: 1.5rem;
+}
+
+.hero-component-root .intro-copy h3,
+.hero-component-root .title h1 {
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+}
+
+.hero-component-root .intro-copy h3 .word,
+.hero-component-root .title h1 .word {
+  display: inline-block;
+  position: relative;
+  will-change: transform;
+  margin-right: 0.1rem;
+}
+
+/* ==========================================================================
+   RESPONSIVE BEHAVIOR (Matches original @media (max-width: 900px))
+   ========================================================================== */
+@media (max-width: 900px) {
+  .hero-component-root .overlay {
+    padding: 0;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .hero-component-root .loader {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    text-align: center;
+  }
+
+  .hero-component-root .projects,
+  .hero-component-root .locations {
+    display: none;
+  }
+
+  .hero-component-root .intro-copy {
+    display: none !important;
+  }
+
+  .hero-component-root .title {
+    position: absolute;
+    top: calc(45% + clamp(95px, 24vw, 135px));
+    bottom: auto !important;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    display: flex !important;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    z-index: 15;
+    padding: 0 8px;
+    box-sizing: border-box;
+  }
+
+  .hero-component-root .title h1 {
+    font-family: "Druk", "Space Grotesk", Impact, "Arial Black", sans-serif;
+    font-size: clamp(1.05rem, 5.2vw, 1.85rem);
+    font-weight: 700;
+    font-style: italic;
+    color: #F5F5F5;
+    text-transform: uppercase;
+    white-space: nowrap;
+    letter-spacing: -0.02em;
+    line-height: 1;
+    margin: 0;
+    text-align: center;
+    padding: 0;
+  }
+
+  .hero-component-root .image-grid {
+    width: 68%;
+    max-width: 280px;
+    gap: 0.35em;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    align-items: center;
+    justify-content: center;
+  }
+
+  .hero-component-root .grid-row {
+    width: 100%;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5em;
+  }
+}
+
+/* ==========================================================================
+   FINAL HERO ENDING — OPAQUE SHEET & EXACT REFERENCE NEO MINDS REVEAL
+   Continuous canvas: pure white background flowing into page
+   ========================================================================== */
+.hero-component-root .hero-opaque-sheet {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #080808;
+  z-index: 30;
+  transform: scaleY(0);
+  transform-origin: 50% 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+/* Subtle curved orbital lines container matching reference */
+.hero-component-root .hero-orbital-container {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 2;
+  opacity: 0.9;
+  overflow: hidden;
+}
+
+.hero-component-root .hero-orbital-svg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.hero-component-root .mobile-only-orbital {
+  display: none;
+}
+
+.hero-component-root .desktop-only-orbital {
+  display: block;
+}
+
+/* Glowing Orange Nodes / Dots on Orbital Lines */
+.hero-component-root .orbital-node {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.hero-component-root .orbital-node-core {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: #FF6A00;
+  position: relative;
+  z-index: 2;
+  box-shadow: 0 0 10px rgba(255, 106, 0, 0.85);
+}
+
+.hero-component-root .orbital-node-glow {
+  position: absolute;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(255, 106, 0, 0.30) 0%, rgba(255, 106, 0, 0) 70%);
+  z-index: 1;
+}
+
+.hero-component-root .orbital-node-lower-left {
+  left: 15%;
+  bottom: 39%;
+}
+
+.hero-component-root .orbital-node-upper-right {
+  right: 13%;
+  top: 28%;
+}
+
+/* Centered Content Composition */
+.hero-component-root .hero-reveal-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  width: 94%;
+  max-width: 980px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  pointer-events: auto;
+  margin: 0 auto;
+  z-index: 5;
+}
+
+/* Main Title: Exact elegant, flowing serif wordmark matching reference "NeoMinds" */
+.hero-component-root .neo-minds-reveal-title {
+  font-family: "Newsreader", "Playfair Display", Georgia, serif;
+  font-size: clamp(4.2rem, 9.6vw, 7.8rem);
+  font-weight: 500;
+  letter-spacing: -0.015em;
+  line-height: 1;
+  margin: 0;
+  text-align: center;
+  text-transform: none;
+  font-style: normal;
+  display: inline-flex;
+  align-items: baseline;
+  justify-content: center;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.hero-component-root .brand-word-neo {
+  color: #F5F5F5;
+  font-weight: 500;
+}
+
+.hero-component-root .brand-word-minds {
+  color: #FF6A00;
+  font-weight: 500;
+}
+
+/* Tech Hub with symmetrical flanking horizontal lines matching reference */
+.hero-component-root .neo-minds-sub-wrapper {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem;
+  margin: 1.15rem 0 0 0;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.hero-component-root .tech-hub-line {
+  display: inline-block;
+  width: 52px;
+  height: 1px;
+  background-color: rgba(255, 255, 255, 0.25);
+  opacity: 0.55;
+}
+
+.hero-component-root .neo-minds-reveal-sub {
+  font-family: "Newsreader", "Playfair Display", Georgia, serif;
+  font-size: clamp(0.95rem, 1.6vw, 1.2rem);
+  font-weight: 500;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  color: #F5F5F5;
+  margin: 0;
+  padding: 0;
+  line-height: 1;
+}
+
+/* One-Line Description */
+.hero-component-root .neo-minds-reveal-desc {
+  font-family: "Newsreader", "Playfair Display", Georgia, serif;
+  font-size: clamp(1.05rem, 1.75vw, 1.35rem);
+  font-weight: 400;
+  font-style: normal;
+  color: #CCCCCC;
+  line-height: 1.5;
+  margin: 1.65rem 0 0 0;
+  max-width: 720px;
+  text-align: center;
+  text-transform: none;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Refined Rectangular CTA Buttons */
+.hero-component-root .final-cta-group {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.35rem;
+  margin-top: 2.25rem;
+}
+
+.hero-component-root .final-cta-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 9px;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 0.95rem;
+  font-weight: 600;
+  padding: 12px 28px;
+  min-width: 146px;
+  height: 46px;
+  border-radius: 8px;
+  cursor: pointer;
+  opacity: 1;
+  transform: translateY(0);
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  text-decoration: none;
+  line-height: 1;
+}
+
+.hero-component-root .final-cta-btn .btn-arrow {
+  display: inline-block;
+  font-size: 1rem;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hero-component-root .final-cta-btn:hover .btn-arrow {
+  transform: translateX(4px);
+}
+
+.hero-component-root .final-cta-primary {
+  background-color: #FF6A00;
+  color: #FFFFFF;
+  border: 1.5px solid #FF6A00;
+  box-shadow: 0 4px 18px rgba(255, 106, 0, 0.28);
+}
+
+.hero-component-root .final-cta-primary:hover {
+  background-color: #E55A00;
+  border-color: #E55A00;
+  box-shadow: 0 6px 22px rgba(255, 106, 0, 0.4);
+  transform: translateY(-2px);
+}
+
+.hero-component-root .final-cta-secondary {
+  background-color: #151515;
+  color: #FFFFFF;
+  border: 1.5px solid rgba(255, 106, 0, 0.4);
+}
+
+.hero-component-root .final-cta-secondary:hover {
+  border-color: #FF6A00;
+  color: #FFFFFF;
+  background-color: #261408;
+  transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+  .hero-component-root {
+    min-height: 100svh;
+    height: 100svh;
+  }
+
+  /* Center the entire hero unit as one cohesive composition */
+  .hero-component-root .hero-reveal-center {
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 90%;
+    max-width: 360px;
+    margin: 0 auto;
+  }
+
+  .hero-component-root .neo-minds-reveal-title {
+    font-size: clamp(2.7rem, 11vw, 3.8rem);
+  }
+
+  .hero-component-root .tech-hub-line {
+    width: 24px;
+  }
+
+  .hero-component-root .neo-minds-reveal-sub {
+    font-size: 0.8rem;
+    letter-spacing: 0.22em;
+  }
+
+  .hero-component-root .neo-minds-reveal-desc {
+    font-size: 0.95rem;
+    line-height: 1.5;
+    margin-top: 1.15rem;
+    padding: 0 0.25rem;
+    max-width: 310px;
+  }
+
+  /* Desktop / Mobile Orbital SVG Display Toggle */
+  .desktop-only-orbital {
+    display: none !important;
+  }
+
+  .mobile-only-orbital {
+    display: block !important;
+  }
+
+  /* Reposition blue orbital framing nodes along the curved orbital lines strictly in empty spaces */
+  .hero-component-root .orbital-node-upper-right {
+    left: auto !important;
+    right: 15% !important;
+    top: 13.5% !important;
+    bottom: auto !important;
+    transform: none !important;
+  }
+
+  .hero-component-root .orbital-node-lower-left {
+    left: 17% !important;
+    right: auto !important;
+    top: 86% !important;
+    bottom: auto !important;
+    transform: none !important;
+  }
+
+  /* Side-by-side buttons with identical dimensions */
+  .hero-component-root .final-cta-group {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    max-width: 310px;
+    margin-top: 1.4rem;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  .hero-component-root .join-dodge-field {
+    flex: 1 1 0;
+    width: 50%;
+    min-width: 0 !important;
+    max-width: none !important;
+    height: 44px !important;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    box-sizing: border-box;
+  }
+
+  .hero-component-root .dodge-field__mover {
+    width: 100%;
+    height: 44px;
+    display: flex;
+    box-sizing: border-box;
+  }
+
+  .hero-component-root .final-cta-btn {
+    flex: 1 1 0;
+    width: 100%;
+    min-width: 0 !important;
+    max-width: none !important;
+    height: 44px !important;
+    padding: 0 10px;
+    font-size: 0.88rem;
+    font-weight: 600;
+    border-radius: 8px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    box-sizing: border-box;
+    text-align: center;
+    white-space: nowrap;
+    line-height: 1;
+  }
+
+  .hero-component-root .final-cta-secondary {
+    flex: 1 1 0;
+    width: 50%;
+    min-width: 0 !important;
+    max-width: none !important;
+    height: 44px !important;
+  }
+
+  /* Center the 3x3 image grid animation on mobile phone screens */
+  /* Center the 3x3 image grid animation on mobile phone screens */
+  .hero-component-root .image-grid {
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 68%;
+    max-width: 270px;
+    aspect-ratio: 1 / 1;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 0.35em !important;
+    z-index: 10 !important;
+    margin: 0;
+    padding: 0;
+  }
+
+  .hero-component-root .image-grid .grid-row {
+    width: 100% !important;
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: center !important;
+    align-items: center !important;
+    gap: 0.35em !important;
+    flex: 1;
+  }
+
+  .hero-component-root .image-grid .img {
+    position: relative !important;
+    flex: 1 !important;
+    aspect-ratio: 1 / 1 !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    overflow: visible !important;
+  }
+
+  /* Center middle hero image is in front (z-index 10) */
+  .hero-component-root .image-grid .img.hero-img {
+    z-index: 10 !important;
+  }
+
+  /* Banner images on mobile phone: sit BEHIND central man (z-index 2) */
+  .hero-component-root .banner-img {
+    display: block !important;
+    width: 33% !important;
+    max-width: 135px !important;
+    min-width: 95px !important;
+    aspect-ratio: 4 / 5 !important;
+    z-index: 2 !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    background: transparent !important;
+    overflow: visible !important;
+  }
+
+  .hero-component-root .banner-img-1 {
+    z-index: 2 !important;
+  }
+
+  .hero-component-root .banner-img-2 {
+    z-index: 2 !important;
+  }
+
+  /* White sheet reveal sits on top of all images (z-index 30) */
+  .hero-component-root .hero-opaque-sheet {
+    z-index: 30 !important;
+  }
+}
+
+

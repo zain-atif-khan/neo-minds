@@ -1,0 +1,95 @@
+.bounceCardsContainer {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto;
+}
+
+.bounceCardsContainer .card {
+  position: absolute;
+  width: 280px;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), 0 2px 8px rgba(255, 106, 0, 0.15);
+  border: 1px solid var(--border-light, rgba(255, 255, 255, 0.08));
+  background: #111111;
+  cursor: pointer;
+  transform-origin: center center;
+  will-change: transform;
+  transition: box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  flex-direction: column;
+}
+
+.bounceCardsContainer .card:hover {
+  z-index: 10;
+  box-shadow: 0 20px 48px rgba(255, 106, 0, 0.35), 0 4px 16px rgba(0, 0, 0, 0.6);
+}
+
+.bounceCardsContainer .card .image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  pointer-events: none;
+  display: block;
+}
+
+/* When BounceCards wraps full Program Shelf Cards */
+.bounceCardsContainer .program-shelf-card {
+  width: 100%;
+  height: 100%;
+  min-height: 380px;
+  border-radius: 20px;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+.programs-bounce-stage {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem 0 2rem 0;
+  overflow: visible;
+}
+
+@media (max-width: 992px) and (min-width: 769px) {
+  .programs-bounce-stage {
+    padding: 1.5rem 0;
+    overflow-x: auto;
+  }
+  .bounceCardsContainer {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .programs-bounce-stage {
+    padding: 1rem 0;
+    overflow: visible;
+  }
+  .programs-bounce-stage .bounceCardsContainer {
+    width: 100% !important;
+    max-width: 100% !important;
+    height: auto !important;
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 1.25rem !important;
+    align-items: stretch !important;
+    position: static !important;
+  }
+  .programs-bounce-stage .bounceCardsContainer .card {
+    position: static !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    transform: none !important;
+    margin: 0 !important;
+    min-height: auto !important;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.6) !important;
+  }
+  .bounceCardsContainer .program-shelf-card {
+    min-height: auto !important;
+    padding: 1.5rem 1.25rem !important;
+  }
+}
