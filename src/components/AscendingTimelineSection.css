@@ -8,49 +8,43 @@
 .ascending-timeline-section {
   position: relative;
   width: 100%;
-  background: #080808;
+  background: #080808 !important;
   color: #F5F5F5;
-  overflow: hidden;
-  z-index: 5;
+  overflow: visible;
+  z-index: 20;
   box-sizing: border-box;
   border-top: 1px solid rgba(255, 255, 255, 0.05);
   border-bottom: 1px solid rgba(255, 255, 255, 0.05);
 }
 
-/* Pinned Viewport Container */
-.ascending-timeline-pin-container {
-  position: relative;
+/* 1. SCROLLABLE INTRO BLOCK (Scrolls normally, NOT pinned) */
+.staircase-intro-block {
   width: 100%;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: 80px 4vw 50px 4vw;
-  box-sizing: border-box;
   max-width: 1400px;
   margin: 0 auto;
+  padding: 100px 5vw 40px 5vw;
+  box-sizing: border-box;
+  background: #080808;
 }
 
-/* Header Area (Clean, spacious, strictly NO eyebrow) */
 .staircase-header-row {
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
   width: 100%;
-  margin-bottom: 28px;
-  gap: 24px;
+  gap: 28px;
 }
 
 .staircase-title-block {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 8px;
   max-width: 680px;
 }
 
 .staircase-heading {
   font-family: 'Newsreader', 'Playfair Display', Georgia, serif;
-  font-size: clamp(2.1rem, 3.4vw, 3.2rem);
+  font-size: clamp(2.2rem, 3.6vw, 3.4rem);
   font-weight: 500;
   letter-spacing: -0.025em;
   line-height: 1.1;
@@ -65,11 +59,11 @@
 
 .staircase-subtext {
   font-family: 'Plus Jakarta Sans', sans-serif;
-  font-size: clamp(0.88rem, 1.05vw, 1.02rem);
+  font-size: clamp(0.9rem, 1.1vw, 1.05rem);
   color: #888888;
   line-height: 1.5;
   margin: 0;
-  max-width: 540px;
+  max-width: 560px;
 }
 
 .staircase-status-badge {
@@ -77,23 +71,23 @@
   align-items: center;
   gap: 10px;
   font-family: 'Space Grotesk', 'IBM Plex Mono', monospace;
-  font-size: 0.78rem;
+  font-size: 0.8rem;
   letter-spacing: 0.06em;
   text-transform: uppercase;
   color: #888888;
-  padding: 6px 14px;
+  padding: 8px 16px;
   border-radius: 4px;
-  background: #121212;
+  background: #141414;
   border: 1px solid rgba(255, 255, 255, 0.08);
   white-space: nowrap;
 }
 
 .badge-live-dot {
-  width: 6px;
-  height: 6px;
+  width: 7px;
+  height: 7px;
   border-radius: 50%;
   background: #FF6A00;
-  box-shadow: 0 0 8px #FF6A00;
+  box-shadow: 0 0 10px #FF6A00;
 }
 
 .badge-phase-text {
@@ -101,14 +95,34 @@
   font-weight: 600;
 }
 
-/* ==========================================================================
-   HORIZONTAL TIMELINE SCALE ACROSS THE TOP (Exact layout of Image 2)
-   ========================================================================== */
+/* 2. PINNED WRAPPER & STAGE (Pins only when reaching viewport below navbar) */
+.staircase-pin-trigger-wrapper {
+  position: relative;
+  width: 100%;
+  background: #080808 !important;
+  box-sizing: border-box;
+}
+
+.staircase-pinned-stage {
+  position: relative;
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 20px 5vw 40px 5vw;
+  box-sizing: border-box;
+  background: #080808 !important;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+/* Horizontal Timeline Scale Across the Top (Matching Image 2) */
 .staircase-scale-track {
   width: 100%;
   display: flex;
   flex-direction: column;
   margin-bottom: 24px;
+  background: #080808;
 }
 
 .staircase-scale-labels {
@@ -146,7 +160,8 @@
   position: relative;
   width: 100%;
   height: 480px;
-  min-height: 440px;
+  min-height: 460px;
+  background: #080808 !important;
 }
 
 /* Connecting SVG Overlay */
@@ -165,8 +180,8 @@
    ========================================================================== */
 .staircase-bar {
   position: absolute;
-  width: clamp(260px, 24vw, 340px);
-  min-height: 58px;
+  width: clamp(260px, 23vw, 330px);
+  min-height: 56px;
   border-radius: 6px;
   padding: 10px 16px;
   box-sizing: border-box;
@@ -174,7 +189,7 @@
   flex-direction: column;
   justify-content: center;
   gap: 3px;
-  z-index: 3;
+  z-index: 4;
   cursor: default;
   transition: background 0.35s ease, border-color 0.35s ease, color 0.35s ease, box-shadow 0.35s ease, transform 0.35s ease;
   box-shadow: 0 4px 18px rgba(0, 0, 0, 0.65);
@@ -259,7 +274,7 @@
 
 /* 1. INACTIVE BAR (Solid, opaque, elegant dark charcoal) */
 .staircase-bar.bar-inactive {
-  background: #141414;
+  background: #141414 !important;
   border: 1px solid rgba(255, 255, 255, 0.09);
   color: #999999;
 }
@@ -286,7 +301,7 @@
 
 /* 2. ACTIVE BAR (Vibrant Neo Minds Orange - matching Image 2 highlighted bar) */
 .staircase-bar.bar-active {
-  background: #FF6A00;
+  background: #FF6A00 !important;
   border: 1.5px solid #FF8533;
   color: #FFFFFF;
   box-shadow: 0 6px 28px rgba(255, 106, 0, 0.42);
@@ -316,7 +331,7 @@
 
 /* 3. COMPLETED BAR (Passed earlier in scroll, remains solid & readable) */
 .staircase-bar.bar-completed {
-  background: #1A1A1A;
+  background: #1A1A1A !important;
   border: 1px solid rgba(255, 106, 0, 0.45);
   color: #FFFFFF;
 }
@@ -345,47 +360,47 @@
    DESKTOP ASCENDING STAIRCASE POSITIONING (Bottom-Left to Top-Right)
    ========================================================================== */
 @media (min-width: 901px) {
-  /* Phase 01: Lowest row at bottom-left */
+  /* Phase 01: Lowest position at bottom-left */
   .staircase-bar:nth-child(1) {
-    left: 0%;
-    top: 79%;
+    left: 1%;
+    top: 390px;
   }
 
   /* Phase 02: Slightly higher, further right */
   .staircase-bar:nth-child(2) {
-    left: 15%;
-    top: 63%;
+    left: 16%;
+    top: 312px;
   }
 
   /* Phase 03: Higher again */
   .staircase-bar:nth-child(3) {
-    left: 30%;
-    top: 47%;
+    left: 31%;
+    top: 234px;
   }
 
   /* Phase 04: Continues upwards */
   .staircase-bar:nth-child(4) {
-    left: 45%;
-    top: 31%;
+    left: 46%;
+    top: 156px;
   }
 
   /* Phase 05: Moves further towards top-right */
   .staircase-bar:nth-child(5) {
-    left: 59%;
-    top: 15%;
+    left: 61%;
+    top: 78px;
   }
 
   /* Phase 06: Highest position at top-right */
   .staircase-bar:nth-child(6) {
-    left: 72%;
-    top: 0%;
+    left: 73%;
+    top: 0px;
   }
 }
 
 /* Medium Desktop Screens (901px to 1100px) */
 @media (min-width: 901px) and (max-width: 1100px) {
   .staircase-bar {
-    width: 250px;
+    width: 245px;
     padding: 8px 12px;
   }
   .bar-title-text {
@@ -415,12 +430,12 @@
   .bar-desc-text {
     display: none;
   }
-  .staircase-bar:nth-child(1) { left: 0%; top: 79%; }
-  .staircase-bar:nth-child(2) { left: 14%; top: 63%; }
-  .staircase-bar:nth-child(3) { left: 28%; top: 47%; }
-  .staircase-bar:nth-child(4) { left: 42%; top: 31%; }
-  .staircase-bar:nth-child(5) { left: 56%; top: 15%; }
-  .staircase-bar:nth-child(6) { left: 70%; top: 0%; }
+  .staircase-bar:nth-child(1) { left: 0%; top: 340px; }
+  .staircase-bar:nth-child(2) { left: 14%; top: 272px; }
+  .staircase-bar:nth-child(3) { left: 28%; top: 204px; }
+  .staircase-bar:nth-child(4) { left: 42%; top: 136px; }
+  .staircase-bar:nth-child(5) { left: 56%; top: 68px; }
+  .staircase-bar:nth-child(6) { left: 70%; top: 0px; }
 }
 
 /* ==========================================================================
@@ -428,23 +443,26 @@
    Reorganised into a clean ascending vertical progression
    ========================================================================== */
 @media (max-width: 768px) {
-  .ascending-timeline-pin-container {
-    padding: 75px 4vw 30px 4vw;
+  .staircase-intro-block {
+    padding: 80px 5vw 25px 5vw;
   }
 
   .staircase-header-row {
     flex-direction: column;
     align-items: flex-start;
     gap: 12px;
-    margin-bottom: 20px;
   }
 
   .staircase-heading {
-    font-size: 1.75rem;
+    font-size: 1.8rem;
   }
 
   .staircase-subtext {
     font-size: 0.82rem;
+  }
+
+  .staircase-pinned-stage {
+    padding: 10px 5vw 30px 5vw;
   }
 
   .staircase-scale-track {
@@ -454,7 +472,7 @@
   .staircase-canvas {
     position: relative;
     height: auto;
-    min-height: 450px;
+    min-height: 460px;
     display: flex;
     flex-direction: column;
     gap: 14px;
